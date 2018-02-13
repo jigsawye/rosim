@@ -1,0 +1,28 @@
+{
+  "name": "ro-stats-simulator",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://jigsawye.com/ro-stats-simulator",
+  "dependencies": {
+    "antd": "^3.2.0",
+    "lodash": "^4.17.5",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.1.0",
+    "redux": "^3.7.2",
+    "styled-components": "^3.1.6"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom"
+  },
+  "devDependencies": {
+    "axios": "^0.17.1",
+    "babel-plugin-import": "^1.6.3",
+    "cheerio": "^1.0.0-rc.2",
+    "react-app-rewired": "^1.4.1"
+  }
+}
