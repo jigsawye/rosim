@@ -11,12 +11,18 @@ const MenuButton = styled(Button)`
   margin-right: 8px;
 `;
 
+const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
+
 class SaveLoad extends React.Component {
   state = {
     archives: [],
     visible: false,
     saveName: '',
   };
+
+  componentDidUpdate() {
+    localStorage.setItem('archives', JSON.stringify(this.state.archives));
+  }
 
   showModal = () => {
     let archives = [];
@@ -28,12 +34,9 @@ class SaveLoad extends React.Component {
     this.setState({ visible: true, saveName: '', archives });
   }
 
-  handleOk = () => {
-    localStorage.setItem('archives', JSON.stringify(this.state.archives));
+  handleClose = () => {
     this.setState({ visible: false });
   }
-
-  handleCancel = () => this.setState({ visible: false })
 
   updateSaveName = ({ target }) => this.setState({ saveName: target.value })
 
@@ -43,6 +46,7 @@ class SaveLoad extends React.Component {
     }
 
     const data = {
+      _id: generateId(),
       name: this.state.saveName,
       ...this.props.currentData,
     };
@@ -52,10 +56,11 @@ class SaveLoad extends React.Component {
     });
   }
 
-  saveExistsData = (data) => {
+  saveExistsData = ({ _id, name }) => {
     const { archives } = this.state;
-    const index = archives.findIndex(({ name }) => name === data.name);
-    archives[index] = { name: data.name, ...this.props.currentData };
+    const index = archives.findIndex(archive => archive._id === _id);
+    archives[index] = { _id, name, ...this.props.currentData };
+
     this.setState({ archives });
   }
 
@@ -63,8 +68,8 @@ class SaveLoad extends React.Component {
     this.props.loadSaveData(data);
   }
 
-  deleteData = (data) => {
-    const archives = this.state.archives.filter(({ name }) => name !== data.name);
+  deleteData = ({ _id }) => {
+    const archives = this.state.archives.filter(archive => archive._id !== _id);
     this.setState({ archives });
   }
 
@@ -75,9 +80,7 @@ class SaveLoad extends React.Component {
         <Modal
           title="Save / Load"
           visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
+          footer={<Button onClick={this.handleClose}>Close</Button>}>
           <Row gutter={16}>
             <Col span={20}>
               <Input
