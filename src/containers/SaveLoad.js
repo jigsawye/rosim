@@ -80,6 +80,7 @@ class SaveLoad extends React.Component {
         <Modal
           title="Save / Load"
           visible={this.state.visible}
+          onCancel={this.handleClose}
           footer={<Button onClick={this.handleClose}>Close</Button>}>
           <Row gutter={16}>
             <Col span={20}>
