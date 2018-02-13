@@ -1,7 +1,7 @@
-RO Stats Simulartor
+# RO Stats Simulartor
 
--[ ] Save & Load
--[ ] 職業
+- [ ] Save & Load
+- [ ] 職業
   - [ ] 1-1
   - [x] 2-1
   - [ ] 2-2
@@ -9,14 +9,14 @@ RO Stats Simulartor
   - [ ] Adv 2-2
   - [ ] 3-1
   - [ ] 3-2
--[x] 素質模擬
-  -[x] JOB 加成
--[ ] 屬性面板
-  -[ ] ATK
-  -[ ] MATK
-  -[ ] CRI
-  -[ ] DEF
-  -[ ] MDEF
-  -[ ] HIT
-  -[ ] FLEE
-  -[ ] ASPD
+- [x] 素質模擬
+  - [x] JOB 加成
+- [ ] 屬性面板
+  - [ ] ATK
+  - [ ] MATK
+  - [ ] CRI
+  - [ ] DEF
+  - [ ] MDEF
+  - [ ] HIT
+  - [ ] FLEE
+  - [ ] ASPD
