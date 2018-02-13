@@ -1,22 +1,17 @@
 # RO Stats Simulartor
 
-- [ ] Save & Load
-- [ ] 職業
-  - [ ] 1-1
-  - [x] 2-1
-  - [ ] 2-2
-  - [ ] Adv 2-1
-  - [ ] Adv 2-2
-  - [ ] 3-1
-  - [ ] 3-2
-- [x] 素質模擬
-  - [x] JOB 加成
-- [ ] 屬性面板
-  - [ ] ATK
-  - [ ] MATK
-  - [ ] CRI
-  - [ ] DEF
-  - [ ] MDEF
-  - [ ] HIT
-  - [ ] FLEE
-  - [ ] ASPD
+Build with React, Redux, antd, styled-components.
+
+## Build Setup
+
+``` bash
+# install dependencies
+yarn # or `npm install`
+
+# serve with hot reload at localhost:8080
+yarn dev # or `npm run dev`
+
+# build for production with minification
+yarn build # or `npm run build`
+```
+
