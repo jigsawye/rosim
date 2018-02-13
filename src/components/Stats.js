@@ -25,7 +25,7 @@ const Plus = styled.span`
 const Stats = ({ label, value, onChange, bonuse }) => (
   <StatsContainer>
     <Label>{label}</Label>
-    <Select style={{ width: 60 }} value={value} onChange={onChange}>
+    <Select style={{ width: 70 }} value={value} onChange={onChange}>
       {range(1, 100).map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
     <Plus>+</Plus>
