@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Layout } from 'antd';
+import { Row, Col, Layout, Icon } from 'antd';
 
 import BaseInfo from '../containers/BaseInfo';
 import Status from '../containers/Status';
@@ -12,19 +12,36 @@ const Logo = styled.div`
   color: #FFF;
 `;
 
+const AppHeader = () => (
+  <Header>
+    <Row gutter={16}>
+      <Col span={4}>
+        <Logo>RO Stats Simulator</Logo>
+      </Col>
+      <Col offset={16} span={4}>
+        <SaveLoad></SaveLoad>
+      </Col>
+    </Row>
+  </Header>
+);
+
+const AppFooter = () => (
+  <Footer style={{ textAlign: 'center' }}>
+    <p>
+      Developed with <Icon type="heart" /> by <a href="https://github.com/jigsawye" target="__blank">Evan Ye</a>.
+    </p>
+    <p>
+      <a href="https://github.com/jigsawye/ro-stats-simulator" target="__blank">
+        <Icon type="github" /> Source Code
+      </a>
+    </p>
+  </Footer>
+);
+
 const App = () => (
   <Layout>
-    <Header>
-      <Row gutter={16}>
-        <Col span={4}>
-          <Logo>RO Stats Simulator</Logo>
-        </Col>
-        <Col offset={16} span={4}>
-          <SaveLoad></SaveLoad>
-        </Col>
-      </Row>
-    </Header>
-    <Content style={{ padding: '30px 50px' }}>
+    <AppHeader />
+    <Content style={{ padding: '30px 50px', minHeight: 'calc(100vh - 182px)' }}>
       <Row gutter={16}>
         <Col span={12}>
           <BaseInfo></BaseInfo>
@@ -36,7 +53,7 @@ const App = () => (
         </Col>
       </Row>
     </Content>
-    <Footer></Footer>
+    <AppFooter />
   </Layout>
 );
 

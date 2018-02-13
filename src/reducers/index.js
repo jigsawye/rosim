@@ -3,6 +3,7 @@ import {
   SET_JOB_LEVEL,
   SET_JOB,
   SET_STAT,
+  LOAD_SAVE_DATA,
 } from '../constants/types';
 
 const initialState = {
@@ -30,6 +31,8 @@ export default (state = initialState, action) => {
           [action.key]: Number(action.stat),
         },
       };
+    case LOAD_SAVE_DATA:
+      return { ...action.data };
     default:
       return state;
   }

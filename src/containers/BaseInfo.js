@@ -18,13 +18,13 @@ const BaseInfo = ({ baseLevel, jobLevel, job, setBaseLevel, setJobLevel, setJob 
     <Row gutter={16}>
       <Col span={8}>
         <Label>Base Level</Label>
-        <Select style={{ width: 60 }} value={baseLevel} onChange={setBaseLevel}>
+        <Select style={{ width: 70 }} value={baseLevel} onChange={setBaseLevel}>
           {range(1, 100).map((level) => <Option key={level}>{level}</Option>)}
         </Select>
       </Col>
       <Col span={8}>
         <Label>Job Level</Label>
-        <Select style={{ width: 60 }} value={jobLevel} onChange={setJobLevel}>
+        <Select style={{ width: 70 }} value={jobLevel} onChange={setJobLevel}>
           {range(1, 51).map((level) => <Option key={level}>{level}</Option>)}
         </Select>
       </Col>
