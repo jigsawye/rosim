@@ -8,6 +8,11 @@ import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
 import SaveInput from '../components/SaveLoad/SaveInput';
 import { loadSaveData } from '../actions';
 
+const SaveLoadContainer = styled.div`
+  display: inline-block;
+  float: right;
+`;
+
 const MenuButton = styled(Button)`
   margin-right: 8px;
 `;
@@ -95,10 +100,11 @@ class SaveLoad extends React.Component {
 
   render() {
     return (
-      <div>
+      <SaveLoadContainer>
         <MenuButton type="primary" icon="save" onClick={this.showModal}>Save / Load</MenuButton>
         <Modal
           title="Save / Load"
+          width={600}
           visible={this.state.visible}
           onCancel={this.closeModal}
           footer={<Button onClick={this.closeModal}>Close</Button>}>
@@ -115,7 +121,7 @@ class SaveLoad extends React.Component {
             renderItem={this.renderListItem}
           />
         </Modal>
-      </div>
+      </SaveLoadContainer>
     );
   }
 }

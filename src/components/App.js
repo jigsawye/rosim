@@ -22,18 +22,18 @@ const App = () => (
     <AppHeader />
     <AppContent>
       <Row gutter={16}>
-        <Col xs={{ span: 12 }} xxl={{ span: 9, offset: 3 }}>
+        <Col xs={24} lg={12} xxl={{ span: 9, offset: 3 }}>
           <BaseInfo />
         </Col>
       </Row>
       <Row gutter={16}>
-        <Col xs={{ span: 6 }} xxl={{ span: 4, offset: 3 }}>
+        <Col xs={24} lg={6} xxl={{ span: 4, offset: 3 }}>
           <Status />
         </Col>
-        <Col xs={{ span: 10 }} xxl={{ span: 9 }}>
+        <Col xs={24} lg={10} xxl={8}>
           <Ability />
         </Col>
-        <Col xs={{ span: 8 }} xxl={{ span: 8 }}>
+        <Col xs={24} lg={8} xxl={6}>
           <AspdSetting />
         </Col>
       </Row>
