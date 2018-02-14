@@ -27,10 +27,10 @@ const App = () => (
         </Col>
       </Row>
       <Row gutter={16}>
-        <Col xs={24} lg={6} xxl={{ span: 4, offset: 3 }}>
+        <Col xs={24} lg={5} xxl={{ span: 4, offset: 3 }}>
           <Status />
         </Col>
-        <Col xs={24} lg={10} xxl={8}>
+        <Col xs={24} lg={11} xxl={8}>
           <Ability />
         </Col>
         <Col xs={24} lg={8} xxl={6}>

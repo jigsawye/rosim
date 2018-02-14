@@ -1,14 +1,21 @@
-import {
-  SET_BASE_LEVEL,
-  SET_JOB_LEVEL,
-  SET_JOB,
-  SET_STAT,
-  LOAD_SAVE_DATA,
-} from '../constants/types';
+import * as types from '../constants/types';
 
-export const setBaseLevel = level => ({ type: SET_BASE_LEVEL, level });
-export const setJobLevel = level => ({ type: SET_JOB_LEVEL, level });
-export const setJob = job => ({ type: SET_JOB, job });
-export const setStat = (key, stat) => ({ type: SET_STAT, key, stat });
+export const setBaseLevel = level => ({ type: types.SET_BASE_LEVEL, level });
+export const setJobLevel = level => ({ type: types.SET_JOB_LEVEL, level });
+export const setJob = job => ({ type: types.SET_JOB, job });
+export const setStat = (key, stat) => ({ type: types.SET_STAT, key, stat });
 
-export const loadSaveData = data => ({ type: LOAD_SAVE_DATA, data });
+export const loadSaveData = data => ({ type: types.LOAD_SAVE_DATA, data });
+
+export const updateAspdWeaponId = weaponId => ({
+  type: types.UPDATE_ASPD_WEAPON_ID, weaponId,
+});
+export const updateAspdEqultmentAddition = equltmentsAddition => ({
+  type: types.UPDATE_ASPD_EQULTMENTS_ADDITION, equltmentsAddition,
+});
+export const updateAspdSkillAddition = skillsAddition => ({
+  type: types.UPDATE_ASPD_SKILLS_ADDITION, skillsAddition,
+});
+export const updateAspdPotionAddition = potionAddition => ({
+  type: types.UPDATE_ASPD_POTION_ADDITION, potionAddition,
+});

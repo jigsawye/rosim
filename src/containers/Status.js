@@ -3,10 +3,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Card, Divider } from 'antd';
 
-import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
 import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
 import { setStat } from '../actions';
+import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
 
 const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
   <Card title="Stats">

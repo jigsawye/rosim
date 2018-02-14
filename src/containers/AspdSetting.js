@@ -1,10 +1,101 @@
 import React from 'react';
-import { Card } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { Row, Col, Card, Select, InputNumber, Radio } from 'antd';
 
-const AspdSetting = () => (
+import {
+  updateAspdWeaponId,
+  updateAspdEqultmentAddition,
+  updateAspdSkillAddition,
+  updateAspdPotionAddition,
+} from '../actions';
+import { weapons, jobUsableWeapons } from '../constants/weapons';
+
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
+const { Option } = Select;
+
+const aspdUpPotions = [
+  { key: 0, name: '無', aspdUp: 0 },
+  { key: 1, name: '集中藥水', aspdUp: 10 },
+  { key: 2, name: '覺醒藥水', aspdUp: 15 },
+  { key: 3, name: '菠色克藥水', aspdUp: 20 },
+];
+
+const Label = styled.div`
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+  line-height: 32px;
+`;
+
+const InputField = styled.div`
+  margin-bottom: 10px;
+`;
+
+const AspdSetting = ({
+  aspd,
+  usableWeapons,
+  updateAspdWeaponId,
+  updateAspdEqultmentAddition,
+  updateAspdSkillAddition,
+  updateAspdPotionAddition,
+}) => (
   <Card title="ASPD Setting">
-    Todo
+    <InputField>
+      <Row>
+        <Col xs={12}>
+          <Label>主要</Label>
+          <Select style={{ width: 100 }} value={aspd.weaponId} onChange={updateAspdWeaponId}>
+            {usableWeapons.map(({ id, baseAspd }) => (
+              <Option key={id} value={id}>{weapons.find(weapon => weapon.id === id).name}</Option>)
+            )}
+          </Select>
+        </Col>
+        <Col xs={12}>
+          <Label>副手</Label>
+          *TODO
+        </Col>
+      </Row>
+    </InputField>
+    <InputField>
+      <Label>裝備提升攻速</Label>
+      <InputNumber
+        min={0}
+        max={200}
+        value={aspd.equltmentsAddition}
+        onChange={updateAspdEqultmentAddition} /> %
+    </InputField>
+    <InputField>
+      <Label>技能提升攻速</Label>
+      <InputNumber
+        min={0}
+        max={200}
+        value={aspd.skillsAddition}
+        onChange={updateAspdSkillAddition}/> %
+    </InputField>
+    <InputField>
+      <RadioGroup value={aspd.potionAddition} onChange={({ target }) => updateAspdPotionAddition(target.value)}>
+        {aspdUpPotions.map(({ key, name, aspdUp }) => (
+          <RadioButton key={key} value={aspdUp}>{name}</RadioButton>
+        ))}
+      </RadioGroup>
+    </InputField>
   </Card>
 );
 
-export default AspdSetting;
+const mapStateToProps = ({ job, stats, aspd }) => ({
+  usableWeapons: jobUsableWeapons.find(({ jobId }) => jobId === job).weapons,
+  stats,
+  aspd,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  updateAspdWeaponId,
+  updateAspdEqultmentAddition,
+  updateAspdSkillAddition,
+  updateAspdPotionAddition,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(AspdSetting);

@@ -1,23 +1,23 @@
 export const weapons = [
-  id: 0, name: '空手',
-  id: 1, name: '短劍',
-  id: 2, name: '單手劍',
-  id: 3, name: '雙手劍',
-  id: 4, name: '單手槍',
-  id: 5, name: '雙手槍',
-  id: 6, name: '單手斧',
-  id: 7, name: '雙手斧',
-  id: 8, name: '鈍器',
-  id: 9, name: '單手杖',
-  id: 10, name: '弓',
-  id: 11, name: '拳刃',
-  id: 12, name: '書',
-  id: 13, name: '拳套',
-  id: 14, name: '樂器',
-  id: 15, name: '鞭子',
+  { id: 0, name: '空手' },
+  { id: 1, name: '短劍' },
+  { id: 2, name: '單手劍' },
+  { id: 3, name: '雙手劍' },
+  { id: 4, name: '單手槍' },
+  { id: 5, name: '雙手槍' },
+  { id: 6, name: '單手斧' },
+  { id: 7, name: '雙手斧' },
+  { id: 8, name: '鈍器' },
+  { id: 9, name: '單手杖' },
+  { id: 10, name: '弓' },
+  { id: 11, name: '拳刃' },
+  { id: 12, name: '書' },
+  { id: 13, name: '拳套' },
+  { id: 14, name: '樂器' },
+  { id: 15, name: '鞭子' },
 ];
 
-export const weaponsBaseAspd = [
+export const jobUsableWeapons = [
   {
     jobId: 7,
     weapons: [
