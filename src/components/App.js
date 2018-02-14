@@ -4,8 +4,11 @@ import { Row, Col, Layout } from 'antd';
 
 import AppHeader from './Layouts/AppHeader';
 import AppFooter from './Layouts/AppFooter';
+
 import BaseInfo from '../containers/BaseInfo';
-import Stats from '../containers/Stats';
+import Status from '../containers/Status';
+import Ability from '../containers/Ability';
+import AspdSetting from '../containers/AspdSetting';
 
 const { Content } = Layout;
 
@@ -25,7 +28,13 @@ const App = () => (
       </Row>
       <Row gutter={16}>
         <Col xs={{ span: 6 }} xxl={{ span: 4, offset: 3 }}>
-          <Stats />
+          <Status />
+        </Col>
+        <Col xs={{ span: 10 }} xxl={{ span: 9 }}>
+          <Ability />
+        </Col>
+        <Col xs={{ span: 8 }} xxl={{ span: 8 }}>
+          <AspdSetting />
         </Col>
       </Row>
     </AppContent>

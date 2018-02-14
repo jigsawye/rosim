@@ -5,11 +5,11 @@ import { Card, Divider } from 'antd';
 
 import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
 import Stat from '../components/Stat';
-import StatsPointBox from '../components/StatsPointBox';
+import StatusPointBox from '../components/StatusPointBox';
 import { setStat } from '../actions';
 
 const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
-  <Card style={{ margin: '16px 0' }} title="Stats">
+  <Card title="Stats">
     {Object.keys(stats).map((key) => (
       <Stat
         key={key}
@@ -20,7 +20,7 @@ const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
       </Stat>
     ))}
     <Divider></Divider>
-    <StatsPointBox point={remainingPoint}></StatsPointBox>
+    <StatusPointBox point={remainingPoint}></StatusPointBox>
   </Card>
 );
 
