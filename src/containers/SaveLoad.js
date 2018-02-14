@@ -2,9 +2,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Row, Col, Button, Modal, List, Input, Divider, Popconfirm } from 'antd';
+import { Button, Modal, List, Divider, Popconfirm } from 'antd';
 
 import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
+import SaveInput from '../components/SaveLoad/SaveInput';
 import { loadSaveData } from '../actions';
 
 const MenuButton = styled(Button)`
@@ -34,15 +35,13 @@ class SaveLoad extends React.Component {
     this.setState({ visible: true, saveName: '', archives });
   }
 
-  handleClose = () => {
-    this.setState({ visible: false });
-  }
+  closeModal = () => this.setState({ visible: false })
 
   updateSaveName = ({ target }) => this.setState({ saveName: target.value })
 
   saveData = () => {
     if (this.state.saveName === '') {
-      return
+      return;
     }
 
     const data = {
@@ -53,6 +52,7 @@ class SaveLoad extends React.Component {
 
     this.setState({
       archives: [...this.state.archives, data],
+      saveName: '',
     });
   }
 
@@ -73,6 +73,26 @@ class SaveLoad extends React.Component {
     this.setState({ archives });
   }
 
+  renderListItem = (item) => (
+    <List.Item actions={this.renderListActions(item)}>
+      <List.Item.Meta title={item.name} description={<ArchiveDescription item={item} />} />
+    </List.Item>
+  )
+
+  renderListActions = (item) => {
+    const actions = [
+      { title: '覆蓋原', text: 'Save', onConfirm: () => this.saveExistsData(item) },
+      { title: '載入此', text: 'Load', onConfirm: () => this.loadData(item) },
+      { title: '刪除此', text: 'Delete', onConfirm: () => this.deleteData(item) },
+    ];
+
+    return actions.map(({ title, text, onConfirm }) => (
+      <Popconfirm placement="bottom" title={`你確定要${title}存檔嗎?`} onConfirm={onConfirm}>
+        <a>{text}</a>
+      </Popconfirm>
+    ));
+  }
+
   render() {
     return (
       <div>
@@ -80,51 +100,19 @@ class SaveLoad extends React.Component {
         <Modal
           title="Save / Load"
           visible={this.state.visible}
-          onCancel={this.handleClose}
-          footer={<Button onClick={this.handleClose}>Close</Button>}>
-          <Row gutter={16}>
-            <Col span={20}>
-              <Input
-                placeholder="Save Name"
-                value={this.state.saveName}
-                onChange={this.updateSaveName}/>
-            </Col>
-            <Col span={4}>
-              <Button type="primary" onClick={this.saveData}>Save</Button>
-            </Col>
-          </Row>
+          onCancel={this.closeModal}
+          footer={<Button onClick={this.closeModal}>Close</Button>}>
+          <SaveInput
+            value={this.state.saveName}
+            updateSaveName={this.updateSaveName}
+            saveData={this.saveData}
+          />
           <Divider />
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
             dataSource={this.state.archives}
-            renderItem={item => (
-              <List.Item actions={[
-                <Popconfirm
-                  placement="bottom"
-                  title="你確定要覆蓋原存檔嗎?"
-                  onConfirm={() => this.saveExistsData(item)}>
-                  <a>Save</a>
-                </Popconfirm>,
-                <Popconfirm
-                  placement="bottom"
-                  title="你確定要載入此存檔嗎?"
-                  onConfirm={() => this.loadData(item)}>
-                  <a>Load</a>
-                </Popconfirm>,
-                <Popconfirm
-                  placement="bottom"
-                  title="你確定要刪除此存檔嗎?"
-                  onConfirm={() => this.deleteData(item)}>
-                  <a>Delete</a>
-                </Popconfirm>,
-              ]}>
-                <List.Item.Meta
-                  title={item.name}
-                  description={<ArchiveDescription item={item} />}
-                />
-              </List.Item>
-            )}
+            renderItem={this.renderListItem}
           />
         </Modal>
       </div>
