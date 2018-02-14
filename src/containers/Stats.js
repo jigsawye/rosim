@@ -4,20 +4,20 @@ import { connect } from 'react-redux';
 import { Card, Divider } from 'antd';
 
 import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
-import Stats from '../components/Stats';
+import Stat from '../components/Stat';
 import StatsPointBox from '../components/StatsPointBox';
 import { setStat } from '../actions';
 
 const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
   <Card style={{ margin: '16px 0' }} title="Stats">
     {Object.keys(stats).map((key) => (
-      <Stats
+      <Stat
         key={key}
         label={key.toUpperCase()}
         value={stats[key]}
         bonuse={jobBonusStats[key]}
         onChange={(stat) => setStat(key, stat)}>
-      </Stats>
+      </Stat>
     ))}
     <Divider></Divider>
     <StatsPointBox point={remainingPoint}></StatsPointBox>
