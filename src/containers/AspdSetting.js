@@ -6,6 +6,7 @@ import { Row, Col, Card, Select, InputNumber, Radio } from 'antd';
 
 import {
   updateAspdWeaponId,
+  updateAspdLefthandId,
   updateAspdEqultmentAddition,
   updateAspdSkillAddition,
   updateAspdPotionAddition,
@@ -37,7 +38,9 @@ const InputField = styled.div`
 const AspdSetting = ({
   aspd,
   usableWeapons,
+  usableLefthand = [],
   updateAspdWeaponId,
+  updateAspdLefthandId,
   updateAspdEqultmentAddition,
   updateAspdSkillAddition,
   updateAspdPotionAddition,
@@ -55,7 +58,17 @@ const AspdSetting = ({
         </Col>
         <Col xs={12}>
           <Label>副手</Label>
-          *TODO
+          <Select
+            style={{ width: 100 }}
+            value={aspd.lefthandId}
+            onChange={updateAspdLefthandId}
+            disabled={!weapons.find(weapon => weapon.id === aspd.weaponId).lefthand}>
+            <Option key={100} value={100}>無</Option>
+            <Option key={101} value={101}>盾</Option>
+            {usableLefthand.map(({ id, baseAspd }) => (
+              <Option key={id} value={id}>{weapons.find(weapon => weapon.id === id).name}</Option>)
+            )}
+          </Select>
         </Col>
       </Row>
     </InputField>
@@ -87,12 +100,14 @@ const AspdSetting = ({
 
 const mapStateToProps = ({ job, stats, aspd }) => ({
   usableWeapons: jobUsableWeapons.find(({ jobId }) => jobId === job).weapons,
+  usableLefthand: jobUsableWeapons.find(({ jobId }) => jobId === job).lefthand,
   stats,
   aspd,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   updateAspdWeaponId,
+  updateAspdLefthandId,
   updateAspdEqultmentAddition,
   updateAspdSkillAddition,
   updateAspdPotionAddition,

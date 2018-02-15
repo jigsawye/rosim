@@ -1,4 +1,5 @@
 import * as types from '../constants/types';
+import { weapons } from '../constants/weapons';
 
 const initialState = {
   baseLevel: 1,
@@ -9,6 +10,7 @@ const initialState = {
   },
   aspd: {
     weaponId: 0,
+    lefthandId: 100,
     equltmentsAddition: 0,
     skillsAddition: 0,
     potionAddition: 0,
@@ -22,7 +24,15 @@ export default (state = initialState, action) => {
     case types.SET_JOB_LEVEL:
       return { ...state, jobLevel: Number(action.level) };
     case types.SET_JOB:
-      return { ...state, job: Number(action.job) };
+      return {
+        ...state,
+        job: Number(action.job),
+        aspd: {
+          ...state.aspd,
+          weaponId: 0,
+          lefthandId: 100,
+        },
+      };
     case types.SET_STAT:
       return {
         ...state,
@@ -34,11 +44,22 @@ export default (state = initialState, action) => {
     case types.LOAD_SAVE_DATA:
       return { ...action.data };
     case types.UPDATE_ASPD_WEAPON_ID:
+      const { lefthand } = weapons.find(({ id }) => id === action.weaponId);
+      const lefthandId = lefthand ? state.aspd.lefthandId : 100;
       return {
         ...state,
         aspd: {
           ...state.aspd,
+          lefthandId,
           weaponId: action.weaponId,
+        },
+      };
+    case types.UPDATE_ASPD_LEFTHAND_ID:
+      return {
+        ...state,
+        aspd: {
+          ...state.aspd,
+          lefthandId: action.lefthandId,
         },
       };
     case types.UPDATE_ASPD_EQULTMENTS_ADDITION:

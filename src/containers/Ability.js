@@ -32,16 +32,22 @@ const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
   </Card>
 );
 
-const getAspd = (job, { agi, dex }, { weaponId, equltmentsAddition, skillsAddition, potionAddition }) => {
-  const { baseAspd } = jobUsableWeapons
-    .find(({ jobId }) => jobId === job).weapons
-    .find(({ id }) => id === weaponId);
-  const leftHand = 0;
+const getAspd = (job, agi, dex, { weaponId, lefthandId, equltmentsAddition, skillsAddition, potionAddition }) => {
+  const { weapons, shieldAspd, lefthand = [] } = jobUsableWeapons.find(({ jobId }) => jobId === job);
+  const { baseAspd } = weapons.find(({ id }) => id === weaponId);
+  const lefthandBaseAspd = lefthandId === 100 ? 0 :
+    lefthandId === 101 ? shieldAspd : lefthand.find(({ id }) => id === lefthandId).baseAspd;
   const aspdUpA = potionAddition + skillsAddition;
   const aspdUpB = equltmentsAddition;
   const aspdUpPoint = 0;
-  const aspdMultiplier = baseAspd < 145 ? 1 : (1 - (baseAspd - 144) / 50);
-  const aspdA = baseAspd + Math.sqrt(agi * 1120 / 111 + dex * 11 / 60) * aspdMultiplier - leftHand;
+  const hasLefthandWeapon = lefthandBaseAspd > 0;
+  const lefthandAdjust = hasLefthandWeapon ? (lefthandBaseAspd - 194) / 4 : lefthandBaseAspd;
+  const agiAdjust = hasLefthandWeapon ? 10.01 :
+    weaponId === 10 ? 10 : 1120 / 111;
+  const aspdMultiplier = hasLefthandWeapon ? 1.04518 :
+    baseAspd >= 145 ? (1 - (baseAspd - 144) / 50) : 1;
+
+  const aspdA = baseAspd + lefthandAdjust + Math.sqrt(agi * agiAdjust + dex * 11 / 60) * aspdMultiplier;
   const aspdB = 200 - (200 - aspdA) * (1 - aspdUpA / 100);
   const finalAspd = 195 - (195 - aspdB) * (1 - aspdUpB / 100) + aspdUpPoint;
   return finalAspd.toFixed(2);
@@ -70,7 +76,7 @@ const mapStateToProps = ({ stats, baseLevel, jobLevel, job, aspd }) => {
       Math.floor(baseLevel / 4) +
       Math.floor((stats.vit + jobBonusStats.vit) / 5) +
       Math.floor((stats.dex + jobBonusStats.dex) / 5),
-    aspd: getAspd(job, stats, aspd),
+    aspd: getAspd(job, stats.agi + jobBonusStats.agi, stats.dex + jobBonusStats.dex, aspd),
   };
 };
 

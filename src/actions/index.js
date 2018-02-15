@@ -10,6 +10,9 @@ export const loadSaveData = data => ({ type: types.LOAD_SAVE_DATA, data });
 export const updateAspdWeaponId = weaponId => ({
   type: types.UPDATE_ASPD_WEAPON_ID, weaponId,
 });
+export const updateAspdLefthandId = lefthandId => ({
+  type: types.UPDATE_ASPD_LEFTHAND_ID, lefthandId,
+});
 export const updateAspdEqultmentAddition = equltmentsAddition => ({
   type: types.UPDATE_ASPD_EQULTMENTS_ADDITION, equltmentsAddition,
 });
