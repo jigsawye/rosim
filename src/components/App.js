@@ -5,6 +5,7 @@ import { Row, Col, Layout } from 'antd';
 import AppHeader from './Layouts/AppHeader';
 import AppFooter from './Layouts/AppFooter';
 
+import Greaso from '../components/Greaso';
 import BaseInfo from '../containers/BaseInfo';
 import Status from '../containers/Status';
 import Ability from '../containers/Ability';
@@ -35,6 +36,7 @@ const App = () => (
         </Col>
         <Col xs={24} lg={8} xxl={6}>
           <AspdSetting />
+          <Greaso />
         </Col>
       </Row>
     </AppContent>
