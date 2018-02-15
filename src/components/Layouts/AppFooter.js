@@ -6,10 +6,13 @@ const { Footer } = Layout;
 const AppFooter = () => (
   <Footer style={{ textAlign: 'center' }}>
     <p>
-      Developed with <Icon type="heart" /> by <a href="https://github.com/jigsawye" target="__blank">Evan Ye</a>.
+      Developed with <Icon type="heart" /> by <a
+        href="https://github.com/jigsawye"
+        rel="noopener noreferrer"
+        target="_blank">Evan Ye</a>.
     </p>
     <p>
-      <a href="https://github.com/jigsawye/ro-stats-simulator" target="__blank">
+      <a href="https://github.com/jigsawye/ro-stats-simulator" rel="noopener noreferrer" target="_blank">
         <Icon type="github" /> Source Code
       </a>
     </p>

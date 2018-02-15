@@ -9,7 +9,7 @@ const Image = styled.img`
 
 const Greaso = () => (
   <Card title="工商：本公會會長的實況連結，歡迎追隨訂閱" style={{ marginTop: 15 }}>
-    <a href="https://www.twitch.tv/greaso522" target="__blank">
+    <a href="https://www.twitch.tv/greaso522" rel="noopener noreferrer" target="_blank">
       <Image src={greaso} alt="greaso twitch"/>
     </a>
   </Card>
