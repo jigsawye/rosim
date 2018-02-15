@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
+import { floor } from 'lodash';
 
 import { getJobBonusStats } from '../utils/stats';
 import { jobUsableWeapons } from '../constants/weapons';
@@ -55,28 +56,21 @@ const getAspd = (job, agi, dex, { weaponId, lefthandId, equltmentsAddition, skil
 
 const mapStateToProps = ({ stats, baseLevel, jobLevel, job, aspd }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
+  const { weaponId } = aspd;
+  const statusKeys = ['str', 'agi', 'vit', 'int', 'dex', 'luk'];
+  const [str, agi, vit, int, dex, luk] = statusKeys.map(key => stats[key] + jobBonusStats[key]);
+  const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
+
   return {
-    atk: stats.str + jobBonusStats.str +
-      Math.floor(baseLevel / 4) +
-      Math.floor((stats.luk + jobBonusStats.luk) / 3) +
-      Math.floor((stats.dex + jobBonusStats.dex) / 5),
-    matk: Math.floor(baseLevel / 4) +
-      Math.floor((stats.int + jobBonusStats.int) * 1.5) +
-      Math.floor((stats.luk + jobBonusStats.luk) / 3) +
-      Math.floor((stats.dex + jobBonusStats.dex) / 5),
-    hit: Math.floor((stats.luk + jobBonusStats.luk) / 3) +
-      stats.dex + jobBonusStats.dex + baseLevel + 175,
-    flee: Math.floor((stats.luk + jobBonusStats.luk) / 5) +
-      stats.agi + jobBonusStats.agi + baseLevel + 100,
-    dodge: Math.floor((stats.luk + jobBonusStats.luk) / 10) + 1,
-    cri: Math.floor((stats.luk + jobBonusStats.luk) * 0.3) + 1,
-    def: Math.floor((stats.agi + jobBonusStats.agi) / 5) +
-      Math.floor((baseLevel + stats.vit + jobBonusStats.vit) / 2),
-    mdef: stats.int + jobBonusStats.int +
-      Math.floor(baseLevel / 4) +
-      Math.floor((stats.vit + jobBonusStats.vit) / 5) +
-      Math.floor((stats.dex + jobBonusStats.dex) / 5),
-    aspd: getAspd(job, stats.agi + jobBonusStats.agi, stats.dex + jobBonusStats.dex, aspd),
+    atk: mainAtkStat + floor(baseLevel / 4 + luk / 3 + subAtkStat / 5),
+    matk: floor(baseLevel / 4) + floor(int * 1.5) + floor(luk / 3) + floor(dex / 5),
+    hit: floor(luk / 3) + dex + baseLevel + 175,
+    flee: floor(luk / 5) + agi + baseLevel + 100,
+    dodge: floor(luk / 10) + 1,
+    cri: floor(luk / 3) + 1,
+    def: floor(agi / 5 + (baseLevel + vit) / 2),
+    mdef: int + floor(baseLevel / 4 + (vit + dex) / 5),
+    aspd: getAspd(job, stats.agi + jobBonusStats.agi, dex, aspd),
   };
 };
 

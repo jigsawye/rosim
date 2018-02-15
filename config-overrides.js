@@ -7,5 +7,7 @@ module.exports = function override(config, env) {
     style: 'css',
   }], config);
 
+  config = injectBabelPlugin('lodash', config);
+
   return config;
 };
