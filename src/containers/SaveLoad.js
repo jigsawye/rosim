@@ -50,9 +50,9 @@ class SaveLoad extends React.Component {
     }
 
     const data = {
+      ...this.props.currentData,
       _id: generateId(),
       name: this.state.saveName,
-      ...this.props.currentData,
     };
 
     this.setState({
@@ -64,7 +64,7 @@ class SaveLoad extends React.Component {
   saveExistsData = ({ _id, name }) => {
     const { archives } = this.state;
     const index = archives.findIndex(archive => archive._id === _id);
-    archives[index] = { _id, name, ...this.props.currentData };
+    archives[index] = { ...this.props.currentData, _id, name };
 
     this.setState({ archives });
   }
