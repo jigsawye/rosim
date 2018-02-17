@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Button, Modal, List, Divider, Popconfirm } from 'antd';
+import { findIndex, reject } from 'lodash';
 
 import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
 import SaveInput from '../components/SaveLoad/SaveInput';
@@ -63,18 +64,16 @@ class SaveLoad extends React.Component {
 
   saveExistsData = ({ _id, name }) => {
     const { archives } = this.state;
-    const index = archives.findIndex(archive => archive._id === _id);
+    const index = findIndex(archives, { _id });
     archives[index] = { ...this.props.currentData, _id, name };
 
     this.setState({ archives });
   }
 
-  loadData = (data) => {
-    this.props.loadSaveData(data);
-  }
+  loadData = data => this.props.loadSaveData(data)
 
   deleteData = ({ _id }) => {
-    const archives = this.state.archives.filter(archive => archive._id !== _id);
+    const archives = reject(this.state.archives, { _id });
     this.setState({ archives });
   }
 
