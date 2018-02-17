@@ -1,5 +1,7 @@
 # RO Stats Simulartor
 
+![demo](images/demo.png)
+
 Build with React, Redux, antd, styled-components.
 
 ## Build Setup
