@@ -2,8 +2,9 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Button, Modal, List, Divider, Popconfirm } from 'antd';
+import { Button, Modal, List, Divider, Popconfirm, Tooltip } from 'antd';
 import { findIndex, reject } from 'lodash';
+import copy from 'copy-to-clipboard';
 
 import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
 import SaveInput from '../components/SaveLoad/SaveInput';
@@ -24,6 +25,7 @@ class SaveLoad extends React.Component {
   state = {
     archives: [],
     visible: false,
+    copied: false,
     saveName: '',
   };
 
@@ -77,6 +79,17 @@ class SaveLoad extends React.Component {
     this.setState({ archives });
   }
 
+  resetCopied = () => this.setState({ copied: false })
+
+  copyToClipboard = (item) => {
+    const jsonData = JSON.stringify(item);
+    const base64Data = btoa(jsonData);
+    const url = `${window.location.origin}?data=${base64Data}`;
+
+    copy(url);
+    this.setState({ copied: true });
+  }
+
   renderListItem = (item) => (
     <List.Item actions={this.renderListActions(item)}>
       <List.Item.Meta title={item.name} description={<ArchiveDescription item={item} />} />
@@ -90,11 +103,16 @@ class SaveLoad extends React.Component {
       { title: '刪除此', text: 'Delete', onConfirm: () => this.deleteData(item) },
     ];
 
-    return actions.map(({ title, text, onConfirm }) => (
-      <Popconfirm placement="bottom" title={`你確定要${title}存檔嗎?`} onConfirm={onConfirm}>
-        <a>{text}</a>
-      </Popconfirm>
-    ));
+    return [
+      <Tooltip title={this.state.copied ? '複製成功！' : '複製到剪貼板'} onVisibleChange={this.resetCopied}>
+        <a onClick={() => this.copyToClipboard(item)}>Url</a>
+      </Tooltip>,
+      ...actions.map(({ title, text, onConfirm }) => (
+        <Popconfirm placement="bottom" title={`你確定要${title}存檔嗎?`} onConfirm={onConfirm}>
+          <a>{text}</a>
+        </Popconfirm>
+      )),
+    ];
   }
 
   render() {
