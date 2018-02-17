@@ -22,14 +22,23 @@ const Plus = styled.span`
   margin: 0 7px;
 `;
 
-const Stats = ({ label, value, onChange, bonuse }) => (
+const Bonuse = styled.div`
+  display: inline-block;
+  width: 10px;
+`;
+
+const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat }) => (
   <StatsContainer>
     <Label>{label}</Label>
     <Select style={{ width: 70 }} value={value} onChange={onChange}>
       {range(1, 100).map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
     <Plus>+</Plus>
-    {bonuse}
+    <Bonuse>{bonuse}</Bonuse>
+    <Plus>+</Plus>
+    <Select style={{ width: 70 }} value={otherStat} onChange={onChangeOtherStat}>
+      {range(0, 50).map((stat) => <Option key={stat}>{stat}</Option>)}
+    </Select>
   </StatsContainer>
 );
 
@@ -38,6 +47,8 @@ Stats.propTypes = {
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   bonuse: PropTypes.number.isRequired,
+  otherStat: PropTypes.number.isRequired,
+  onChangeOtherStat: PropTypes.func.isRequired,
 };
 
 export default Stats;

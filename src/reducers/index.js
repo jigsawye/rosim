@@ -8,6 +8,9 @@ const initialState = {
   stats: {
     str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1,
   },
+  otherStats: {
+    str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0,
+  },
   aspd: {
     weaponId: 0,
     lefthandId: 100,
@@ -38,6 +41,14 @@ export default (state = initialState, action) => {
         ...state,
         stats: {
           ...state.stats,
+          [action.key]: Number(action.stat),
+        },
+      };
+    case types.SET_OTHER_STAT:
+      return {
+        ...state,
+        otherStats: {
+          ...state.otherStats,
           [action.key]: Number(action.stat),
         },
       };

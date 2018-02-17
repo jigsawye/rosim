@@ -5,10 +5,10 @@ import { Card, Divider } from 'antd';
 
 import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
-import { setStat } from '../actions';
+import { setStat, setOtherStat } from '../actions';
 import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
 
-const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
+const Status = ({ stats, setStat, otherStats, setOtherStat, remainingPoint, jobBonusStats }) => (
   <Card title="Stats">
     {Object.keys(stats).map((key) => (
       <Stat
@@ -16,7 +16,9 @@ const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
         label={key.toUpperCase()}
         value={stats[key]}
         bonuse={jobBonusStats[key]}
-        onChange={(stat) => setStat(key, stat)}>
+        onChange={stat => setStat(key, stat)}
+        otherStat={otherStats[key]}
+        onChangeOtherStat={stat => setOtherStat(key, stat)}>
       </Stat>
     ))}
     <Divider></Divider>
@@ -24,13 +26,14 @@ const Status = ({ stats, setStat, remainingPoint, jobBonusStats }) => (
   </Card>
 );
 
-const mapStateToProps = ({ stats, baseLevel, jobLevel, job }) => ({
+const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job }) => ({
   stats,
+  otherStats,
   jobBonusStats : getJobBonusStats(jobLevel, job),
   remainingPoint: getRemainingStatsPoint(baseLevel, stats),
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ setStat }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ setStat, setOtherStat }, dispatch);
 
 export default connect(
   mapStateToProps,

@@ -22,8 +22,8 @@ const AbilityGrid = ({ label, children }) => (
 
 const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
   <Card title="Ability" className="ant-card-contain-grid">
-    <AbilityGrid label="ATK">{atk} + ___ ± __</AbilityGrid>
-    <AbilityGrid label="MATK">{matk} + ___ ± __</AbilityGrid>
+    <AbilityGrid label="ATK">{atk} + ___</AbilityGrid>
+    <AbilityGrid label="MATK">{matk} + ___</AbilityGrid>
     <AbilityGrid label="CRI">{cri}</AbilityGrid>
     <AbilityGrid label="DEF">{def} + ___</AbilityGrid>
     <AbilityGrid label="MDEF">{mdef} + ___</AbilityGrid>
@@ -54,11 +54,11 @@ const getAspd = (job, agi, dex, { weaponId, lefthandId, equltmentsAddition, skil
   return finalAspd.toFixed(2);
 };
 
-const mapStateToProps = ({ stats, baseLevel, jobLevel, job, aspd }) => {
+const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
   const { weaponId } = aspd;
   const statusKeys = ['str', 'agi', 'vit', 'int', 'dex', 'luk'];
-  const [str, agi, vit, int, dex, luk] = statusKeys.map(key => stats[key] + jobBonusStats[key]);
+  const [str, agi, vit, int, dex, luk] = statusKeys.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
 
   return {
@@ -70,7 +70,7 @@ const mapStateToProps = ({ stats, baseLevel, jobLevel, job, aspd }) => {
     cri: floor(luk / 3) + 1,
     def: floor(agi / 5 + (baseLevel + vit) / 2),
     mdef: int + floor(baseLevel / 4 + (vit + dex) / 5),
-    aspd: getAspd(job, stats.agi + jobBonusStats.agi, dex, aspd),
+    aspd: getAspd(job, agi, dex, aspd),
   };
 };
 
