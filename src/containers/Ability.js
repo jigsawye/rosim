@@ -63,7 +63,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd }) 
 
   return {
     atk: mainAtkStat + floor(baseLevel / 4 + luk / 3 + subAtkStat / 5),
-    matk: floor(baseLevel / 4) + floor(int * 1.5) + floor(luk / 3) + floor(dex / 5),
+    matk: floor(baseLevel / 4 + int * 1.5 + luk / 3 + dex / 5),
     hit: floor(luk / 3) + dex + baseLevel + 175,
     flee: floor(luk / 5) + agi + baseLevel + 100,
     dodge: floor(luk / 10) + 1,
