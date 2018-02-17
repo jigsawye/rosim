@@ -45,7 +45,7 @@ const AspdSetting = ({
   updateAspdSkillAddition,
   updateAspdPotionAddition,
 }) => (
-  <Card title="ASPD Setting">
+  <Card title="ASPD Setting" style={{ marginTop: 15 }}>
     <InputField>
       <Row>
         <Col xs={12}>

@@ -9,7 +9,7 @@ import { setStat, setOtherStat } from '../actions';
 import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
 
 const Status = ({ stats, setStat, otherStats, setOtherStat, remainingPoint, jobBonusStats }) => (
-  <Card title="Stats">
+  <Card title="Stats" style={{ marginTop: 15 }}>
     {Object.keys(stats).map((key) => (
       <Stat
         key={key}

@@ -7,9 +7,12 @@ import SaveLoad from '../../containers/SaveLoad';
 const { Header } = Layout;
 
 const Logo = styled.div`
-  display: inline-block;
+  display: none;
   font-size: 20px;
   color: #FFF;
+  @media (min-width:992px) {
+    display: inline-block;
+  }
 `;
 
 const AppHeader = () => (

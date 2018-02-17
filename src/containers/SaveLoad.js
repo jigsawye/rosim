@@ -15,10 +15,6 @@ const SaveLoadContainer = styled.div`
   float: right;
 `;
 
-const MenuButton = styled(Button)`
-  margin-right: 8px;
-`;
-
 const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
 
 class SaveLoad extends React.Component {
@@ -118,7 +114,7 @@ class SaveLoad extends React.Component {
   render() {
     return (
       <SaveLoadContainer>
-        <MenuButton type="primary" icon="save" onClick={this.showModal}>Save / Load</MenuButton>
+        <Button type="primary" icon="save" onClick={this.showModal}>Save / Load</Button>
         <Modal
           title="Save / Load"
           width={600}

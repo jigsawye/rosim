@@ -21,7 +21,7 @@ const AbilityGrid = ({ label, children }) => (
 );
 
 const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
-  <Card title="Ability" className="ant-card-contain-grid">
+  <Card title="Ability" className="ant-card-contain-grid" style={{ marginTop: 15 }}>
     <AbilityGrid label="ATK">{atk} + ___</AbilityGrid>
     <AbilityGrid label="MATK">{matk} + ___</AbilityGrid>
     <AbilityGrid label="CRI">{cri}</AbilityGrid>

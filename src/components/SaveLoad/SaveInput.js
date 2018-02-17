@@ -4,13 +4,13 @@ import { Row, Col, Input, Button } from 'antd';
 
 const SaveInput = ({ value, updateSaveName, saveData }) => (
   <Row gutter={16}>
-    <Col span={20}>
+    <Col xs={18} lg={20}>
       <Input
         placeholder="Save Name"
         value={value}
         onChange={updateSaveName}/>
     </Col>
-    <Col span={4}>
+    <Col xs={6} lg={4}>
       <Button type="primary" onClick={saveData}>Save</Button>
     </Col>
   </Row>

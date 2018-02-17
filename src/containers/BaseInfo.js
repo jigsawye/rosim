@@ -14,7 +14,7 @@ const Label = styled.label`
 `;
 
 const BaseInfo = ({ baseLevel, jobLevel, job, setBaseLevel, setJobLevel, setJob }) => (
-  <Card title="Base Info" style={{ marginBottom: 15 }}>
+  <Card title="Base Info" style={{ marginTop: 15 }}>
     <Row gutter={16}>
       <Col span={8}>
         <Label>Base Level</Label>
