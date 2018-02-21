@@ -6,6 +6,7 @@ import { floor, find } from 'lodash';
 
 import { getJobBonusStats } from '../utils/stats';
 import aspdTable from '../constants/aspdTable';
+import { statsMap } from '../constants/bonus';
 
 const AbilityText = styled.div`
   margin-top: 10px;
@@ -57,8 +58,7 @@ const getAspd = (job, agi, dex, { weaponId, lefthandId, equltmentsAddition, skil
 const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
   const { weaponId } = aspd;
-  const statusKeys = ['str', 'agi', 'vit', 'int', 'dex', 'luk'];
-  const [str, agi, vit, int, dex, luk] = statusKeys.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
+  const [str, agi, vit, int, dex, luk] = statsMap.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
 
   return {

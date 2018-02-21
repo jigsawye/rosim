@@ -33,7 +33,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job }) => ({
   otherStats,
   statsRange: getStatsRange(job),
   jobBonusStats : getJobBonusStats(jobLevel, job),
-  remainingPoint: getRemainingStatsPoint(baseLevel, stats),
+  remainingPoint: getRemainingStatsPoint(baseLevel, stats, job),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ setStat, setOtherStat }, dispatch);

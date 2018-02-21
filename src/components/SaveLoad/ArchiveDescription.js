@@ -31,7 +31,7 @@ ArchiveDescription.propTypes = {
   item: PropTypes.shape({
     baseLevel: PropTypes.number.isRequired,
     jobLevel: PropTypes.number.isRequired,
-    job: PropTypes.number.isRequired,
+    job: PropTypes.array.isRequired,
     stats: PropTypes.object.isRequired,
   }),
 };

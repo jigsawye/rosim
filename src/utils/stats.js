@@ -1,7 +1,9 @@
 import { range, mapValues, find } from 'lodash';
 import jobStatBonus, { statsMap } from '../constants/bonus';
+import { getClass } from '../constants/classes';
+import { SECOND } from '../constants/classes/classNames';
 
-export const getAvailableStatsPoint = level => range(1, +level)
+export const getAvailableStatsPoint = (level, isTranscendent) => range(1, +level)
   .map((lv) => {
     if (lv < 100) {
       return Math.floor((lv / 5) + 3);
@@ -11,10 +13,12 @@ export const getAvailableStatsPoint = level => range(1, +level)
 
     return Math.floor(((lv - 150) / 7) + 28);
   })
-  .reduce((prev, curr) => prev + curr, 48);
+  .reduce((prev, curr) => prev + curr, isTranscendent ? 100 : 48);
 
-export const getRemainingStatsPoint = (level, stats) => {
-  const statsPoint = getAvailableStatsPoint(level);
+export const getRemainingStatsPoint = (level, stats, job) => {
+  const { type } = getClass(job);
+  const isTranscendent = type !== SECOND;
+  const statsPoint = getAvailableStatsPoint(level, isTranscendent);
   const raises = mapValues(stats, stat => range(1, stat).map(s => ((s < 100) ?
     Math.floor((s - 1) / 10) + 2 :
     (4 * Math.floor((s - 100) / 5)) + 16
