@@ -1,10 +1,12 @@
+import { find } from 'lodash';
 import * as types from '../constants/types';
-import { weapons } from '../constants/weapons';
+import { getBaseLevelRange, getJobLevelRange, getStatsRange } from '../constants/ranges';
+import weapons from '../constants/weapons';
 
 const initialState = {
   baseLevel: 1,
   jobLevel: 1,
-  job: 7,
+  job: ['SWORDMAN', 'KNIGHT'],
   stats: {
     str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1,
   },
@@ -27,9 +29,25 @@ export default (state = initialState, action) => {
     case types.SET_JOB_LEVEL:
       return { ...state, jobLevel: Number(action.level) };
     case types.SET_JOB:
+      const { str, agi, vit, int, dex, luk } = state.stats;
+      const maxBaseLevel = getBaseLevelRange(action.job);
+      const maxJobLevel = getJobLevelRange(action.job);
+      const maxStats = getStatsRange(action.job);
+      const baseLevel = state.baseLevel < maxBaseLevel ? state.baseLevel : maxBaseLevel;
+      const jobLevel = state.jobLevel < maxJobLevel ? state.jobLevel : maxJobLevel;
       return {
         ...state,
-        job: Number(action.job),
+        baseLevel,
+        jobLevel,
+        job: [...action.job],
+        stats: {
+          str: str < maxStats ? str : maxStats,
+          agi: agi < maxStats ? agi : maxStats,
+          vit: vit < maxStats ? vit : maxStats,
+          int: int < maxStats ? int : maxStats,
+          dex: dex < maxStats ? dex : maxStats,
+          luk: luk < maxStats ? luk : maxStats,
+        },
         aspd: {
           ...state.aspd,
           weaponId: 0,
@@ -55,7 +73,7 @@ export default (state = initialState, action) => {
     case types.LOAD_SAVE_DATA:
       return { ...action.data };
     case types.UPDATE_ASPD_WEAPON_ID:
-      const { lefthand } = weapons.find(({ id }) => id === action.weaponId);
+      const { lefthand } = find(weapons, ['id', action.weaponId]);
       const lefthandId = lefthand ? state.aspd.lefthandId : 100;
       return {
         ...state,

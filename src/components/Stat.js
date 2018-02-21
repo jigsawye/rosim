@@ -27,11 +27,11 @@ const Bonuse = styled.div`
   width: 10px;
 `;
 
-const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat }) => (
+const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat, statsRange }) => (
   <StatsContainer>
     <Label>{label}</Label>
     <Select style={{ width: 70 }} value={value} onChange={onChange}>
-      {range(1, 100).map((stat) => <Option key={stat}>{stat}</Option>)}
+      {range(1, statsRange).map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
     <Plus>+</Plus>
     <Bonuse>{bonuse}</Bonuse>
@@ -49,6 +49,7 @@ Stats.propTypes = {
   bonuse: PropTypes.number.isRequired,
   otherStat: PropTypes.number.isRequired,
   onChangeOtherStat: PropTypes.func.isRequired,
+  statsRange: PropTypes.number.isRequired,
 };
 
 export default Stats;

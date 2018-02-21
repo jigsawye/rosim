@@ -7,14 +7,16 @@ import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
 import { setStat, setOtherStat } from '../actions';
 import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
+import { getStatsRange } from '../constants/ranges';
 
-const Status = ({ stats, setStat, otherStats, setOtherStat, remainingPoint, jobBonusStats }) => (
+const Status = ({ stats, statsRange, setStat, otherStats, setOtherStat, remainingPoint, jobBonusStats }) => (
   <Card title="Stats" style={{ marginTop: 15 }}>
     {Object.keys(stats).map((key) => (
       <Stat
         key={key}
         label={key.toUpperCase()}
         value={stats[key]}
+        statsRange={statsRange}
         bonuse={jobBonusStats[key]}
         onChange={stat => setStat(key, stat)}
         otherStat={otherStats[key]}
@@ -29,6 +31,7 @@ const Status = ({ stats, setStat, otherStats, setOtherStat, remainingPoint, jobB
 const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job }) => ({
   stats,
   otherStats,
+  statsRange: getStatsRange(job),
   jobBonusStats : getJobBonusStats(jobLevel, job),
   remainingPoint: getRemainingStatsPoint(baseLevel, stats),
 });

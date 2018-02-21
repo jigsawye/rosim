@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { jobs } from '../../constants/job';
+import { getClassName } from '../../constants/classes';
 
 const BoldSpan = styled.span`
   color: rgba(0, 0, 0, 0.7);
@@ -10,14 +10,12 @@ const BoldSpan = styled.span`
   margin-right: 8px;
 `;
 
-const getJobName = jobId => jobs.find(({ id }) => id === jobId).name;
-
 const ArchiveDescription = ({ item }) => (
   <div>
     <div>
       Level: <BoldSpan>{item.baseLevel}</BoldSpan>
       Job Level: <BoldSpan>{item.jobLevel}</BoldSpan>
-      Job: <BoldSpan>{getJobName(item.job)}</BoldSpan>
+      Job: <BoldSpan>{getClassName(item.job)}</BoldSpan>
     </div>
     <div>
     {Object.keys(item.stats).map(key =>

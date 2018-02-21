@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Row, Col, Card, Select, InputNumber, Radio } from 'antd';
+import { find } from 'lodash';
 
 import {
   updateAspdWeaponId,
@@ -11,7 +12,8 @@ import {
   updateAspdSkillAddition,
   updateAspdPotionAddition,
 } from '../actions';
-import { weapons, jobUsableWeapons } from '../constants/weapons';
+import weapons from '../constants/weapons';
+import aspdTable from '../constants/aspdTable';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -99,8 +101,8 @@ const AspdSetting = ({
 );
 
 const mapStateToProps = ({ job, stats, aspd }) => ({
-  usableWeapons: jobUsableWeapons.find(({ jobId }) => jobId === job).weapons,
-  usableLefthand: jobUsableWeapons.find(({ jobId }) => jobId === job).lefthand,
+  usableWeapons: find(aspdTable, ['job', job[1]]).weapons,
+  usableLefthand: find(aspdTable, ['job', job[1]]).lefthand,
   stats,
   aspd,
 });

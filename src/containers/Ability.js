@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
-import { floor } from 'lodash';
+import { floor, find } from 'lodash';
 
 import { getJobBonusStats } from '../utils/stats';
-import { jobUsableWeapons } from '../constants/weapons';
+import aspdTable from '../constants/aspdTable';
 
 const AbilityText = styled.div`
   margin-top: 10px;
@@ -34,10 +34,10 @@ const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
 );
 
 const getAspd = (job, agi, dex, { weaponId, lefthandId, equltmentsAddition, skillsAddition, potionAddition }) => {
-  const { weapons, shieldAspd, lefthand = [] } = jobUsableWeapons.find(({ jobId }) => jobId === job);
-  const { baseAspd } = weapons.find(({ id }) => id === weaponId);
+  const { weapons, shieldAspd, lefthand = [] } = find(aspdTable, ['job', job[1]]);
+  const { baseAspd } = find(weapons, ['id', weaponId]);
   const lefthandBaseAspd = lefthandId === 100 ? 0 :
-    lefthandId === 101 ? shieldAspd : lefthand.find(({ id }) => id === lefthandId).baseAspd;
+    lefthandId === 101 ? shieldAspd : find(lefthand, ['id', lefthandId]).baseAspd;
   const aspdUpA = potionAddition + skillsAddition;
   const aspdUpB = equltmentsAddition;
   const aspdUpPoint = 0;

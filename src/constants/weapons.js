@@ -1,4 +1,4 @@
-export const weapons = [
+export default [
   { id: 0, name: '空手', lefthand: true },
   { id: 1, name: '短劍', lefthand: true },
   { id: 2, name: '單手劍', lefthand: true },
@@ -13,81 +13,12 @@ export const weapons = [
   { id: 11, name: '拳刃', lefthand: false },
   { id: 12, name: '書', lefthand: true },
   { id: 13, name: '拳套', lefthand: true },
-  { id: 14, name: '樂器', lefthand: true },
-  { id: 15, name: '鞭子', lefthand: true },
-];
-
-export const jobUsableWeapons = [
-  {
-    jobId: 7,
-    shieldAspd: -5,
-    weapons: [
-      { id: 0, baseAspd: 154 },
-      { id: 1, baseAspd: 145 },
-      { id: 2, baseAspd: 149 },
-      { id: 3, baseAspd: 142 },
-      { id: 4, baseAspd: 139 },
-      { id: 5, baseAspd: 134 },
-      { id: 6, baseAspd: 144 },
-      { id: 7, baseAspd: 139 },
-      { id: 8, baseAspd: 149 },
-    ],
-  },
-  {
-    jobId: 8,
-    shieldAspd: -5,
-    weapons: [
-      { id: 0, baseAspd: 154 },
-      { id: 8, baseAspd: 151 },
-      { id: 9, baseAspd: 134 },
-      { id: 12, baseAspd: 150 },
-      { id: 13, baseAspd: 134 },
-    ],
-  },
-  {
-    jobId: 9,
-    shieldAspd: -5,
-    weapons: [
-      { id: 0, baseAspd: 144 },
-      { id: 1, baseAspd: 140 },
-      { id: 9, baseAspd: 141 },
-    ],
-  },
-  {
-    jobId: 10,
-    shieldAspd: -5,
-    weapons: [
-      { id: 0, baseAspd: 154 },
-      { id: 1, baseAspd: 144 },
-      { id: 2, baseAspd: 144 },
-      { id: 6, baseAspd: 148 },
-      { id: 7, baseAspd: 141 },
-      { id: 8, baseAspd: 146 },
-    ],
-  },
-  {
-    jobId: 11,
-    shieldAspd: -9,
-    weapons: [
-      { id: 0, baseAspd: 154 },
-      { id: 1, baseAspd: 141 },
-      { id: 10, baseAspd: 146 },
-    ],
-  },
-  {
-    jobId: 12,
-    shieldAspd: -6,
-    weapons: [
-      { id: 0, baseAspd: 154 },
-      { id: 1, baseAspd: 152 },
-      { id: 2, baseAspd: 144 },
-      { id: 6, baseAspd: 143 },
-      { id: 11, baseAspd: 152 },
-    ],
-    lefthand: [
-      { id: 1, baseAspd: 152 },
-      { id: 2, baseAspd: 144 },
-      { id: 6, baseAspd: 143 },
-    ],
-  },
+  { id: 14, name: '樂器/鞭子', lefthand: false },
+  { id: 15, name: '雙手杖', lefthand: true },
+  { id: 16, name: '風魔飛鏢', lefthand: false },
+  { id: 17, name: '手槍', lefthand: false },
+  { id: 18, name: '來福槍', lefthand: false },
+  { id: 19, name: '霰彈槍', lefthand: false },
+  { id: 20, name: '格林機槍', lefthand: false },
+  { id: 21, name: '榴彈槍', lefthand: false },
 ];

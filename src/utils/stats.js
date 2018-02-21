@@ -1,6 +1,5 @@
-import range from 'lodash/range';
-import mapValues from 'lodash/mapValues';
-import jobStatBonuses from '../constants/bonuses';
+import { range, mapValues, find } from 'lodash';
+import jobStatBonus, { statsMap } from '../constants/bonus';
 
 export const getAvailableStatsPoint = level => range(1, +level)
   .map((lv) => {
@@ -25,7 +24,12 @@ export const getRemainingStatsPoint = (level, stats) => {
   return statsPoint - totalRaise;
 };
 
-export const getJobBonusStats = (jobLevel, jobId) => {
-  const { bonuses } = jobStatBonuses.find(({ id }) => id === jobId);
-  return bonuses.find(({ level }) => level === jobLevel);
+export const getJobBonusStats = (jobLevel, job) => {
+  const jobBonus = find(jobStatBonus, ['key', job[1]]);
+  return jobBonus.bonus.filter(r => r[0] <= jobLevel)
+    .reduce((prev, next) => {
+      const nextBouns = { ...prev };
+      nextBouns[statsMap[next[1]]] += 1;
+      return nextBouns;
+    }, { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 });
 };
