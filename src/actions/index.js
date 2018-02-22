@@ -14,12 +14,15 @@ export const updateAspdWeaponId = weaponId => ({
 export const updateAspdLefthandId = lefthandId => ({
   type: types.UPDATE_ASPD_LEFTHAND_ID, lefthandId,
 });
-export const updateAspdEqultmentAddition = equltmentsAddition => ({
-  type: types.UPDATE_ASPD_EQULTMENTS_ADDITION, equltmentsAddition,
+export const updateAspdEquipMod = equipMod => ({
+  type: types.UPDATE_ASPD_EQUIP_MOD, equipMod,
 });
-export const updateAspdSkillAddition = skillsAddition => ({
-  type: types.UPDATE_ASPD_SKILLS_ADDITION, skillsAddition,
+export const updateAspdEquipFixed = equipFixed => ({
+  type: types.UPDATE_ASPD_EQUIP_FIXED, equipFixed,
 });
-export const updateAspdPotionAddition = potionAddition => ({
-  type: types.UPDATE_ASPD_POTION_ADDITION, potionAddition,
+export const updateAspdSkillMod = skillMod => ({
+  type: types.UPDATE_ASPD_SKILL_MOD, skillMod,
+});
+export const updateAspdPotionMod = potionMod => ({
+  type: types.UPDATE_ASPD_POTION_MOD, potionMod,
 });

@@ -8,9 +8,10 @@ import { find } from 'lodash';
 import {
   updateAspdWeaponId,
   updateAspdLefthandId,
-  updateAspdEqultmentAddition,
-  updateAspdSkillAddition,
-  updateAspdPotionAddition,
+  updateAspdEquipMod,
+  updateAspdEquipFixed,
+  updateAspdSkillMod,
+  updateAspdPotionMod,
 } from '../actions';
 import weapons from '../constants/weapons';
 import aspdTable from '../constants/aspdTable';
@@ -43,9 +44,10 @@ const AspdSetting = ({
   usableLefthand = [],
   updateAspdWeaponId,
   updateAspdLefthandId,
-  updateAspdEqultmentAddition,
-  updateAspdSkillAddition,
-  updateAspdPotionAddition,
+  updateAspdEquipMod,
+  updateAspdEquipFixed,
+  updateAspdSkillMod,
+  updateAspdPotionMod,
 }) => (
   <Card title="ASPD Setting" style={{ marginTop: 15 }}>
     <InputField>
@@ -54,7 +56,7 @@ const AspdSetting = ({
           <Label>主要</Label>
           <Select style={{ width: 100 }} value={aspd.weaponId} onChange={updateAspdWeaponId}>
             {usableWeapons.map(({ id, baseAspd }) => (
-              <Option key={id} value={id}>{weapons.find(weapon => weapon.id === id).name}</Option>)
+              <Option key={id} value={id}>{find(weapons, { id }).name}</Option>)
             )}
           </Select>
         </Col>
@@ -64,11 +66,11 @@ const AspdSetting = ({
             style={{ width: 100 }}
             value={aspd.lefthandId}
             onChange={updateAspdLefthandId}
-            disabled={!weapons.find(weapon => weapon.id === aspd.weaponId).lefthand}>
+            disabled={!find(weapons, ['id', aspd.weaponId]).lefthand}>
             <Option key={100} value={100}>無</Option>
             <Option key={101} value={101}>盾</Option>
             {usableLefthand.map(({ id, baseAspd }) => (
-              <Option key={id} value={id}>{weapons.find(weapon => weapon.id === id).name}</Option>)
+              <Option key={id} value={id}>{find(weapons, { id }).name}</Option>)
             )}
           </Select>
         </Col>
@@ -79,19 +81,27 @@ const AspdSetting = ({
       <InputNumber
         min={0}
         max={200}
-        value={aspd.equltmentsAddition}
-        onChange={updateAspdEqultmentAddition} /> %
+        value={aspd.equipMod}
+        onChange={updateAspdEquipMod} /> %
     </InputField>
     <InputField>
       <Label>技能提升攻速</Label>
       <InputNumber
         min={0}
         max={200}
-        value={aspd.skillsAddition}
-        onChange={updateAspdSkillAddition}/> %
+        value={aspd.skillMod}
+        onChange={updateAspdSkillMod}/> %
     </InputField>
     <InputField>
-      <RadioGroup value={aspd.potionAddition} onChange={({ target }) => updateAspdPotionAddition(target.value)}>
+      <Label>裝備提升攻速(點)</Label>
+      <InputNumber
+        min={0}
+        max={20}
+        value={aspd.equipFixed}
+        onChange={updateAspdEquipFixed}/>
+    </InputField>
+    <InputField>
+      <RadioGroup value={aspd.potionMod} onChange={({ target }) => updateAspdPotionMod(target.value)}>
         {aspdUpPotions.map(({ key, name, aspdUp }) => (
           <RadioButton key={key} value={aspdUp}>{name}</RadioButton>
         ))}
@@ -110,9 +120,10 @@ const mapStateToProps = ({ job, stats, aspd }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   updateAspdWeaponId,
   updateAspdLefthandId,
-  updateAspdEqultmentAddition,
-  updateAspdSkillAddition,
-  updateAspdPotionAddition,
+  updateAspdEquipMod,
+  updateAspdEquipFixed,
+  updateAspdSkillMod,
+  updateAspdPotionMod,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AspdSetting);

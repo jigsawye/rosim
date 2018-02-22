@@ -2,6 +2,7 @@ import { find } from 'lodash';
 import * as types from '../constants/types';
 import { getBaseLevelRange, getJobLevelRange, getStatsRange } from '../constants/ranges';
 import weapons from '../constants/weapons';
+import formatOldData from '../utils/formatOldData';
 
 const initialState = {
   baseLevel: 1,
@@ -16,9 +17,10 @@ const initialState = {
   aspd: {
     weaponId: 0,
     lefthandId: 100,
-    equltmentsAddition: 0,
-    skillsAddition: 0,
-    potionAddition: 0,
+    equipFixed: 0,
+    equipMod: 0,
+    skillMod: 0,
+    potionMod: 0,
   },
 };
 
@@ -71,7 +73,7 @@ export default (state = initialState, action) => {
         },
       };
     case types.LOAD_SAVE_DATA:
-      return { ...action.data };
+      return formatOldData(action.data);
     case types.UPDATE_ASPD_WEAPON_ID:
       const { lefthand } = find(weapons, ['id', action.weaponId]);
       const lefthandId = lefthand ? state.aspd.lefthandId : 100;
@@ -91,28 +93,36 @@ export default (state = initialState, action) => {
           lefthandId: action.lefthandId,
         },
       };
-    case types.UPDATE_ASPD_EQULTMENTS_ADDITION:
+    case types.UPDATE_ASPD_EQUIP_MOD:
       return {
         ...state,
         aspd: {
           ...state.aspd,
-          equltmentsAddition: action.equltmentsAddition,
+          equipMod: action.equipMod,
         },
       };
-    case types.UPDATE_ASPD_SKILLS_ADDITION:
+    case types.UPDATE_ASPD_EQUIP_FIXED:
       return {
         ...state,
         aspd: {
           ...state.aspd,
-          skillsAddition: action.skillsAddition,
+          equipFixed: action.equipFixed,
         },
       };
-    case types.UPDATE_ASPD_POTION_ADDITION:
+    case types.UPDATE_ASPD_SKILL_MOD:
       return {
         ...state,
         aspd: {
           ...state.aspd,
-          potionAddition: action.potionAddition,
+          skillMod: action.skillMod,
+        },
+      };
+    case types.UPDATE_ASPD_POTION_MOD:
+      return {
+        ...state,
+        aspd: {
+          ...state.aspd,
+          potionMod: action.potionMod,
         },
       };
     default:
