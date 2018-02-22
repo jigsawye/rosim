@@ -25,19 +25,23 @@ class SaveLoad extends React.Component {
     saveName: '',
   };
 
-  componentDidUpdate() {
-    localStorage.setItem('archives', JSON.stringify(this.state.archives));
-  }
-
-  showModal = () => {
+  constructor(prop) {
+    super(prop);
     let archives = [];
     const savedArchives = localStorage.getItem('archives');
+
     if (savedArchives) {
       archives = JSON.parse(savedArchives);
     }
 
-    this.setState({ visible: true, saveName: '', archives });
+    this.state.archives = archives;
   }
+
+  componentDidUpdate() {
+    localStorage.setItem('archives', JSON.stringify(this.state.archives));
+  }
+
+  showModal = () => this.setState({ visible: true, saveName: '' })
 
   closeModal = () => this.setState({ visible: false })
 
