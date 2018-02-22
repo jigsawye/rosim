@@ -30,23 +30,23 @@ export default (state = initialState, action) => {
       return { ...state, jobLevel: Number(action.level) };
     case types.SET_JOB:
       const { str, agi, vit, int, dex, luk } = state.stats;
-      const maxBaseLevel = getBaseLevelRange(action.job);
-      const maxJobLevel = getJobLevelRange(action.job);
-      const maxStats = getStatsRange(action.job);
-      const baseLevel = state.baseLevel < maxBaseLevel ? state.baseLevel : maxBaseLevel;
-      const jobLevel = state.jobLevel < maxJobLevel ? state.jobLevel : maxJobLevel;
+      const maxBaseLevel = getBaseLevelRange(action.job) - 1;
+      const maxJobLevel = getJobLevelRange(action.job) - 1;
+      const maxStats = getStatsRange(action.job) - 1;
+      const baseLevel = state.baseLevel <= maxBaseLevel ? state.baseLevel : maxBaseLevel;
+      const jobLevel = state.jobLevel <= maxJobLevel ? state.jobLevel : maxJobLevel;
       return {
         ...state,
         baseLevel,
         jobLevel,
         job: [...action.job],
         stats: {
-          str: str < maxStats ? str : maxStats,
-          agi: agi < maxStats ? agi : maxStats,
-          vit: vit < maxStats ? vit : maxStats,
-          int: int < maxStats ? int : maxStats,
-          dex: dex < maxStats ? dex : maxStats,
-          luk: luk < maxStats ? luk : maxStats,
+          str: str <= maxStats ? str : maxStats,
+          agi: agi <= maxStats ? agi : maxStats,
+          vit: vit <= maxStats ? vit : maxStats,
+          int: int <= maxStats ? int : maxStats,
+          dex: dex <= maxStats ? dex : maxStats,
+          luk: luk <= maxStats ? luk : maxStats,
         },
         aspd: {
           ...state.aspd,
