@@ -14,7 +14,7 @@ const Status = ({ stats, statsRange, setStat, otherStats, setOtherStat, remainin
     {Object.keys(stats).map((key) => (
       <Stat
         key={key}
-        label={key.toUpperCase()}
+        label={key}
         value={stats[key]}
         statsRange={statsRange}
         bonuse={jobBonusStats[key]}

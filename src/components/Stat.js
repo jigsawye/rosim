@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Select } from 'antd';
+import { Select, Popover } from 'antd';
 import styled from 'styled-components';
-import range from 'lodash/range';
+import { range, upperCase } from 'lodash';
+
+import * as StatTips from './Tips/Stat';
 
 const { Option } = Select;
 
@@ -29,7 +31,9 @@ const Bonuse = styled.div`
 
 const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat, statsRange }) => (
   <StatsContainer>
-    <Label>{label}</Label>
+    <Popover title={StatTips[label].title} content={StatTips[label].content} placement="right">
+      <Label>{upperCase(label)}</Label>
+    </Popover>
     <Select style={{ width: 70 }} value={value} onChange={onChange}>
       {range(1, statsRange).map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
