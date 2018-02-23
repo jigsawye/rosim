@@ -27,7 +27,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -m 'auto commit [ci skip]' -d build"
   },
   "devDependencies": {
     "axios": "^0.17.1",
