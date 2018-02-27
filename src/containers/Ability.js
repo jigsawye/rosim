@@ -1,40 +1,36 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Card, Popover } from 'antd';
+import { Popover } from 'antd';
 import { floor } from 'lodash';
 
+import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
 import * as AbilityTips from '../components/Tips/Ability';
 import { getJobBonusStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
 import { statsMap } from '../constants/bonus';
 
-const AbilityText = styled.div`
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: bold;
-`;
-
 const AbilityGrid = ({ label, children, ...props }) => {
   const ContentComponent = AbilityTips[label].content;
   return (
-    <Card.Grid style={{ textAlign: 'center' }}>
+    <CardGrid>
       <Popover title={AbilityTips[label].title} content={<ContentComponent {...props} />}>
         <div>{label}</div>
       </Popover>
-      <AbilityText>{children}</AbilityText>
-    </Card.Grid>
+      <CardText>{children}</CardText>
+    </CardGrid>
   );
 };
 
-const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
-  <Card title="Ability" className="ant-card-contain-grid" style={{ marginTop: 15 }}>
+const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
+  <Card title="Ability" className="ant-card-contain-grid">
+    <AbilityGrid label="MaxHP">{maxHp}</AbilityGrid>
+    <AbilityGrid label="MaxSP">{maxSp}</AbilityGrid>
+    <AbilityGrid label="ASPD" aspd={aspd}>{aspd}</AbilityGrid>
     <AbilityGrid label="ATK">{atk} + ___</AbilityGrid>
     <AbilityGrid label="MATK">{matk} + ___</AbilityGrid>
     <AbilityGrid label="CRI">{cri}</AbilityGrid>
     <AbilityGrid label="DEF">{def} + ___</AbilityGrid>
     <AbilityGrid label="MDEF">{mdef} + ___</AbilityGrid>
-    <AbilityGrid label="ASPD" aspd={aspd}>{aspd}</AbilityGrid>
     <AbilityGrid label="HIT">{hit}</AbilityGrid>
     <AbilityGrid label="FLEE">{flee} + {dodge}</AbilityGrid>
   </Card>
@@ -47,6 +43,8 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd }) 
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
 
   return {
+    maxHp: 10000,
+    maxSp: 10000,
     atk: mainAtkStat + floor(baseLevel / 4 + luk / 3 + subAtkStat / 5),
     matk: floor(baseLevel / 4 + int * 1.5 + luk / 3 + dex / 5),
     hit: floor(luk / 3) + dex + baseLevel + 175,

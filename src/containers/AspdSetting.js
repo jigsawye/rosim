@@ -1,10 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Row, Col, Card, Select, InputNumber, Radio } from 'antd';
+import { Row, Col, Select, InputNumber, Radio } from 'antd';
 import { find } from 'lodash';
 
+import { Card, Label, InputField } from '../components/Layouts/CardLayout';
 import {
   updateAspdWeaponId,
   updateAspdLefthandId,
@@ -27,17 +27,6 @@ const aspdUpPotions = [
   { key: 3, name: '菠色克藥水', aspdUp: 20 },
 ];
 
-const Label = styled.div`
-  display: inline-block;
-  margin-right: 10px;
-  font-weight: bold;
-  line-height: 32px;
-`;
-
-const InputField = styled.div`
-  margin-bottom: 10px;
-`;
-
 const AspdSetting = ({
   aspd,
   usableWeapons,
@@ -49,7 +38,7 @@ const AspdSetting = ({
   updateAspdSkillMod,
   updateAspdPotionMod,
 }) => (
-  <Card title="ASPD Setting" style={{ marginTop: 15 }}>
+  <Card title="ASPD Setting">
     <InputField>
       <Row>
         <Col xs={12}>

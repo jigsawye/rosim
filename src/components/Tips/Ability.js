@@ -10,6 +10,20 @@ export const ASPD = {
   ),
 };
 
+export const MaxHP = {
+  title: 'Max HP (最大生命值)',
+  content: () => (
+    <div>角色之最大生命值</div>
+  ),
+};
+
+export const MaxSP = {
+  title: 'Max SP (最大魔力值)',
+  content: () => (
+    <div>角色之最大魔力值</div>
+  ),
+};
+
 export const ATK = {
   title: 'ATK (物理攻擊力)',
   content: () => (

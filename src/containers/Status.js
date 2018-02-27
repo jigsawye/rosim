@@ -1,8 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Card, Divider } from 'antd';
+import { Divider } from 'antd';
 
+import { Card } from '../components/Layouts/CardLayout';
 import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
 import { setStat, setOtherStat } from '../actions';
