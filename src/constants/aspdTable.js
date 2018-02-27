@@ -2,7 +2,7 @@ import * as classes from './classes/classNames';
 
 export default [
   {
-    job: '初心者',
+    job: classes.NOVICE,
     shieldAspd: -10,
     weapons: [
       {
@@ -192,7 +192,7 @@ export default [
     ],
   },
   {
-    job: '轉生劍士',
+    job: classes.HIGH_SWORDMAN,
     shieldAspd: -5,
     weapons: [
       {
@@ -234,7 +234,7 @@ export default [
     ],
   },
   {
-    job: '轉生法師',
+    job: classes.HIGH_MAGICIAN,
     shieldAspd: -10,
     weapons: [
       {
@@ -256,7 +256,7 @@ export default [
     ],
   },
   {
-    job: '轉生服事',
+    job: classes.HIGH_ACOLYTE,
     shieldAspd: -7,
     weapons: [
       {
@@ -278,7 +278,7 @@ export default [
     ],
   },
   {
-    job: '轉生盜賊',
+    job: classes.HIGH_THIEF,
     shieldAspd: -6,
     weapons: [
       {
@@ -304,7 +304,7 @@ export default [
     ],
   },
   {
-    job: '轉生商人',
+    job: classes.HIGH_MERCHANT,
     shieldAspd: -5,
     weapons: [
       {
@@ -334,7 +334,7 @@ export default [
     ],
   },
   {
-    job: '轉生弓箭手',
+    job: classes.HIGH_ARCHER,
     shieldAspd: -9,
     weapons: [
       {
@@ -1414,7 +1414,7 @@ export default [
     ],
   },
   {
-    job: '超級初心者',
+    job: classes.SUPER_NOVICE,
     shieldAspd: -10,
     weapons: [
       {
@@ -1444,7 +1444,7 @@ export default [
     ],
   },
   {
-    job: '忍者',
+    job: classes.NINJA,
     shieldAspd: -6,
     weapons: [
       {
@@ -1468,7 +1468,7 @@ export default [
     ],
   },
   {
-    job: '神槍手',
+    job: classes.GUNSLINGER,
     shieldAspd: -6,
     weapons: [
       {
@@ -1508,7 +1508,7 @@ export default [
     ],
   },
   {
-    job: '超級初心者 等級擴充',
+    job: classes.EXPANDED_SUPER_NOVICE,
     shieldAspd: -10,
     weapons: [
       {
@@ -1538,7 +1538,7 @@ export default [
     ],
   },
   {
-    job: '朧/影狼',
+    job: classes.KAGERO_OBORO,
     shieldAspd: -6,
     weapons: [
       {
@@ -1556,7 +1556,7 @@ export default [
     ],
   },
   {
-    job: '反叛者',
+    job: classes.REBEL,
     shieldAspd: -6,
     weapons: [
       {
@@ -1586,7 +1586,7 @@ export default [
     ],
   },
   {
-    job: '拳聖',
+    job: classes.TEAKWON_MASTER,
     shieldAspd: -6,
     weapons: [
       {
@@ -1600,7 +1600,7 @@ export default [
     ],
   },
   {
-    job: '悟靈士',
+    job: classes.SOUL_LINKER,
     shieldAspd: -6,
     weapons: [
       {
@@ -1622,7 +1622,7 @@ export default [
     ],
   },
   {
-    job: '召喚師',
+    job: classes.SUMMONER,
     shieldAspd: -7,
     weapons: [
       {

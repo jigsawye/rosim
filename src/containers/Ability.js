@@ -7,6 +7,7 @@ import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
 import * as AbilityTips from '../components/Tips/Ability';
 import { getJobBonusStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
+import { getMaxHp } from '../utils/hpsp';
 import { statsMap } from '../constants/bonus';
 
 const AbilityGrid = ({ label, children, ...props }) => {
@@ -36,15 +37,15 @@ const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, as
   </Card>
 );
 
-const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd }) => {
+const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hpsp }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
   const { weaponId } = aspd;
   const [str, agi, vit, int, dex, luk] = statsMap.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
 
   return {
-    maxHp: 10000,
-    maxSp: 10000,
+    maxHp: getMaxHp(baseLevel, job, vit, hpsp),
+    maxSp: 'TODO',
     atk: mainAtkStat + floor(baseLevel / 4 + luk / 3 + subAtkStat / 5),
     matk: floor(baseLevel / 4 + int * 1.5 + luk / 3 + dex / 5),
     hit: floor(luk / 3) + dex + baseLevel + 175,

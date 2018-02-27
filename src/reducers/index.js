@@ -14,6 +14,12 @@ const initialState = {
   otherStats: {
     str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0,
   },
+  hpsp: {
+    hpAddMod: 0,
+    hpMultiMod: 0,
+    spAddMod: 0,
+    spMultiMod: 0,
+  },
   aspd: {
     weaponId: 0,
     lefthandId: 100,
@@ -123,6 +129,38 @@ export default (state = initialState, action) => {
         aspd: {
           ...state.aspd,
           potionMod: action.potionMod,
+        },
+      };
+    case types.UPDATE_HP_ADD_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          hpAddMod: action.hpAddMod,
+        },
+      };
+    case types.UPDATE_HP_MULTI_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          hpMultiMod: action.hpMultiMod,
+        },
+      };
+    case types.UPDATE_SP_ADD_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          spAddMod: action.spAddMod,
+        },
+      };
+    case types.UPDATE_SP_MULTI_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          spMultiMod: action.spMultiMod,
         },
       };
     default:

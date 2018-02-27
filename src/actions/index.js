@@ -26,3 +26,16 @@ export const updateAspdSkillMod = skillMod => ({
 export const updateAspdPotionMod = potionMod => ({
   type: types.UPDATE_ASPD_POTION_MOD, potionMod,
 });
+
+export const updateHpAddMod = hpAddMod => ({
+  type: types.UPDATE_HP_ADD_MOD, hpAddMod,
+});
+export const updateHpMultiMod = hpMultiMod => ({
+  type: types.UPDATE_HP_MULTI_MOD, hpMultiMod,
+});
+export const updateSpAddMod = spAddMod => ({
+  type: types.UPDATE_SP_ADD_MOD, spAddMod,
+});
+export const updateSpMultiMod = spMultiMod => ({
+  type: types.UPDATE_SP_MULTI_MOD, spMultiMod,
+});
