@@ -7,7 +7,7 @@ import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
 import * as AbilityTips from '../components/Tips/Ability';
 import { getJobBonusStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
-import { getMaxHp } from '../utils/hpsp';
+import { getMaxHp, getMaxSp } from '../utils/hpsp';
 import { statsMap } from '../constants/bonus';
 
 const AbilityGrid = ({ label, children, ...props }) => {
@@ -45,7 +45,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hp
 
   return {
     maxHp: getMaxHp(baseLevel, job, vit, hpsp),
-    maxSp: 'TODO',
+    maxSp: getMaxSp(baseLevel, job, int, hpsp),
     atk: mainAtkStat + floor(baseLevel / 4 + luk / 3 + subAtkStat / 5),
     matk: floor(baseLevel / 4 + int * 1.5 + luk / 3 + dex / 5),
     hit: floor(luk / 3) + dex + baseLevel + 175,
