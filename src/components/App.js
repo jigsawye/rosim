@@ -10,6 +10,7 @@ import BaseInfo from '../containers/BaseInfo';
 import Status from '../containers/Status';
 import Ability from '../containers/Ability';
 import AspdSetting from '../containers/AspdSetting';
+import MaxHPSP from '../containers/MaxHPSP';
 
 const { Content } = Layout;
 
@@ -25,18 +26,19 @@ const App = () => (
     <AppHeader />
     <AppContent>
       <Row gutter={16}>
-        <Col xs={24} lg={24} xxl={{ span: 18, offset: 3 }}>
+        <Col xs={24} lg={16} xxl={{ span: 12, offset: 3 }}>
           <BaseInfo />
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col xs={24} lg={7} xxl={{ span: 5, offset: 3 }}>
-          <Status />
-        </Col>
-        <Col xs={24} lg={9} xxl={7}>
-          <Ability />
+          <Row gutter={16}>
+            <Col lg={24} xl={10}>
+              <Status />
+            </Col>
+            <Col lg={24} xl={14}>
+              <Ability />
+            </Col>
+          </Row>
         </Col>
         <Col xs={24} lg={8} xxl={6}>
+          <MaxHPSP />
           <AspdSetting />
           <Greaso />
         </Col>

@@ -1,6 +1,8 @@
 import { find, floor } from 'lodash';
 import aspdTable from '../constants/aspdTable';
 
+export const getAspdFrequency = aspd => floor(50 / (200 - Number(aspd)), 2);
+
 const getLefthandBaseAspd = (lefthandId, lefthand, shieldAspd) => {
   if (lefthandId === 100) {
     return 0;

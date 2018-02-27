@@ -1,6 +1,8 @@
 import { find } from 'lodash';
 import * as types from '../constants/types';
-import { getBaseLevelRange, getJobLevelRange, getStatsRange } from '../constants/ranges';
+import { getClass } from '../constants/classes';
+import { THIRD } from '../constants/classes/classNames';
+import { getMaxBaseLevel, getMaxJobLevel, getMaxStats } from '../constants/ranges';
 import weapons from '../constants/weapons';
 import formatOldData from '../utils/formatOldData';
 
@@ -13,6 +15,12 @@ const initialState = {
   },
   otherStats: {
     str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0,
+  },
+  hpsp: {
+    hpAddMod: 0,
+    hpMultiMod: 0,
+    spAddMod: 0,
+    spMultiMod: 0,
   },
   aspd: {
     weaponId: 0,
@@ -32,10 +40,12 @@ export default (state = initialState, action) => {
       return { ...state, jobLevel: Number(action.level) };
     case types.SET_JOB:
       const { str, agi, vit, int, dex, luk } = state.stats;
-      const maxBaseLevel = getBaseLevelRange(action.job) - 1;
-      const maxJobLevel = getJobLevelRange(action.job) - 1;
-      const maxStats = getStatsRange(action.job) - 1;
-      const baseLevel = state.baseLevel <= maxBaseLevel ? state.baseLevel : maxBaseLevel;
+      const { type } = getClass(action.job);
+      const maxBaseLevel = getMaxBaseLevel(action.job);
+      const maxJobLevel = getMaxJobLevel(action.job);
+      const maxStats = getMaxStats(action.job);
+      const baseLevel = state.baseLevel > maxBaseLevel ? maxBaseLevel :
+        (type === THIRD && state.baseLevel < 99) ? 99 : state.baseLevel;
       const jobLevel = state.jobLevel <= maxJobLevel ? state.jobLevel : maxJobLevel;
       return {
         ...state,
@@ -123,6 +133,38 @@ export default (state = initialState, action) => {
         aspd: {
           ...state.aspd,
           potionMod: action.potionMod,
+        },
+      };
+    case types.UPDATE_HP_ADD_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          hpAddMod: action.hpAddMod,
+        },
+      };
+    case types.UPDATE_HP_MULTI_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          hpMultiMod: action.hpMultiMod,
+        },
+      };
+    case types.UPDATE_SP_ADD_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          spAddMod: action.spAddMod,
+        },
+      };
+    case types.UPDATE_SP_MULTI_MOD:
+      return {
+        ...state,
+        hpsp: {
+          ...state.hpsp,
+          spMultiMod: action.spMultiMod,
         },
       };
     default:

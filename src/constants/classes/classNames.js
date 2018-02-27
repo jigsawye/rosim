@@ -69,5 +69,9 @@ export const TEAKWON_MASTER = 'TEAKWON_MASTER';
 export const SOUL_LINKER = 'SOUL_LINKER';
 
 export const NINJA = 'NINJA';
-export const GUNSLINGER = 'GUNSLINGER';
 export const KAGERO_OBORO = 'KAGERO_OBORO';
+
+export const GUNSLINGER = 'GUNSLINGER';
+export const REBEL = 'REBEL';
+
+export const SUMMONER = 'SUMMONER';

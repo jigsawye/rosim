@@ -1,10 +1,11 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Row, Col, Card, Select, InputNumber, Radio } from 'antd';
+import { Row, Col, Select, InputNumber, Radio, Popover } from 'antd';
 import { find } from 'lodash';
 
+import { Card, Label, InputField } from '../components/Layouts/CardLayout';
+import { EquipMod, EquipFixed, SkillMod } from '../components/Tips/ASPD';
 import {
   updateAspdWeaponId,
   updateAspdLefthandId,
@@ -27,17 +28,6 @@ const aspdUpPotions = [
   { key: 3, name: '菠色克藥水', aspdUp: 20 },
 ];
 
-const Label = styled.div`
-  display: inline-block;
-  margin-right: 10px;
-  font-weight: bold;
-  line-height: 32px;
-`;
-
-const InputField = styled.div`
-  margin-bottom: 10px;
-`;
-
 const AspdSetting = ({
   aspd,
   usableWeapons,
@@ -49,7 +39,7 @@ const AspdSetting = ({
   updateAspdSkillMod,
   updateAspdPotionMod,
 }) => (
-  <Card title="ASPD Setting" style={{ marginTop: 15 }}>
+  <Card title="ASPD Setting">
     <InputField>
       <Row>
         <Col xs={12}>
@@ -77,7 +67,9 @@ const AspdSetting = ({
       </Row>
     </InputField>
     <InputField>
-      <Label>裝備提升攻速</Label>
+      <Popover title="裝備提升攻速 (攻擊後延遲)" content={EquipMod}>
+        <Label>裝備提升攻速</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={200}
@@ -85,7 +77,9 @@ const AspdSetting = ({
         onChange={updateAspdEquipMod} /> %
     </InputField>
     <InputField>
-      <Label>技能提升攻速</Label>
+      <Popover title="技能提升攻速 (攻擊後延遲)" content={SkillMod}>
+        <Label>技能提升攻速</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={200}
@@ -93,7 +87,9 @@ const AspdSetting = ({
         onChange={updateAspdSkillMod}/> %
     </InputField>
     <InputField>
-      <Label>裝備提升攻速(點)</Label>
+      <Popover title="裝備提升 ASPD" content={EquipFixed}>
+        <Label>裝備提升 ASPD</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={20}
