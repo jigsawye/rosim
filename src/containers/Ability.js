@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Card } from 'antd';
+import { Card, Popover } from 'antd';
 import { floor } from 'lodash';
 
+import * as AbilityTips from '../components/Tips/Ability';
 import { getJobBonusStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
 import { statsMap } from '../constants/bonus';
@@ -14,12 +15,17 @@ const AbilityText = styled.div`
   font-weight: bold;
 `;
 
-const AbilityGrid = ({ label, children }) => (
-  <Card.Grid style={{ textAlign: 'center' }}>
-    <div>{label}</div>
-    <AbilityText>{children}</AbilityText>
-  </Card.Grid>
-);
+const AbilityGrid = ({ label, children, ...props }) => {
+  const ContentComponent = AbilityTips[label].content;
+  return (
+    <Card.Grid style={{ textAlign: 'center' }}>
+      <Popover title={AbilityTips[label].title} content={<ContentComponent {...props} />}>
+        <div>{label}</div>
+      </Popover>
+      <AbilityText>{children}</AbilityText>
+    </Card.Grid>
+  );
+};
 
 const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
   <Card title="Ability" className="ant-card-contain-grid" style={{ marginTop: 15 }}>
@@ -28,7 +34,7 @@ const Ability = ({ atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
     <AbilityGrid label="CRI">{cri}</AbilityGrid>
     <AbilityGrid label="DEF">{def} + ___</AbilityGrid>
     <AbilityGrid label="MDEF">{mdef} + ___</AbilityGrid>
-    <AbilityGrid label="ASPD">{aspd}</AbilityGrid>
+    <AbilityGrid label="ASPD" aspd={aspd}>{aspd}</AbilityGrid>
     <AbilityGrid label="HIT">{hit}</AbilityGrid>
     <AbilityGrid label="FLEE">{flee} + {dodge}</AbilityGrid>
   </Card>
