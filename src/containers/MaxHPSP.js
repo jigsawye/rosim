@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { InputNumber } from 'antd';
+import { InputNumber, Popover } from 'antd';
 
 import { Card, Label, InputField } from '../components/Layouts/CardLayout';
+import { HpAddMod, HpMultiMod, SpAddMod, SpMultiMod } from '../components/Tips/MaxHPSP';
 import { updateHpAddMod, updateHpMultiMod, updateSpAddMod, updateSpMultiMod } from '../actions';
 
 const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updateSpMultiMod }) => (
   <Card title="Max HP & Max SP">
     <InputField>
-      <Label>Max HP 提升</Label>
+      <Popover title="提升 Max Hp 的數值" content={HpAddMod} placement="bottom">
+        <Label>Max HP 提升</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={200}
@@ -17,7 +20,9 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         onChange={updateHpAddMod} />
     </InputField>
     <InputField>
-      <Label>Max HP 提升</Label>
+      <Popover title="提升 Max Hp 的百分比" content={HpMultiMod} placement="bottom">
+        <Label>Max HP 提升</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={10000}
@@ -25,7 +30,9 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         onChange={updateHpMultiMod} /> %
     </InputField>
     <InputField>
-      <Label>Max SP 提升</Label>
+      <Popover title="提升 Max Sp 的數值" content={SpAddMod} placement="bottom">
+        <Label>Max SP 提升</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={200}
@@ -33,7 +40,9 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         onChange={updateSpAddMod} />
     </InputField>
     <InputField>
-      <Label>Max SP 提升</Label>
+      <Popover title="提升 Max Sp 的百分比" content={SpMultiMod} placement="bottom">
+        <Label>Max SP 提升</Label>
+      </Popover>
       <InputNumber
         min={0}
         max={10000}
