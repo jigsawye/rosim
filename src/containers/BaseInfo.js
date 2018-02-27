@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Card, Select, Cascader, Popover } from 'antd';
 import styled from 'styled-components';
-import { range } from 'lodash';
 
 import { BaseLevelTips, JobLevelTips } from '../components/Tips/BaseInfo';
 import classes from '../constants/classes';
@@ -33,7 +32,7 @@ const BaseInfo = ({
           <Label>Lv.</Label>
         </Popover>
         <Select style={{ width: 70 }} value={baseLevel} onChange={setBaseLevel}>
-          {range(1, baseLevelRange).map(level => <Option key={level}>{level}</Option>)}
+          {baseLevelRange.map(level => <Option key={level}>{level}</Option>)}
         </Select>
       </Col>
       <Col span={7}>
@@ -41,7 +40,7 @@ const BaseInfo = ({
           <Label>Job Lv.</Label>
         </Popover>
         <Select style={{ width: 70 }} value={jobLevel} onChange={setJobLevel}>
-          {range(1, jobLevelRange).map(level => <Option key={level}>{level}</Option>)}
+          {jobLevelRange.map(level => <Option key={level}>{level}</Option>)}
         </Select>
       </Col>
       <Col span={10}>

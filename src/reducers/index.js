@@ -1,6 +1,8 @@
 import { find } from 'lodash';
 import * as types from '../constants/types';
-import { getBaseLevelRange, getJobLevelRange, getStatsRange } from '../constants/ranges';
+import { getClass } from '../constants/classes';
+import { THIRD } from '../constants/classes/classNames';
+import { getMaxBaseLevel, getMaxJobLevel, getMaxStats } from '../constants/ranges';
 import weapons from '../constants/weapons';
 import formatOldData from '../utils/formatOldData';
 
@@ -38,10 +40,12 @@ export default (state = initialState, action) => {
       return { ...state, jobLevel: Number(action.level) };
     case types.SET_JOB:
       const { str, agi, vit, int, dex, luk } = state.stats;
-      const maxBaseLevel = getBaseLevelRange(action.job) - 1;
-      const maxJobLevel = getJobLevelRange(action.job) - 1;
-      const maxStats = getStatsRange(action.job) - 1;
-      const baseLevel = state.baseLevel <= maxBaseLevel ? state.baseLevel : maxBaseLevel;
+      const { type } = getClass(action.job);
+      const maxBaseLevel = getMaxBaseLevel(action.job);
+      const maxJobLevel = getMaxJobLevel(action.job);
+      const maxStats = getMaxStats(action.job);
+      const baseLevel = state.baseLevel > maxBaseLevel ? maxBaseLevel :
+        (type === THIRD && state.baseLevel < 99) ? 99 : state.baseLevel;
       const jobLevel = state.jobLevel <= maxJobLevel ? state.jobLevel : maxJobLevel;
       return {
         ...state,

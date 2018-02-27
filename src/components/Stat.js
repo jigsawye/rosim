@@ -35,7 +35,7 @@ const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat, s
       <Label>{upperCase(label)}</Label>
     </Popover>
     <Select style={{ width: 70 }} value={value} onChange={onChange}>
-      {range(1, statsRange).map((stat) => <Option key={stat}>{stat}</Option>)}
+      {statsRange.map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
     <Plus>+</Plus>
     <Bonuse>{bonuse}</Bonuse>
@@ -53,7 +53,7 @@ Stats.propTypes = {
   bonuse: PropTypes.number.isRequired,
   otherStat: PropTypes.number.isRequired,
   onChangeOtherStat: PropTypes.func.isRequired,
-  statsRange: PropTypes.number.isRequired,
+  statsRange: PropTypes.array.isRequired,
 };
 
 export default Stats;
