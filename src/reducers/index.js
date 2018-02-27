@@ -1,6 +1,6 @@
 import { find } from 'lodash';
 import * as types from '../constants/types';
-import { getClass } from '../constants/classes';
+import { getJobType } from '../constants/classes';
 import { THIRD } from '../constants/classes/classNames';
 import { getMaxBaseLevel, getMaxJobLevel, getMaxStats } from '../constants/ranges';
 import weapons from '../constants/weapons';
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
       return { ...state, jobLevel: Number(action.level) };
     case types.SET_JOB:
       const { str, agi, vit, int, dex, luk } = state.stats;
-      const { type } = getClass(action.job);
+      const type = getJobType(action.job);
       const maxBaseLevel = getMaxBaseLevel(action.job);
       const maxJobLevel = getMaxJobLevel(action.job);
       const maxStats = getMaxStats(action.job);

@@ -16,11 +16,13 @@ const classes = [
   acolyte,
 ];
 
-export const getClass = ([firstClass, secondClass]) => {
+export const getJob = ([firstClass, secondClass]) => {
   const { children } = find(classes, ['value', firstClass]);
   return find(children, ['value', secondClass]);
 };
 
-export const getClassName = compose(prop('label'), getClass);
+export const getJobName = compose(prop('label'), getJob);
+
+export const getJobType = compose(prop('type'), getJob);
 
 export default classes;

@@ -1,7 +1,7 @@
 import { isNumber, defaultTo } from 'lodash';
 
 export default (data) => {
-  const { baseLevel, jobLevel, job, stats, otherStats, aspd, hpsp } = data;
+  const { baseLevel, jobLevel, job, stats, otherStats, aspd, hpsp = {} } = data;
   const { weaponId, lefthandId } = aspd;
   return {
     baseLevel,

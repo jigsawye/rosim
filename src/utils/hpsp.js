@@ -1,6 +1,6 @@
 import { round, floor, find } from 'lodash';
 import { compose, prop, includes } from 'lodash/fp';
-import { getClass } from '../constants/classes';
+import { getJobType } from '../constants/classes';
 import { SECOND, THIRD } from '../constants/classes/classNames';
 import { secondHpTable, secondSpTable, thirdHpTable, thirdSpTable } from '../constants/hpspTable';
 
@@ -41,7 +41,7 @@ const getThirdBaseSp = (baseLevel, job) => {
 
 
 export const getMaxHp = (baseLevel, job, vit, { hpAddMod, hpMultiMod }) => {
-  const { type } = getClass(job)
+  const type = getJobType(job)
   const transMod = type === SECOND ? 1 : 1.25;
   const getBaseHp = type === THIRD ? getThirdBaseHp : getSecondBaseHp;
   const baseHp = getBaseHp(baseLevel, job);
@@ -54,7 +54,7 @@ export const getMaxHp = (baseLevel, job, vit, { hpAddMod, hpMultiMod }) => {
 };
 
 export const getMaxSp = (baseLevel, job, int, { spAddMod, spMultiMod }) => {
-  const { type } = getClass(job)
+  const type = getJobType(job)
   const transMod = type === SECOND ? 1 : 1.25;
   const getBaseSp = type === THIRD ? getThirdBaseSp : getSecondBaseSp;
   const baseSp = getBaseSp(baseLevel, job);
