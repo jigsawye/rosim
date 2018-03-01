@@ -1,4 +1,6 @@
+require('dotenv').config();
 const { injectBabelPlugin } = require('react-app-rewired');
+const rewireDefinePlugin = require('react-app-rewire-define-plugin');
 
 module.exports = function override(config, env) {
   config = injectBabelPlugin(['import', {
@@ -8,6 +10,10 @@ module.exports = function override(config, env) {
   }], config);
 
   config = injectBabelPlugin('lodash', config);
+
+  config = rewireDefinePlugin(config, env, {
+    'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+  });
 
   return config;
 };
