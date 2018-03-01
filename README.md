@@ -7,16 +7,26 @@
 
 Build with React, Redux, antd, styled-components.
 
+## Setup
+
+``` bash
+# create your .env file
+cp .env.example .env
+
+# update your environment variable
+vim .env
+```
+
 ## Build Setup
 
 ``` bash
 # install dependencies
-yarn # or `npm install`
+yarn
 
 # serve with hot reload at localhost:8080
-yarn dev # or `npm run dev`
+yarn start
 
 # build for production with minification
-yarn build # or `npm run build`
+yarn build
 ```
 
