@@ -12,7 +12,7 @@ const AppFooter = () => (
         target="_blank">Evan Ye</a>.
     </p>
     <p>
-      <a href="https://github.com/jigsawye/ro-stats-simulator" rel="noopener noreferrer" target="_blank">
+      <a href="https://github.com/jigsawye/rosim" rel="noopener noreferrer" target="_blank">
         <Icon type="github" /> Source Code
       </a>
     </p>

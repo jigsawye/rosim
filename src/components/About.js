@@ -4,6 +4,8 @@ import { Row, Col } from 'antd';
 
 import { Card } from './Layouts/CardLayout';
 
+const renderers ={ link : props => <a href={props.href} target="_blank">{props.children}</a> };
+
 const aboutWebsite = `
 為何會有此模擬器請參考[巴哈原文](https://forum.gamer.com.tw/C.php?bsn=4212&snA=416122&tnum=7)，總之這是一個在過年沒 RO 玩之下的產物。
 
@@ -53,7 +55,7 @@ const About = () => (
   <Row>
     <Col xs={24} lg={{ span: 18, offset: 3 }} xxl={{ span: 14, offset: 5 }}>
       <Card title="關於本站">
-        <ReactMarkdown source={aboutWebsite} />
+        <ReactMarkdown source={aboutWebsite} renderers={renderers}/>
         <iframe
           title="discord"
           src="https://discordapp.com/widget?id=416465528442454026&theme=dark"
@@ -63,7 +65,7 @@ const About = () => (
           frameBorder="0" />
       </Card>
       <Card title="關於作者">
-        <ReactMarkdown source={aboutCreator} />
+        <ReactMarkdown source={aboutCreator} renderers={renderers}/>
       </Card>
     </Col>
   </Row>
