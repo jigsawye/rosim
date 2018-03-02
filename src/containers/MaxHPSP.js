@@ -14,8 +14,8 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         <Label>Max HP 提升</Label>
       </Popover>
       <InputNumber
-        min={0}
-        max={200}
+        min={-10000}
+        max={20000}
         value={hpsp.hpAddMod}
         onChange={updateHpAddMod} />
     </InputField>
@@ -24,8 +24,8 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         <Label>Max HP 提升</Label>
       </Popover>
       <InputNumber
-        min={0}
-        max={10000}
+        min={-100}
+        max={400}
         value={hpsp.hpMultiMod}
         onChange={updateHpMultiMod} /> %
     </InputField>
@@ -34,8 +34,8 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         <Label>Max SP 提升</Label>
       </Popover>
       <InputNumber
-        min={0}
-        max={200}
+        min={-5000}
+        max={10000}
         value={hpsp.spAddMod}
         onChange={updateSpAddMod} />
     </InputField>
@@ -44,8 +44,8 @@ const MaxHPSP = ({ hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updat
         <Label>Max SP 提升</Label>
       </Popover>
       <InputNumber
-        min={0}
-        max={10000}
+        min={-100}
+        max={400}
         value={hpsp.spMultiMod}
         onChange={updateSpMultiMod} /> %
     </InputField>
