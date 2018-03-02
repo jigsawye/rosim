@@ -41,7 +41,7 @@ const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat, s
     <Bonuse>{bonuse}</Bonuse>
     <Plus>+</Plus>
     <Select style={{ width: 70 }} value={otherStat} onChange={onChangeOtherStat}>
-      {range(0, 50).map((stat) => <Option key={stat}>{stat}</Option>)}
+      {range(0, 201).map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
   </StatsContainer>
 );
