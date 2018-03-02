@@ -71,7 +71,7 @@ const AspdSetting = ({
         <Label>裝備提升攻速</Label>
       </Popover>
       <InputNumber
-        min={0}
+        min={-100}
         max={200}
         value={aspd.equipMod}
         onChange={updateAspdEquipMod} /> %
