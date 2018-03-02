@@ -13,6 +13,7 @@ module.exports = function override(config, env) {
 
   config = rewireDefinePlugin(config, env, {
     'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+    'process.env.version': JSON.stringify(require('./package.json').version),
   });
 
   return config;

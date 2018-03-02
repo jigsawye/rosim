@@ -12,7 +12,15 @@ import { loadSaveData } from '../actions';
 
 const SaveLoadContainer = styled.div`
   display: inline-block;
+  margin-left: 16px;
   float: right;
+
+  @media only screen and (max-width: 767.99px) {
+    margin-left: 0;
+    float: none;
+    display: block;
+    padding: 12px 16px;
+  }
 `;
 
 const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
@@ -118,7 +126,7 @@ class SaveLoad extends React.Component {
   render() {
     return (
       <SaveLoadContainer>
-        <Button icon="save" onClick={this.showModal}>Save / Load</Button>
+        <Button icon="save" type="sm" onClick={this.showModal}>Save / Load</Button>
         <Modal
           title="Save / Load"
           width={600}
