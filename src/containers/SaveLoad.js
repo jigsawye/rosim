@@ -118,7 +118,7 @@ class SaveLoad extends React.Component {
   render() {
     return (
       <SaveLoadContainer>
-        <Button type="primary" icon="save" onClick={this.showModal}>Save / Load</Button>
+        <Button icon="save" onClick={this.showModal}>Save / Load</Button>
         <Modal
           title="Save / Load"
           width={600}
