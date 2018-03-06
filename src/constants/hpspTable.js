@@ -187,7 +187,7 @@ export const thirdSpTable = [
     job: [
       classes.GUILLOTINE_CROSS,
       classes.RANGER,
-      classes.MERCHANT,
+      classes.MECHANIC,
       classes.SHADOW_CHASER,
       classes.WANDERER,
       classes.MINSTREL,
