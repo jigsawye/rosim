@@ -706,6 +706,28 @@ export default [
     ],
   },
   {
+    job: classes.DANCER,
+    shieldAspd: -7,
+    weapons: [
+      {
+        id: 0,
+        baseAspd: 154,
+      },
+      {
+        id: 1,
+        baseAspd: 141,
+      },
+      {
+        id: 10,
+        baseAspd: 146,
+      },
+      {
+        id: 14,
+        baseAspd: 149,
+      },
+    ],
+  },
+  {
     job: classes.LORD_KNIGHT,
     shieldAspd: -5,
     weapons: [
@@ -1060,6 +1082,28 @@ export default [
     ],
   },
   {
+    job: classes.GYPSY,
+    shieldAspd: -7,
+    weapons: [
+      {
+        id: 0,
+        baseAspd: 154,
+      },
+      {
+        id: 1,
+        baseAspd: 141,
+      },
+      {
+        id: 10,
+        baseAspd: 146,
+      },
+      {
+        id: 14,
+        baseAspd: 149,
+      },
+    ],
+  },
+  {
     job: classes.RUNE_KNIGHT,
     shieldAspd: -5,
     weapons: [
@@ -1393,6 +1437,28 @@ export default [
   },
   {
     job: classes.MAESTRO,
+    shieldAspd: -7,
+    weapons: [
+      {
+        id: 0,
+        baseAspd: 154,
+      },
+      {
+        id: 1,
+        baseAspd: 142,
+      },
+      {
+        id: 10,
+        baseAspd: 145,
+      },
+      {
+        id: 14,
+        baseAspd: 150,
+      },
+    ],
+  },
+  {
+    job: classes.WANDERER,
     shieldAspd: -7,
     weapons: [
       {
