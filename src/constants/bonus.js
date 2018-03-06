@@ -885,7 +885,7 @@ export default [
     ],
   },
   {
-    key: classes.BLACKSMITH,
+    key: classes.WHITESMITH,
     bonus: [
       [1, 4],
       [2, 0],
