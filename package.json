@@ -4,7 +4,7 @@
   "version": "1.4.1",
   "author": "Evan Ye <jigsaw.ye@gmail.com> (https://jigsawye.com/)",
   "license": "MIT",
-  "homepage": "https://ro-stats-simulator.jigsawye.com",
+  "homepage": "https://rosim.jigsawye.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/jigsawye/rosim.git"
