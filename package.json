@@ -1,7 +1,7 @@
 {
   "name": "rosim",
   "description": "Ragnarok Online Stats Simulator",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": "Evan Ye <jigsaw.ye@gmail.com> (https://jigsawye.com/)",
   "license": "MIT",
   "homepage": "https://ro-stats-simulator.jigsawye.com",
