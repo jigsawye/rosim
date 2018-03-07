@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { InputNumber } from 'antd';
+import { round } from 'lodash';
 import { getAspdFrequency } from '../../utils/aspd';
 
 export const ASPD = {
@@ -90,4 +92,49 @@ export const FLEE = {
       <p>以完全迴避率不計攻擊對象命中直接迴避</p>
     </div>
   ),
+};
+
+class CastTimePopover extends Component {
+  state = {
+    skillCastTime: 0,
+    equipCastTime: 0,
+  }
+
+  handleSkillCastTime = skillCastTime => this.setState({ skillCastTime });
+
+  handleEquipCastTime = equipCastTime => this.setState({ equipCastTime });
+
+  render() {
+    const { skillCastTime, equipCastTime } = this.state;
+    return (
+      <div>
+        <p>以此百分比進行變詠減免</p>
+        <div style={{ marginBottom: 5 }}>
+          <span>原始變詠 : </span>
+          <InputNumber
+            size="small"
+            min={0}
+            max={30}
+            value={skillCastTime}
+            onChange={this.handleSkillCastTime}/>
+        </div>
+        <div style={{ marginBottom: 5 }}>
+          <span>卡裝減免 : </span>
+          <InputNumber
+            size="small"
+            min={0}
+            max={100}
+            value={equipCastTime}
+            onChange={this.handleEquipCastTime}/>
+            %
+        </div>
+        <p>最終變詠 : {round(skillCastTime * (1 - equipCastTime / 100) * this.props.castTime, 2)}</p>
+      </div>
+    );
+  }
+}
+
+export const CastTime = {
+  title: 'Case Time (詠唱時間)',
+  content: CastTimePopover,
 };

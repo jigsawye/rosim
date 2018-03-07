@@ -22,7 +22,7 @@ const AbilityGrid = ({ label, children, ...props }) => {
   );
 };
 
-const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, aspd }) => (
+const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, aspd, castTime }) => (
   <Card title="Ability" className="ant-card-contain-grid">
     <AbilityGrid label="MaxHP">{maxHp}</AbilityGrid>
     <AbilityGrid label="MaxSP">{maxSp}</AbilityGrid>
@@ -34,6 +34,7 @@ const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, as
     <AbilityGrid label="MDEF">{mdef} + ___</AbilityGrid>
     <AbilityGrid label="HIT">{hit}</AbilityGrid>
     <AbilityGrid label="FLEE">{flee} + {dodge}</AbilityGrid>
+    <AbilityGrid label="CastTime" castTime={castTime}>{castTime * 100} %</AbilityGrid>
   </Card>
 );
 
@@ -42,6 +43,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hp
   const { weaponId } = aspd;
   const [str, agi, vit, int, dex, luk] = statsMap.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
+  const castTime = 1 - round(Math.sqrt((dex * 2 + int) / 530), 3);
 
   return {
     maxHp: getMaxHp(baseLevel, job, vit, hpsp),
@@ -54,6 +56,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hp
     cri: round(luk * 0.3, 2) + 2.2,
     def: floor(agi / 5 + (baseLevel + vit) / 2),
     mdef: int + floor(baseLevel / 4 + (vit + dex) / 5),
+    castTime: castTime < 0 ? 0 : castTime,
     aspd: getAspd(job, agi, dex, aspd),
   };
 };
