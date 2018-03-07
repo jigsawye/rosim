@@ -67,6 +67,7 @@ export const CRI = {
   content: () => (
     <div>
       <p>每次攻擊造成必殺攻擊的機率</p>
+      <p>此為正確的爆擊率，RO 內的面板上顯示有誤</p>
     </div>
   ),
 };

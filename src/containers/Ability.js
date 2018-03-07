@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Popover } from 'antd';
-import { floor } from 'lodash';
+import { floor, round } from 'lodash';
 
 import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
 import * as AbilityTips from '../components/Tips/Ability';
@@ -51,7 +51,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hp
     hit: floor(luk / 3) + dex + baseLevel + 175,
     flee: floor(luk / 5) + agi + baseLevel + 100,
     dodge: floor(luk / 10) + 1,
-    cri: floor(luk / 3) + 1,
+    cri: round(luk * 0.3, 2) + 2.2,
     def: floor(agi / 5 + (baseLevel + vit) / 2),
     mdef: int + floor(baseLevel / 4 + (vit + dex) / 5),
     aspd: getAspd(job, agi, dex, aspd),
