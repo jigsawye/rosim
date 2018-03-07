@@ -17,15 +17,14 @@ import {
 import weapons from '../constants/weapons';
 import aspdTable from '../constants/aspdTable';
 
-const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Option } = Select;
 
-const aspdUpPotions = [
-  { key: 0, name: '無', aspdUp: 0 },
-  { key: 1, name: '集中藥水', aspdUp: 10 },
-  { key: 2, name: '覺醒藥水', aspdUp: 15 },
-  { key: 3, name: '菠色克藥水', aspdUp: 20 },
+const aspdPotionModOptions = [
+  { label: '無', value: 0 },
+  { label: '集中藥水', value: 10 },
+  { label: '覺醒藥水', value: 15 },
+  { label: '菠色克藥水', value: 20 },
 ];
 
 const AspdSetting = ({
@@ -97,21 +96,23 @@ const AspdSetting = ({
         onChange={updateAspdEquipFixed}/>
     </InputField>
     <InputField>
-      <RadioGroup value={aspd.potionMod} onChange={({ target }) => updateAspdPotionMod(target.value)}>
-        {aspdUpPotions.map(({ key, name, aspdUp }) => (
-          <RadioButton key={key} value={aspdUp}>{name}</RadioButton>
-        ))}
-      </RadioGroup>
+      <RadioGroup
+        options={aspdPotionModOptions}
+        value={aspd.potionMod}
+        onChange={({ target }) => updateAspdPotionMod(target.value)}/>
     </InputField>
   </Card>
 );
 
-const mapStateToProps = ({ job, stats, aspd }) => ({
-  usableWeapons: find(aspdTable, ['job', job[1]]).weapons,
-  usableLefthand: find(aspdTable, ['job', job[1]]).lefthand,
-  stats,
-  aspd,
-});
+const mapStateToProps = ({ job, stats, aspd }) => {
+  const { weapons, lefthand } = find(aspdTable, ['job', job[1]]);
+  return {
+    stats,
+    aspd,
+    usableWeapons: weapons,
+    usableLefthand: lefthand,
+  };
+};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   updateAspdWeaponId,
