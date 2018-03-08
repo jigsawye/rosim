@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputNumber } from 'antd';
+import { InputNumber, Switch } from 'antd';
 import { round } from 'lodash';
 import { getAspdFrequency } from '../../utils/aspd';
 
@@ -98,17 +98,29 @@ class CastTimePopover extends Component {
   state = {
     skillCastTime: 0,
     equipCastTime: 0,
+    isSource: true,
   }
 
   handleSkillCastTime = skillCastTime => this.setState({ skillCastTime });
 
   handleEquipCastTime = equipCastTime => this.setState({ equipCastTime });
 
+  handleIsSource = isSource => this.setState({ isSource });
+
   render() {
-    const { skillCastTime, equipCastTime } = this.state;
+    const { skillCastTime, equipCastTime, isSource } = this.state;
+    const castTime = round(
+      skillCastTime *
+      (1 - equipCastTime / 100) *
+      (isSource ? 0.6 : 1) *
+      this.props.castTime, 2
+    );
     return (
       <div>
         <p>以此百分比進行變詠減免</p>
+        <div style={{ marginBottom: 5 }}>
+          起源 <Switch size="small" checked={isSource} onChange={this.handleIsSource} />
+        </div>
         <div style={{ marginBottom: 5 }}>
           <span>原始變詠 : </span>
           <InputNumber
@@ -128,7 +140,7 @@ class CastTimePopover extends Component {
             onChange={this.handleEquipCastTime}/>
             %
         </div>
-        <p>最終變詠 : {round(skillCastTime * (1 - equipCastTime / 100) * this.props.castTime, 2)}</p>
+        <p>最終變詠 : {castTime}</p>
       </div>
     );
   }
