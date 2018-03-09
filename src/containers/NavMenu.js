@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { compose, withHandlers, withProps, setPropTypes, pure } from 'recompose';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { Menu } from 'antd';
@@ -33,42 +34,34 @@ const RoSimMenuItem = styled(Menu.Item)`
   }
 `;
 
-class NavMenu extends Component {
-  static propTypes = {
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    mode: PropTypes.string,
-  }
-
-  static defaultProps = {
-    mode: 'vertical'
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      path: this.props.location.pathname,
-    };
-  }
-
-  handleClick = ({ key }) => {
-    if (key !== this.state.path) {
-      this.props.history.push(key);
-      this.setState({ path: key });
+const withPathHandler = compose(
+  pure,
+  withRouter,
+  withProps(({ location, history, mode = 'vertical' }) => ({
+    path: location.pathname, push: history.push, mode,
+  })),
+  setPropTypes({
+    path: PropTypes.string.isRequired,
+    push: PropTypes.func.isRequired,
+    mode: PropTypes.string.isRequired,
+  }),
+  withHandlers({
+    pushPath: ({ path, push }) => ({ key }) => {
+      if (key !== path) {
+        push(key);
+      }
     }
-  }
+  }),
+);
 
-  render() {
-    return (
-      <div>
-        <SaveLoad />
-        <RoSimMenu mode={this.props.mode} selectedKeys={[this.state.path]} onClick={this.handleClick}>
-          <RoSimMenuItem key="/">模擬器</RoSimMenuItem>
-          <RoSimMenuItem key="/about">關於</RoSimMenuItem>
-        </RoSimMenu>
-      </div>
-    );
-  }
-}
+const NavMenu = withPathHandler(({ mode, path, pushPath }) => (
+  <div>
+    <SaveLoad />
+    <RoSimMenu mode={mode} selectedKeys={[path]} onClick={pushPath}>
+      <RoSimMenuItem key="/">模擬器</RoSimMenuItem>
+      <RoSimMenuItem key="/about">關於</RoSimMenuItem>
+    </RoSimMenu>
+  </div>
+));
 
-export default withRouter(NavMenu);
+export default NavMenu;

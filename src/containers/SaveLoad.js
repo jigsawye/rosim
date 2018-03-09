@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -25,7 +25,7 @@ const SaveLoadContainer = styled.div`
 
 const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
 
-class SaveLoad extends React.Component {
+class SaveLoad extends PureComponent {
   state = {
     archives: [],
     visible: false,
