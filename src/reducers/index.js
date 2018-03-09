@@ -51,7 +51,7 @@ export default (state = initialState, action) => {
         ...state,
         baseLevel,
         jobLevel,
-        job: [...action.job],
+        job: action.job,
         stats: {
           str: str <= maxStats ? str : maxStats,
           agi: agi <= maxStats ? agi : maxStats,

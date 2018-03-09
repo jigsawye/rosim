@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Popover } from 'antd';
-import { floor, round } from 'lodash';
+import { floor, round, merge } from 'lodash';
 
 import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
 import * as AbilityTips from '../components/Tips/Ability';
 import { getJobBonusStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
 import { getMaxHp, getMaxSp } from '../utils/hpsp';
-import { statsMap } from '../constants/bonus';
 
 const AbilityGrid = ({ label, children, ...props }) => {
   const ContentComponent = AbilityTips[label].content;
@@ -41,7 +40,7 @@ const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, as
 const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hpsp }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
   const { weaponId } = aspd;
-  const [str, agi, vit, int, dex, luk] = statsMap.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
+  const { str, agi, vit, int, dex, luk } = merge(stats, jobBonusStats, otherStats);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
   const castTime = 1 - round(Math.sqrt((dex * 2 + int) / 530), 5);
 
