@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import Raven from 'raven-js';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import createRavenMiddleware from "raven-for-redux";
 
 import reducer from './reducers';
