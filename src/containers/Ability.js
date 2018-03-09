@@ -43,7 +43,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hp
   const { weaponId } = aspd;
   const [str, agi, vit, int, dex, luk] = statsMap.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
-  const castTime = 1 - round(Math.sqrt((dex * 2 + int) / 530), 3);
+  const castTime = 1 - round(Math.sqrt((dex * 2 + int) / 530), 5);
 
   return {
     maxHp: getMaxHp(baseLevel, job, vit, hpsp),
