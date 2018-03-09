@@ -9,7 +9,7 @@ module.exports = function override(config, env) {
     style: 'css',
   }], config);
 
-  config = injectBabelPlugin('lodash', config);
+  config = injectBabelPlugin(['lodash', { id: ['lodash', 'recompose'] }], config);
 
   config = rewireDefinePlugin(config, env, {
     'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
