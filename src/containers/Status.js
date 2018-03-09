@@ -19,9 +19,9 @@ const Status = ({ stats, statsRange, setStat, otherStats, setOtherStat, remainin
         value={stats[key]}
         statsRange={statsRange}
         bonuse={jobBonusStats[key]}
-        onChange={stat => setStat(key, stat)}
+        onChange={stat => setStat({ key, stat })}
         otherStat={otherStats[key]}
-        onChangeOtherStat={stat => setOtherStat(key, stat)}>
+        onChangeOtherStat={stat => setOtherStat({ key, stat })}>
       </Stat>
     ))}
     <Divider></Divider>

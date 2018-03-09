@@ -40,7 +40,7 @@ const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, as
 const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hpsp }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
   const { weaponId } = aspd;
-  const { str, agi, vit, int, dex, luk } = merge(stats, jobBonusStats, otherStats);
+  const { str, agi, vit, int, dex, luk } = merge({}, stats, jobBonusStats, otherStats);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
   const castTime = 1 - round(Math.sqrt((dex * 2 + int) / 530), 5);
 

@@ -1,41 +1,22 @@
+import { createAction } from 'redux-actions';
 import * as types from '../constants/types';
 
-export const setBaseLevel = level => ({ type: types.SET_BASE_LEVEL, level });
-export const setJobLevel = level => ({ type: types.SET_JOB_LEVEL, level });
-export const setJob = job => ({ type: types.SET_JOB, job });
-export const setStat = (key, stat) => ({ type: types.SET_STAT, key, stat });
-export const setOtherStat = (key, stat) => ({ type: types.SET_OTHER_STAT, key, stat });
+export const setBaseLevel = createAction(types.SET_BASE_LEVEL);
+export const setJobLevel = createAction(types.SET_JOB_LEVEL);
+export const setJob = createAction(types.SET_JOB);
+export const setStat = createAction(types.SET_STAT);
+export const setOtherStat = createAction(types.SET_OTHER_STAT);
 
-export const loadSaveData = data => ({ type: types.LOAD_SAVE_DATA, data });
+export const loadSaveData = createAction(types.LOAD_SAVE_DATA);
 
-export const updateAspdWeaponId = weaponId => ({
-  type: types.UPDATE_ASPD_WEAPON_ID, weaponId,
-});
-export const updateAspdLefthandId = lefthandId => ({
-  type: types.UPDATE_ASPD_LEFTHAND_ID, lefthandId,
-});
-export const updateAspdEquipMod = equipMod => ({
-  type: types.UPDATE_ASPD_EQUIP_MOD, equipMod,
-});
-export const updateAspdEquipFixed = equipFixed => ({
-  type: types.UPDATE_ASPD_EQUIP_FIXED, equipFixed,
-});
-export const updateAspdSkillMod = skillMod => ({
-  type: types.UPDATE_ASPD_SKILL_MOD, skillMod,
-});
-export const updateAspdPotionMod = potionMod => ({
-  type: types.UPDATE_ASPD_POTION_MOD, potionMod,
-});
+export const updateAspdWeaponId = createAction(types.UPDATE_ASPD_WEAPON_ID);
+export const updateAspdLefthandId = createAction(types.UPDATE_ASPD_LEFTHAND_ID);
+export const updateAspdEquipMod = createAction(types.UPDATE_ASPD_EQUIP_MOD);
+export const updateAspdEquipFixed = createAction(types.UPDATE_ASPD_EQUIP_FIXED);
+export const updateAspdSkillMod = createAction(types.UPDATE_ASPD_SKILL_MOD);
+export const updateAspdPotionMod = createAction(types.UPDATE_ASPD_POTION_MOD);
 
-export const updateHpAddMod = hpAddMod => ({
-  type: types.UPDATE_HP_ADD_MOD, hpAddMod,
-});
-export const updateHpMultiMod = hpMultiMod => ({
-  type: types.UPDATE_HP_MULTI_MOD, hpMultiMod,
-});
-export const updateSpAddMod = spAddMod => ({
-  type: types.UPDATE_SP_ADD_MOD, spAddMod,
-});
-export const updateSpMultiMod = spMultiMod => ({
-  type: types.UPDATE_SP_MULTI_MOD, spMultiMod,
-});
+export const updateHpAddMod = createAction(types.UPDATE_HP_ADD_MOD);
+export const updateHpMultiMod = createAction(types.UPDATE_HP_MULTI_MOD);
+export const updateSpAddMod = createAction(types.UPDATE_SP_ADD_MOD);
+export const updateSpMultiMod = createAction(types.UPDATE_SP_MULTI_MOD);
