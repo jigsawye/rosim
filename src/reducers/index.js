@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import handleActions from '../utils/handleActions';
 import { find } from 'lodash';
 import * as types from '../constants/types';
 import { getJobType } from '../constants/classes';
@@ -34,129 +34,48 @@ const initialState = {
 };
 
 export default handleActions({
-  [types.SET_BASE_LEVEL]: (state, action) => ({
-    ...state, baseLevel: Number(action.payload),
-  }),
-  [types.SET_JOB_LEVEL]: (state, action) => ({
-    ...state, jobLevel: Number(action.payload),
-  }),
-  [types.SET_JOB]: (state, action) => {
+  [types.SET_BASE_LEVEL]: (state, { payload }) => state.baseLevel = Number(payload),
+  [types.SET_JOB_LEVEL]: (state, { payload }) => state.jobLevel = Number(payload),
+  [types.SET_JOB]: (state, { payload }) => {
     const { str, agi, vit, int, dex, luk } = state.stats;
-    const type = getJobType(action.payload);
-    const maxBaseLevel = getMaxBaseLevel(action.payload);
-    const maxJobLevel = getMaxJobLevel(action.payload);
-    const maxStats = getMaxStats(action.payload);
+    const type = getJobType(payload);
+    const maxBaseLevel = getMaxBaseLevel(payload);
+    const maxJobLevel = getMaxJobLevel(payload);
+    const maxStats = getMaxStats(payload);
     const baseLevel = state.baseLevel > maxBaseLevel ? maxBaseLevel :
       (type === THIRD && state.baseLevel < 99) ? 99 : state.baseLevel;
     const jobLevel = state.jobLevel <= maxJobLevel ? state.jobLevel : maxJobLevel;
-    return {
-      ...state,
-      baseLevel,
-      jobLevel,
-      job: action.payload,
-      stats: {
-        str: str <= maxStats ? str : maxStats,
-        agi: agi <= maxStats ? agi : maxStats,
-        vit: vit <= maxStats ? vit : maxStats,
-        int: int <= maxStats ? int : maxStats,
-        dex: dex <= maxStats ? dex : maxStats,
-        luk: luk <= maxStats ? luk : maxStats,
-      },
-      aspd: {
-        ...state.aspd,
-        weaponId: 0,
-        lefthandId: 100,
-      },
-    };
+
+    state.baseLevel = baseLevel;
+    state.jobLevel = jobLevel;
+    state.job = payload
+    state.stats.str = str <= maxStats ? str : maxStats;
+    state.stats.agi = agi <= maxStats ? agi : maxStats;
+    state.stats.vit = vit <= maxStats ? vit : maxStats;
+    state.stats.int = int <= maxStats ? int : maxStats;
+    state.stats.dex = dex <= maxStats ? dex : maxStats;
+    state.stats.luk = luk <= maxStats ? luk : maxStats;
+    state.aspd.weaponId = 0;
+    state.lefthandId = 100;
   },
-  [types.SET_STAT]: (state, action) => ({
-    ...state,
-    stats: {
-      ...state.stats,
-      [action.payload.key]: Number(action.payload.stat),
-    },
-  }),
-  [types.SET_OTHER_STAT]: (state, action) => ({
-    ...state,
-    otherStats: {
-      ...state.otherStats,
-      [action.payload.key]: Number(action.payload.stat),
-    },
-  }),
-  [types.LOAD_SAVE_DATA]: (state, action) => formatOldData(action.payload),
-  [types.UPDATE_ASPD_WEAPON_ID]: (state, action) => {
-    const { lefthand } = find(weapons, ['id', action.payload]);
+  [types.SET_STAT]: (state, { payload }) => state.stats[payload.key] = Number(payload.stat),
+  [types.SET_OTHER_STAT]: (state, { payload }) => state.otherStats[payload.key] = Number(payload.stat),
+  [types.LOAD_SAVE_DATA]: formatOldData,
+  [types.UPDATE_ASPD_WEAPON_ID]: (state, { payload }) => {
+    const { lefthand } = find(weapons, ['id', payload]);
     const lefthandId = lefthand ? state.aspd.lefthandId : 100;
-    return {
-      ...state,
-      aspd: {
-        ...state.aspd,
-        lefthandId,
-        weaponId: action.payload,
-      },
-    };
+
+    state.aspd.lefthandId = lefthandId;
+    state.aspd.weaponId = payload;
   },
-  [types.UPDATE_ASPD_LEFTHAND_ID]: (state, action) => ({
-    ...state,
-    aspd: {
-      ...state.aspd,
-      lefthandId: action.payload,
-    },
-  }),
-  [types.UPDATE_ASPD_EQUIP_MOD]: (state, action) => ({
-    ...state,
-    aspd: {
-      ...state.aspd,
-      equipMod: action.payload,
-    },
-  }),
-  [types.UPDATE_ASPD_EQUIP_FIXED]: (state, action) => ({
-    ...state,
-    aspd: {
-      ...state.aspd,
-      equipFixed: action.payload,
-    },
-  }),
-  [types.UPDATE_ASPD_SKILL_MOD]: (state, action) => ({
-    ...state,
-    aspd: {
-      ...state.aspd,
-      skillMod: action.payload,
-    },
-  }),
-  [types.UPDATE_ASPD_POTION_MOD]: (state, action) => ({
-    ...state,
-    aspd: {
-      ...state.aspd,
-      potionMod: action.payload,
-    },
-  }),
-  [types.UPDATE_HP_ADD_MOD]: (state, action) => ({
-    ...state,
-    hpsp: {
-      ...state.hpsp,
-      hpAddMod: action.payload,
-    },
-  }),
-  [types.UPDATE_HP_MULTI_MOD]: (state, action) => ({
-    ...state,
-    hpsp: {
-      ...state.hpsp,
-      hpMultiMod: action.payload,
-    },
-  }),
-  [types.UPDATE_SP_ADD_MOD]: (state, action) => ({
-    ...state,
-    hpsp: {
-      ...state.hpsp,
-      spAddMod: action.payload,
-    },
-  }),
-  [types.UPDATE_SP_MULTI_MOD]: (state, action) => ({
-    ...state,
-    hpsp: {
-      ...state.hpsp,
-      spMultiMod: action.payload,
-    },
-  }),
+  [types.UPDATE_ASPD_LEFTHAND_ID]: (state, { payload }) => state.aspd.lefthandId = payload,
+  [types.UPDATE_ASPD_EQUIP_MOD]: (state, { payload }) => state.aspd.equipMod = payload,
+  [types.UPDATE_ASPD_EQUIP_FIXED]: (state, { payload }) => state.aspd.equipFixed = payload,
+  [types.UPDATE_ASPD_SKILL_MOD]: (state, { payload }) => state.aspd.skillMod = payload,
+  [types.UPDATE_ASPD_POTION_MOD]: (state, { payload }) => state.aspd.potionMod = payload,
+
+  [types.UPDATE_HP_ADD_MOD]: (state, { payload }) => state.hpsp.hpAddMod = payload,
+  [types.UPDATE_HP_MULTI_MOD]: (state, { payload }) => state.hpsp.hpMultiMod = payload,
+  [types.UPDATE_SP_ADD_MOD]: (state, { payload }) => state.hpsp.spAddMod = payload,
+  [types.UPDATE_SP_MULTI_MOD]: (state, { payload }) => state.hpsp.spMultiMod = payload,
 }, initialState);
