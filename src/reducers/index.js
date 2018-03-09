@@ -56,7 +56,7 @@ export default handleActions({
     state.stats.dex = dex <= maxStats ? dex : maxStats;
     state.stats.luk = luk <= maxStats ? luk : maxStats;
     state.aspd.weaponId = 0;
-    state.lefthandId = 100;
+    state.aspd.lefthandId = 100;
   },
   [types.SET_STAT]: (state, { payload }) => state.stats[payload.key] = Number(payload.stat),
   [types.SET_OTHER_STAT]: (state, { payload }) => state.otherStats[payload.key] = Number(payload.stat),
