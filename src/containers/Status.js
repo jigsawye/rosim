@@ -7,10 +7,19 @@ import { Card } from '../components/Layouts/CardLayout';
 import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
 import { setStat, setOtherStat } from '../actions';
-import { getRemainingStatsPoint, getJobBonusStats } from '../utils/stats';
+import { getRemainingStatsPoint, getJobBonusStats, getSkillBuffStats } from '../utils/stats';
 import { getStatsRange } from '../constants/ranges';
 
-const Status = ({ stats, statsRange, setStat, otherStats, setOtherStat, remainingPoint, jobBonusStats }) => (
+const Status = ({
+  stats,
+  statsRange,
+  setStat,
+  otherStats,
+  setOtherStat,
+  remainingPoint,
+  jobBonusStats,
+  skillBuffStats,
+}) => (
   <Card title="Stats" style={{ marginTop: 15 }}>
     {Object.keys(stats).map((key) => (
       <Stat
@@ -19,6 +28,7 @@ const Status = ({ stats, statsRange, setStat, otherStats, setOtherStat, remainin
         value={stats[key]}
         statsRange={statsRange}
         bonuse={jobBonusStats[key]}
+        buff={skillBuffStats[key]}
         onChange={stat => setStat({ key, stat })}
         otherStat={otherStats[key]}
         onChangeOtherStat={stat => setOtherStat({ key, stat })}>
@@ -29,11 +39,12 @@ const Status = ({ stats, statsRange, setStat, otherStats, setOtherStat, remainin
   </Card>
 );
 
-const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job }) => ({
+const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, skills }) => ({
   stats,
   otherStats,
   statsRange: getStatsRange(job),
   jobBonusStats : getJobBonusStats(jobLevel, job),
+  skillBuffStats: getSkillBuffStats(skills),
   remainingPoint: getRemainingStatsPoint(baseLevel, stats, job),
 });
 

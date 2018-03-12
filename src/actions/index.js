@@ -20,3 +20,5 @@ export const updateHpAddMod = createAction(types.UPDATE_HP_ADD_MOD);
 export const updateHpMultiMod = createAction(types.UPDATE_HP_MULTI_MOD);
 export const updateSpAddMod = createAction(types.UPDATE_SP_ADD_MOD);
 export const updateSpMultiMod = createAction(types.UPDATE_SP_MULTI_MOD);
+
+export const updateBuffSkill = createAction(types.UPDATE_BUFF_SKILL);

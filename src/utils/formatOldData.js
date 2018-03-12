@@ -1,7 +1,7 @@
 import { isNumber, defaultTo } from 'lodash';
 
 export default (state, { payload }) => {
-  const { baseLevel, jobLevel, job, stats, otherStats, aspd, hpsp = {} } = payload;
+  const { baseLevel, jobLevel, job, stats, otherStats, aspd, hpsp = {}, skills = [] } = payload;
   const { weaponId, lefthandId } = aspd;
   state.baseLevel = baseLevel;
   state.jobLevel = jobLevel;
@@ -22,4 +22,5 @@ export default (state, { payload }) => {
     skillMod: defaultTo(aspd.skillsAddition, aspd.skillMod),
     potionMod: defaultTo(aspd.potionAddition, aspd.potionMod),
   };
+  state.skills = skills;
 };

@@ -29,7 +29,7 @@ const Bonuse = styled.div`
   width: 10px;
 `;
 
-const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat, statsRange }) => (
+const Stats = ({ label, value, onChange, bonuse, buff, otherStat, onChangeOtherStat, statsRange }) => (
   <StatsContainer>
     <Popover title={StatTips[label].title} content={StatTips[label].content} placement="right">
       <Label>{upperCase(label)}</Label>
@@ -38,7 +38,7 @@ const Stats = ({ label, value, onChange, bonuse, otherStat, onChangeOtherStat, s
       {statsRange.map((stat) => <Option key={stat}>{stat}</Option>)}
     </Select>
     <Plus>+</Plus>
-    <Bonuse>{bonuse}</Bonuse>
+    <Bonuse>{bonuse + buff}</Bonuse>
     <Plus>+</Plus>
     <Select style={{ width: 70 }} value={otherStat} onChange={onChangeOtherStat}>
       {range(0, 201).map((stat) => <Option key={stat}>{stat}</Option>)}
@@ -51,6 +51,7 @@ Stats.propTypes = {
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   bonuse: PropTypes.number.isRequired,
+  buff: PropTypes.number.isRequired,
   otherStat: PropTypes.number.isRequired,
   onChangeOtherStat: PropTypes.func.isRequired,
   statsRange: PropTypes.array.isRequired,

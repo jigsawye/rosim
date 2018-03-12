@@ -2,6 +2,7 @@ import { range, mapValues, find, floor } from 'lodash';
 import jobStatBonus, { statsMap } from '../constants/bonus';
 import { getJobType } from '../constants/classes';
 import { SECOND } from '../constants/classes/classNames';
+import { acolyteSkills } from '../constants/skills';
 
 export const getAvailableStatsPoint = (level, isTranscendent) => range(1, level)
   .map((lv) => {
@@ -35,4 +36,13 @@ export const getJobBonusStats = (jobLevel, job) => {
       nextBouns[statsMap[next[1]]] += 1;
       return nextBouns;
     }, { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 });
+};
+
+export const getSkillBuffStats = (skills) => {
+  const status = skills.reduce((status, { key, value }) => {
+    const { isToggle, buffs } = find(acolyteSkills, { key });
+    const buff = isToggle ? buffs : find(buffs, ['level', value]).status;
+    return { ...status, ...buff };
+  }, { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 });
+  return status;
 };

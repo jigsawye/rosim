@@ -53,7 +53,7 @@ const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hp
     hit: floor(luk / 3) + dex + baseLevel + 175,
     flee: floor(luk / 5) + agi + baseLevel + 100,
     dodge: floor(luk / 10) + 1,
-    cri: round(luk * 0.3, 2) + 2.2,
+    cri: round(luk * 0.3 + 2.2, 2),
     def: floor(agi / 5 + (baseLevel + vit) / 2),
     mdef: int + floor(baseLevel / 4 + (vit + dex) / 5),
     castTime: castTime < 0 ? 0 : castTime,

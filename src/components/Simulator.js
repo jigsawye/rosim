@@ -6,6 +6,7 @@ import Status from '../containers/Status';
 import Ability from '../containers/Ability';
 import AspdSetting from '../containers/AspdSetting';
 import MaxHPSP from '../containers/MaxHPSP';
+import SkillBuff from '../containers/SkillBuff';
 
 const Simulator = () => (
   <Row gutter={16}>
@@ -21,8 +22,9 @@ const Simulator = () => (
       </Row>
     </Col>
     <Col xs={24} lg={8} xxl={6}>
-      <MaxHPSP />
+      <SkillBuff />
       <AspdSetting />
+      <MaxHPSP />
     </Col>
   </Row>
 );

@@ -1,5 +1,5 @@
 import handleActions from '../utils/handleActions';
-import { find } from 'lodash';
+import { find, findIndex, remove } from 'lodash';
 import * as types from '../constants/types';
 import { getJobType } from '../constants/classes';
 import { THIRD } from '../constants/classes/classNames';
@@ -31,6 +31,7 @@ const initialState = {
     skillMod: 0,
     potionMod: 0,
   },
+  skills: [],
 };
 
 export default handleActions({
@@ -78,4 +79,17 @@ export default handleActions({
   [types.UPDATE_HP_MULTI_MOD]: (state, { payload }) => state.hpsp.hpMultiMod = payload,
   [types.UPDATE_SP_ADD_MOD]: (state, { payload }) => state.hpsp.spAddMod = payload,
   [types.UPDATE_SP_MULTI_MOD]: (state, { payload }) => state.hpsp.spMultiMod = payload,
+
+  [types.UPDATE_BUFF_SKILL]: (state, { payload }) => {
+    const { key, value } = payload;
+    const existIndex = findIndex(state.skills, { key });
+    const isExist = existIndex >= 0;
+    if (isExist && (!value)) {
+      remove(state.skills, { key });
+    } else if (!isExist) {
+      state.skills.push({ key, value });
+    } else {
+      state.skills[existIndex].value = value;
+    }
+  },
 }, initialState);
