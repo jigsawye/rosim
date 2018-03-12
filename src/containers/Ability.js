@@ -34,7 +34,7 @@ const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, as
     <AbilityGrid label="MDEF">{mdef} + ___</AbilityGrid>
     <AbilityGrid label="HIT">{hit}</AbilityGrid>
     <AbilityGrid label="FLEE">{flee} + {dodge}</AbilityGrid>
-    <AbilityGrid label="CastTime" castTime={castTime}>{castTime * 100} %</AbilityGrid>
+    <AbilityGrid label="CastTime" castTime={castTime}>{round(castTime * 100, 3)} %</AbilityGrid>
   </Card>
 );
 
