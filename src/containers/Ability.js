@@ -5,7 +5,7 @@ import { floor, round } from 'lodash';
 
 import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
 import * as AbilityTips from '../components/Tips/Ability';
-import { getJobBonusStats } from '../utils/stats';
+import { getJobBonusStats, getSkillBuffStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
 import { getMaxHp, getMaxSp } from '../utils/hpsp';
 import { statsMap } from '../constants/bonus';
@@ -38,10 +38,12 @@ const Ability = ({ maxHp, maxSp, atk, matk, def, mdef, hit, flee, dodge, cri, as
   </Card>
 );
 
-const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hpsp }) => {
+const mapStateToProps = ({ stats, otherStats, baseLevel, jobLevel, job, aspd, hpsp, skills }) => {
   const jobBonusStats = getJobBonusStats(jobLevel, job);
+  const skillBuffStats = getSkillBuffStats(skills);
   const { weaponId } = aspd;
-  const [str, agi, vit, int, dex, luk] = statsMap.map(key => stats[key] + jobBonusStats[key] + otherStats[key]);
+  const [str, agi, vit, int, dex, luk] = statsMap.map(key =>
+    stats[key] + jobBonusStats[key] + otherStats[key] + skillBuffStats[key]);
   const [mainAtkStat, subAtkStat] = weaponId === 10 ? [dex, str] : [str, dex];
   const castTime = 1 - round(Math.sqrt((dex * 2 + int) / 530), 5);
 
