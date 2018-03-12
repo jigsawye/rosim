@@ -6,7 +6,7 @@ export default ({ dispatch }) => {
   if (data) {
     try {
       const jsonData = atob(data);
-      const loadData = JSON.parse(jsonData);
+      const { _id, name, ...loadData } = JSON.parse(jsonData);
       dispatch(loadSaveData(loadData));
     } catch (error) {
       window.location.href = window.location.origin;

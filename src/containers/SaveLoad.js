@@ -49,6 +49,8 @@ class SaveLoad extends Component {
     localStorage.setItem('archives', JSON.stringify(this.state.archives));
   }
 
+  copiedText = () => this.state.copied ? '複製成功！' : '複製分享網址至剪貼板'
+
   showModal = () => this.setState({ visible: true, saveName: '' })
 
   closeModal = () => this.setState({ visible: false })
@@ -89,14 +91,16 @@ class SaveLoad extends Component {
 
   resetCopied = () => this.setState({ copied: false })
 
-  copyToClipboard = (item) => {
-    const jsonData = JSON.stringify(item);
+  copyToClipboard = ({ _id, name, ...data }) => {
+    const jsonData = JSON.stringify(data);
     const base64Data = btoa(jsonData);
     const url = `${window.location.origin}?data=${base64Data}`;
 
     copy(url);
     this.setState({ copied: true });
   }
+
+  generateCurrentUrl = () => this.copyToClipboard(this.props.currentData)
 
   renderListItem = (item) => (
     <List.Item actions={this.renderListActions(item)}>
@@ -112,7 +116,7 @@ class SaveLoad extends Component {
     ];
 
     return [
-      <Tooltip title={this.state.copied ? '複製成功！' : '複製到剪貼板'} onVisibleChange={this.resetCopied}>
+      <Tooltip title={this.copiedText()} onVisibleChange={this.resetCopied}>
         <a onClick={() => this.copyToClipboard(item)}>Url</a>
       </Tooltip>,
       ...actions.map(({ title, text, onConfirm }) => (
@@ -135,8 +139,11 @@ class SaveLoad extends Component {
           footer={<Button onClick={this.closeModal}>Close</Button>}>
           <SaveInput
             value={this.state.saveName}
+            copiedText={this.copiedText()}
             updateSaveName={this.updateSaveName}
             saveData={this.saveData}
+            resetCopied={this.resetCopied}
+            generateCurrentUrl={this.generateCurrentUrl}
           />
           <Divider />
           <List
