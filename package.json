@@ -1,7 +1,7 @@
 {
   "name": "rosim",
   "description": "Ragnarok Online Stats Simulator",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "author": "Evan Ye <jigsaw.ye@gmail.com> (https://jigsawye.com/)",
   "license": "MIT",
   "homepage": "https://rosim.jigsawye.com",
@@ -42,7 +42,7 @@
     "deploy": "gh-pages -m 'auto commit [ci skip]' -d build"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.6.5",
+    "babel-plugin-import": "^1.6.6",
     "babel-plugin-lodash": "^3.3.2",
     "dotenv": "^5.0.1",
     "react-app-rewire-define-plugin": "^1.0.0",
