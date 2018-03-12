@@ -1,27 +1,25 @@
 import { isNumber, defaultTo } from 'lodash';
 
-export default (data) => {
-  const { baseLevel, jobLevel, job, stats, otherStats, aspd, hpsp = {} } = data;
+export default (state, { payload }) => {
+  const { baseLevel, jobLevel, job, stats, otherStats, aspd, hpsp = {} } = payload;
   const { weaponId, lefthandId } = aspd;
-  return {
-    baseLevel,
-    jobLevel,
-    job: isNumber(job) ? ['SWORDMAN', 'KNIGHT'] : job,
-    stats,
-    otherStats,
-    hpsp: {
-      hpAddMod: defaultTo(hpsp.hpAddMod, 0),
-      hpMultiMod: defaultTo(hpsp.hpMultiMod, 0),
-      spAddMod: defaultTo(hpsp.spAddMod, 0),
-      spMultiMod: defaultTo(hpsp.spMultiMod, 0),
-    },
-    aspd: {
-      weaponId,
-      lefthandId,
-      equipFixed: 0,
-      equipMod: defaultTo(aspd.equltmentsAddition, aspd.equipMod),
-      skillMod: defaultTo(aspd.skillsAddition, aspd.skillMod),
-      potionMod: defaultTo(aspd.potionAddition, aspd.potionMod),
-    },
+  state.baseLevel = baseLevel;
+  state.jobLevel = jobLevel;
+  state.job = isNumber(job) ? ['SWORDMAN', 'KNIGHT'] : job;
+  state.stats = stats;
+  state.otherStats = otherStats;
+  state.hpsp = {
+    hpAddMod: defaultTo(hpsp.hpAddMod, 0),
+    hpMultiMod: defaultTo(hpsp.hpMultiMod, 0),
+    spAddMod: defaultTo(hpsp.spAddMod, 0),
+    spMultiMod: defaultTo(hpsp.spMultiMod, 0),
+  };
+  state.aspd = {
+    weaponId,
+    lefthandId,
+    equipFixed: 0,
+    equipMod: defaultTo(aspd.equltmentsAddition, aspd.equipMod),
+    skillMod: defaultTo(aspd.skillsAddition, aspd.skillMod),
+    potionMod: defaultTo(aspd.potionAddition, aspd.potionMod),
   };
 };
