@@ -6,6 +6,8 @@ import { secondHpTable, secondSpTable, thirdHpTable, thirdSpTable } from '../con
 
 const findTable = (table, job) => find(table, compose(includes(job[1]), prop('job')));
 
+const getTransMod = type => type === SECOND ? 1 : 1.25;
+
 const getSecondBaseHp = (baseLevel, job) => {
   const { hpJobA, hpJobB } = findTable(secondHpTable, job);
   const baseHp = 35 + baseLevel * hpJobB;
@@ -32,16 +34,16 @@ const getThirdBaseSp = (baseLevel, job) => {
 
 export const getMaxHp = (baseLevel, job, vit, { hpAddMod, hpMultiMod }) => {
   const type = getJobType(job)
-  const transMod = type === SECOND ? 1 : 1.25;
+  const transMod = getTransMod(type);
   const getBaseHp = type === THIRD ? getThirdBaseHp : getSecondBaseHp;
   const baseHp = getBaseHp(baseLevel, job);
-  const maxHp = floor(baseHp * (1 + vit * 0.01) * transMod) + hpAddMod;
+  const maxHp = floor(floor(baseHp * (1 + vit * 0.01)) * transMod) + hpAddMod;
   return floor(maxHp * (1 + hpMultiMod * 0.01));
 };
 
 export const getMaxSp = (baseLevel, job, int, { spAddMod, spMultiMod }) => {
   const type = getJobType(job)
-  const transMod = type === SECOND ? 1 : 1.25;
+  const transMod = getTransMod(type);
   const getBaseSp = type === THIRD ? getThirdBaseSp : getSecondBaseSp;
   const baseSp = getBaseSp(baseLevel, job);
   const maxSp =floor(floor(baseSp * (1 + int * 0.01)) * transMod) + spAddMod;
