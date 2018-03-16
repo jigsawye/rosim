@@ -1,10 +1,18 @@
+/* eslint react/no-unknown-property: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Row, Col } from 'antd';
 
 import { Card } from './Layouts/CardLayout';
 
-const renderers ={ link : props => <a href={props.href} target="_blank">{props.children}</a> };
+const link = ({ href, children }) => <a href={href} target="_blank">{children}</a>;
+link.propTypes = {
+  href: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+};
+
+const renderers = { link };
 
 const aboutWebsite = `
 為何會有此模擬器請參考[巴哈原文](https://forum.gamer.com.tw/C.php?bsn=4212&snA=416122&tnum=7)，總之這是一個在過年沒 RO 玩之下的產物。
@@ -55,17 +63,18 @@ const About = () => (
   <Row>
     <Col xs={24} lg={{ span: 18, offset: 3 }} xxl={{ span: 14, offset: 5 }}>
       <Card title="關於本站">
-        <ReactMarkdown source={aboutWebsite} renderers={renderers}/>
+        <ReactMarkdown source={aboutWebsite} renderers={renderers} />
         <iframe
           title="discord"
           src="https://discordapp.com/widget?id=416465528442454026&theme=dark"
           width="100%"
           height="500"
           allowtransparency="true"
-          frameBorder="0" />
+          frameBorder="0"
+        />
       </Card>
       <Card title="關於作者">
-        <ReactMarkdown source={aboutCreator} renderers={renderers}/>
+        <ReactMarkdown source={aboutCreator} renderers={renderers} />
         <p>如果你有餘力的話，歡迎資助我以讓我繼續開發此模擬器，有任何疑問歡迎寄信至：jigsaw.ye@gmail.com</p>
         <a href="https://p.ecpay.com.tw/MeDs6" target="_blank" rel="noopener noreferrer">
           <img alt="ecpay" src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" />

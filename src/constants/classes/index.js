@@ -1,5 +1,5 @@
 import { find } from 'lodash';
-import { prop, compose } from 'lodash';
+import { prop, compose } from 'lodash/fp';
 import swordman from './swordman';
 import mage from './mage';
 import archer from './archer';

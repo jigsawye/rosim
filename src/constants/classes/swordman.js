@@ -1,5 +1,15 @@
-import { SECOND, TRANSCENDENT_SECOND, THIRD } from './classNames';
-import { SWORDMAN, KNIGHT, CRUSADER, LORD_KNIGHT, PALADIN, RUNE_KNIGHT, ROYAL_GUARD } from './classNames';
+import {
+  SECOND,
+  TRANSCENDENT_SECOND,
+  THIRD,
+  SWORDMAN,
+  KNIGHT,
+  CRUSADER,
+  LORD_KNIGHT,
+  PALADIN,
+  RUNE_KNIGHT,
+  ROYAL_GUARD,
+} from './classNames';
 
 export default {
   value: SWORDMAN,

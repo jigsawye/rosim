@@ -7,10 +7,12 @@ const MarginButton = styled(Button)`
   margin-right: 10px;
 `;
 
-const SaveInput = ({ value, updateSaveName, saveData, generateCurrentUrl, copiedText, resetCopied }) => (
+const SaveInput = ({
+  value, updateSaveName, saveData, generateCurrentUrl, copiedText, resetCopied,
+}) => (
   <Row gutter={16}>
     <Col xs={14} lg={17}>
-      <Input placeholder="Save Name" value={value} onChange={updateSaveName}/>
+      <Input placeholder="Save Name" value={value} onChange={updateSaveName} />
     </Col>
     <Col xs={10} lg={7}>
       <MarginButton type="primary" onClick={saveData}>Save</MarginButton>
@@ -26,6 +28,7 @@ SaveInput.propTypes = {
   updateSaveName: PropTypes.func.isRequired,
   saveData: PropTypes.func.isRequired,
   generateCurrentUrl: PropTypes.func.isRequired,
+  copiedText: PropTypes.string.isRequired,
   resetCopied: PropTypes.func.isRequired,
 };
 

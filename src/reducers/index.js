@@ -1,5 +1,5 @@
-import handleActions from '../utils/handleActions';
 import { find, findIndex, remove } from 'lodash';
+import handleActions from '../utils/handleActions';
 import * as types from '../constants/types';
 import { getJobType } from '../constants/classes';
 import { THIRD } from '../constants/classes/classNames';
@@ -35,21 +35,32 @@ const initialState = {
 };
 
 export default handleActions({
-  [types.SET_BASE_LEVEL]: (state, { payload }) => state.baseLevel = Number(payload),
-  [types.SET_JOB_LEVEL]: (state, { payload }) => state.jobLevel = Number(payload),
+  [types.SET_BASE_LEVEL]: (state, { payload }) => {
+    state.baseLevel = Number(payload);
+  },
+  [types.SET_JOB_LEVEL]: (state, { payload }) => {
+    state.jobLevel = Number(payload);
+  },
   [types.SET_JOB]: (state, { payload }) => {
-    const { str, agi, vit, int, dex, luk } = state.stats;
+    const {
+      str, agi, vit, int, dex, luk,
+    } = state.stats;
     const type = getJobType(payload);
     const maxBaseLevel = getMaxBaseLevel(payload);
     const maxJobLevel = getMaxJobLevel(payload);
     const maxStats = getMaxStats(payload);
-    const baseLevel = state.baseLevel > maxBaseLevel ? maxBaseLevel :
-      (type === THIRD && state.baseLevel < 99) ? 99 : state.baseLevel;
+
+    let { baseLevel } = state;
     const jobLevel = state.jobLevel <= maxJobLevel ? state.jobLevel : maxJobLevel;
+    if (state.baseLevel > maxBaseLevel) {
+      baseLevel = maxBaseLevel;
+    } else if (type === THIRD && state.baseLevel < 99) {
+      baseLevel = 99;
+    }
 
     state.baseLevel = baseLevel;
     state.jobLevel = jobLevel;
-    state.job = payload
+    state.job = payload;
     state.stats.str = str <= maxStats ? str : maxStats;
     state.stats.agi = agi <= maxStats ? agi : maxStats;
     state.stats.vit = vit <= maxStats ? vit : maxStats;
@@ -59,8 +70,12 @@ export default handleActions({
     state.aspd.weaponId = 0;
     state.aspd.lefthandId = 100;
   },
-  [types.SET_STAT]: (state, { payload }) => state.stats[payload.key] = Number(payload.stat),
-  [types.SET_OTHER_STAT]: (state, { payload }) => state.otherStats[payload.key] = Number(payload.stat),
+  [types.SET_STAT]: (state, { payload }) => {
+    state.stats[payload.key] = Number(payload.stat);
+  },
+  [types.SET_OTHER_STAT]: (state, { payload }) => {
+    state.otherStats[payload.key] = Number(payload.stat);
+  },
   [types.LOAD_SAVE_DATA]: formatOldData,
   [types.UPDATE_ASPD_WEAPON_ID]: (state, { payload }) => {
     const { lefthand } = find(weapons, ['id', payload]);
@@ -69,16 +84,34 @@ export default handleActions({
     state.aspd.lefthandId = lefthandId;
     state.aspd.weaponId = payload;
   },
-  [types.UPDATE_ASPD_LEFTHAND_ID]: (state, { payload }) => state.aspd.lefthandId = payload,
-  [types.UPDATE_ASPD_EQUIP_MOD]: (state, { payload }) => state.aspd.equipMod = payload,
-  [types.UPDATE_ASPD_EQUIP_FIXED]: (state, { payload }) => state.aspd.equipFixed = payload,
-  [types.UPDATE_ASPD_SKILL_MOD]: (state, { payload }) => state.aspd.skillMod = payload,
-  [types.UPDATE_ASPD_POTION_MOD]: (state, { payload }) => state.aspd.potionMod = payload,
+  [types.UPDATE_ASPD_LEFTHAND_ID]: (state, { payload }) => {
+    state.aspd.lefthandId = payload;
+  },
+  [types.UPDATE_ASPD_EQUIP_MOD]: (state, { payload }) => {
+    state.aspd.equipMod = payload;
+  },
+  [types.UPDATE_ASPD_EQUIP_FIXED]: (state, { payload }) => {
+    state.aspd.equipFixed = payload;
+  },
+  [types.UPDATE_ASPD_SKILL_MOD]: (state, { payload }) => {
+    state.aspd.skillMod = payload;
+  },
+  [types.UPDATE_ASPD_POTION_MOD]: (state, { payload }) => {
+    state.aspd.potionMod = payload;
+  },
 
-  [types.UPDATE_HP_ADD_MOD]: (state, { payload }) => state.hpsp.hpAddMod = payload,
-  [types.UPDATE_HP_MULTI_MOD]: (state, { payload }) => state.hpsp.hpMultiMod = payload,
-  [types.UPDATE_SP_ADD_MOD]: (state, { payload }) => state.hpsp.spAddMod = payload,
-  [types.UPDATE_SP_MULTI_MOD]: (state, { payload }) => state.hpsp.spMultiMod = payload,
+  [types.UPDATE_HP_ADD_MOD]: (state, { payload }) => {
+    state.hpsp.hpAddMod = payload;
+  },
+  [types.UPDATE_HP_MULTI_MOD]: (state, { payload }) => {
+    state.hpsp.hpMultiMod = payload;
+  },
+  [types.UPDATE_SP_ADD_MOD]: (state, { payload }) => {
+    state.hpsp.spAddMod = payload;
+  },
+  [types.UPDATE_SP_MULTI_MOD]: (state, { payload }) => {
+    state.hpsp.spMultiMod = payload;
+  },
 
   [types.UPDATE_BUFF_SKILL]: (state, { payload }) => {
     const { key, value } = payload;

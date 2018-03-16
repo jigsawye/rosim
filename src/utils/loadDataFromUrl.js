@@ -1,5 +1,5 @@
 import { parse } from 'query-string';
-import { loadSaveData } from '../actions';
+import loadSaveData from '../actions';
 
 export default ({ dispatch }) => {
   const { data } = parse(window.location.search);

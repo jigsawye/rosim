@@ -9,12 +9,12 @@ export const EXPANDED_SUPER_NOVICE = 'EXPANDED_SUPER_NOVICE';
 
 export const SWORDMAN = 'SWORDMAN';
 export const HIGH_SWORDMAN = 'HIGH_SWORDMAN';
-export const KNIGHT = 'KNIGHT'
-export const CRUSADER = 'CRUSADER'
-export const LORD_KNIGHT = 'LORD_KNIGHT'
-export const PALADIN = 'PALADIN'
-export const RUNE_KNIGHT = 'RUNE_KNIGHT'
-export const ROYAL_GUARD = 'ROYAL_GUARD'
+export const KNIGHT = 'KNIGHT';
+export const CRUSADER = 'CRUSADER';
+export const LORD_KNIGHT = 'LORD_KNIGHT';
+export const PALADIN = 'PALADIN';
+export const RUNE_KNIGHT = 'RUNE_KNIGHT';
+export const ROYAL_GUARD = 'ROYAL_GUARD';
 
 export const MAGE = 'MAGE';
 export const HIGH_MAGICIAN = 'HIGH_MAGICIAN';

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -8,7 +9,7 @@ import copy from 'copy-to-clipboard';
 
 import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
 import SaveInput from '../components/SaveLoad/SaveInput';
-import { loadSaveData } from '../actions';
+import loadSaveDataAction from '../actions';
 
 const SaveLoadContainer = styled.div`
   display: inline-block;
@@ -23,15 +24,22 @@ const SaveLoadContainer = styled.div`
   }
 `;
 
-const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
+const generateId = () => `_${Math.random().toString(36).substr(2, 9)}`;
 
 class SaveLoad extends Component {
-  state = {
-    archives: [],
-    visible: false,
-    copied: false,
-    saveName: '',
-  };
+  static propTypes = {
+    currentData: PropTypes.shape({
+      baseLevel: PropTypes.number.isRequired,
+      jobLevel: PropTypes.number.isRequired,
+      job: PropTypes.arrayOf(PropTypes.string).isRequired,
+      stats: PropTypes.object.isRequired,
+      otherStats: PropTypes.object.isRequired,
+      hpsp: PropTypes.object.isRequired,
+      aspd: PropTypes.object.isRequired,
+      skills: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }).isRequired,
+    loadSaveData: PropTypes.func.isRequired,
+  }
 
   constructor(prop) {
     super(prop);
@@ -45,11 +53,18 @@ class SaveLoad extends Component {
     this.state.archives = archives;
   }
 
+  state = {
+    archives: [],
+    visible: false,
+    copied: false,
+    saveName: '',
+  };
+
   componentDidUpdate() {
     localStorage.setItem('archives', JSON.stringify(this.state.archives));
   }
 
-  copiedText = () => this.state.copied ? '複製成功！' : '複製分享網址至剪貼板'
+  copiedText = () => (this.state.copied ? '複製成功！' : '複製分享網址至剪貼板')
 
   showModal = () => this.setState({ visible: true, saveName: '' })
 
@@ -91,7 +106,7 @@ class SaveLoad extends Component {
 
   resetCopied = () => this.setState({ copied: false })
 
-  copyToClipboard = ({ _id, name, ...data }) => {
+  handleCopyClick = ({ _id, name, ...data }) => {
     const jsonData = JSON.stringify(data);
     const base64Data = btoa(jsonData);
     const url = `${window.location.origin}?data=${base64Data}`;
@@ -100,9 +115,9 @@ class SaveLoad extends Component {
     this.setState({ copied: true });
   }
 
-  generateCurrentUrl = () => this.copyToClipboard(this.props.currentData)
+  generateCurrentUrl = () => this.handleCopyClick(this.props.currentData)
 
-  renderListItem = (item) => (
+  renderListItem = item => (
     <List.Item actions={this.renderListActions(item)}>
       <List.Item.Meta title={item.name} description={<ArchiveDescription item={item} />} />
     </List.Item>
@@ -117,11 +132,11 @@ class SaveLoad extends Component {
 
     return [
       <Tooltip title={this.copiedText()} onVisibleChange={this.resetCopied}>
-        <a onClick={() => this.copyToClipboard(item)}>Url</a>
+        <button onClick={() => this.handleCopyClick(item)}>Url</button>
       </Tooltip>,
       ...actions.map(({ title, text, onConfirm }) => (
         <Popconfirm placement="bottom" title={`你確定要${title}存檔嗎?`} onConfirm={onConfirm}>
-          <a>{text}</a>
+          <button>{text}</button>
         </Popconfirm>
       )),
     ];
@@ -136,7 +151,8 @@ class SaveLoad extends Component {
           width={600}
           visible={this.state.visible}
           onCancel={this.closeModal}
-          footer={<Button onClick={this.closeModal}>Close</Button>}>
+          footer={<Button onClick={this.closeModal}>Close</Button>}
+        >
           <SaveInput
             value={this.state.saveName}
             copiedText={this.copiedText()}
@@ -160,6 +176,8 @@ class SaveLoad extends Component {
 
 const mapStateToProps = state => ({ currentData: state });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ loadSaveData }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  loadSaveData: loadSaveDataAction,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveLoad);

@@ -1,17 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose, withState } from 'recompose';
 import styled from 'styled-components';
 import { InputNumber, Switch } from 'antd';
 import { round } from 'lodash';
 import { getAspdFrequency } from '../../utils/aspd';
 
+const AspdTip = ({ aspd }) => (
+  <div>
+    <p>每秒攻擊次數：{ getAspdFrequency(aspd) }</p>
+  </div>
+);
+
+AspdTip.propTypes = {
+  aspd: PropTypes.number.isRequired,
+};
+
 export const ASPD = {
   title: 'ASPD (攻擊速度)',
-  content: ({ aspd }) => (
-    <div>
-      <p>每秒攻擊次數：{ getAspdFrequency(aspd) }</p>
-    </div>
-  ),
+  content: AspdTip,
 };
 
 export const MaxHP = {
@@ -113,7 +120,7 @@ const CastTimePopover = withCastTime(({
   isSource,
   setSkillCastTime,
   setEquipCastTime,
-  setIsSource
+  setIsSource,
 }) => (
   <div>
     <p>以此百分比進行變詠減免</p>
@@ -122,13 +129,16 @@ const CastTimePopover = withCastTime(({
     </MarginDiv>
     <MarginDiv>
       <span>原始變詠 : </span>
-      <InputNumber size="small" min={0} max={30} value={skillCastTime} onChange={setSkillCastTime}/>
+      <InputNumber size="small" min={0} max={30} value={skillCastTime} onChange={setSkillCastTime} />
     </MarginDiv>
     <MarginDiv>
       <span>卡裝減免 : </span>
-      <InputNumber size="small" min={0} max={100} value={equipCastTime} onChange={setEquipCastTime}/>%
+      <InputNumber size="small" min={0} max={100} value={equipCastTime} onChange={setEquipCastTime} />%
     </MarginDiv>
-    <p>最終變詠 : {round(skillCastTime * (1 - equipCastTime / 100) * (isSource ? 0.6 : 1) * castTime, 2)}</p>
+    <p>
+      最終變詠 : {round(skillCastTime * (1 - (equipCastTime / 100)) *
+      (isSource ? 0.6 : 1) * castTime, 2)}
+    </p>
   </div>
 ));
 

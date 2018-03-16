@@ -51,7 +51,7 @@ const AppHeader = () => (
     <Row gutter={16}>
       <Col xs={24} md={6} lg={5} xxl={4}>
         <HomePageLink href="/">
-          <img src={AppLogo} alt="RoSim Logo"/>
+          <img src={AppLogo} alt="RoSim Logo" />
         </HomePageLink>
       </Col>
       <Col xs={0} md={18} lg={19} xxl={20}>

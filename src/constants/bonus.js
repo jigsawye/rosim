@@ -1,4 +1,5 @@
 import * as classes from './classes/classNames';
+
 export const statsMap = ['str', 'agi', 'vit', 'int', 'dex', 'luk'];
 
 export default [

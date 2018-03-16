@@ -3,13 +3,12 @@ import { Icon, Layout } from 'antd';
 
 const { Footer } = Layout;
 
+const Evan = () => <a href="https://github.com/jigsawye" rel="noopener noreferrer" target="_blank">Evan Ye</a>;
+
 const AppFooter = () => (
   <Footer style={{ textAlign: 'center' }}>
     <p>
-      Developed with <Icon type="heart" /> by <a
-        href="https://github.com/jigsawye"
-        rel="noopener noreferrer"
-        target="_blank">Evan Ye</a>.
+      Developed with <Icon type="heart" /> by <Evan />.
     </p>
     <p>
       <a href="https://github.com/jigsawye/rosim" rel="noopener noreferrer" target="_blank">

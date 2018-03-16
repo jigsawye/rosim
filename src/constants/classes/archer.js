@@ -1,5 +1,7 @@
-import { SECOND, TRANSCENDENT_SECOND, THIRD } from './classNames';
 import {
+  SECOND,
+  TRANSCENDENT_SECOND,
+  THIRD,
   ARCHER,
   HUNTER,
   BARD,
