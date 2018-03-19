@@ -43,14 +43,9 @@ class SaveLoad extends Component {
 
   constructor(prop) {
     super(prop);
-    let archives = [];
-    const savedArchives = localStorage.getItem('archives');
+    const archives = JSON.parse(localStorage.getItem('archives'));
 
-    if (savedArchives) {
-      archives = JSON.parse(savedArchives);
-    }
-
-    this.state.archives = archives;
+    this.state.archives = archives || [];
   }
 
   state = {
