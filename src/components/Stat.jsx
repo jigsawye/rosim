@@ -29,19 +29,21 @@ const Bonuse = styled.div`
   width: 10px;
 `;
 
-const Stats = ({ label, value, onChange, bonuse, buff, otherStat, onChangeOtherStat, statsRange }) => (
+const Stats = ({
+  label, value, onChange, bonuse, buff, otherStat, onChangeOtherStat, statsRange,
+}) => (
   <StatsContainer>
     <Popover title={StatTips[label].title} content={StatTips[label].content} placement="right">
       <Label>{upperCase(label)}</Label>
     </Popover>
     <Select style={{ width: 70 }} value={value} onChange={onChange}>
-      {statsRange.map((stat) => <Option key={stat}>{stat}</Option>)}
+      {statsRange.map(stat => <Option key={stat}>{stat}</Option>)}
     </Select>
     <Plus>+</Plus>
     <Bonuse>{bonuse + buff}</Bonuse>
     <Plus>+</Plus>
     <Select style={{ width: 70 }} value={otherStat} onChange={onChangeOtherStat}>
-      {range(0, 201).map((stat) => <Option key={stat}>{stat}</Option>)}
+      {range(0, 201).map(stat => <Option key={stat}>{stat}</Option>)}
     </Select>
   </StatsContainer>
 );
@@ -54,7 +56,7 @@ Stats.propTypes = {
   buff: PropTypes.number.isRequired,
   otherStat: PropTypes.number.isRequired,
   onChangeOtherStat: PropTypes.func.isRequired,
-  statsRange: PropTypes.array.isRequired,
+  statsRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 export default Stats;

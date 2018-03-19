@@ -1,5 +1,15 @@
-import { SECOND, TRANSCENDENT_SECOND, THIRD } from './classNames';
-import { MAGE, WIZARD, SAGE ,HIGH_WIZARD, PROFESSOR, WARLOCK, SORCERER } from './classNames';
+import {
+  SECOND,
+  TRANSCENDENT_SECOND,
+  THIRD,
+  MAGE,
+  WIZARD,
+  SAGE,
+  HIGH_WIZARD,
+  PROFESSOR,
+  WARLOCK,
+  SORCERER,
+} from './classNames';
 
 export default {
   value: MAGE,

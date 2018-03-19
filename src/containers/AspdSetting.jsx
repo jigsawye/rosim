@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Select, InputNumber, Radio, Popover } from 'antd';
@@ -6,15 +7,8 @@ import { find } from 'lodash';
 
 import { Card, Label, InputField } from '../components/Layouts/CardLayout';
 import { EquipMod, EquipFixed, SkillMod } from '../components/Tips/ASPD';
-import {
-  updateAspdWeaponId,
-  updateAspdLefthandId,
-  updateAspdEquipMod,
-  updateAspdEquipFixed,
-  updateAspdSkillMod,
-  updateAspdPotionMod,
-} from '../actions';
-import weapons from '../constants/weapons';
+import * as aspdActions from '../actions/aspd';
+import allWeapons from '../constants/weapons';
 import aspdTable from '../constants/aspdTable';
 
 const RadioGroup = Radio.Group;
@@ -30,7 +24,7 @@ const aspdPotionModOptions = [
 const AspdSetting = ({
   aspd,
   usableWeapons,
-  usableLefthand = [],
+  usableLefthand,
   updateAspdWeaponId,
   updateAspdLefthandId,
   updateAspdEquipMod,
@@ -44,9 +38,9 @@ const AspdSetting = ({
         <Col xs={12}>
           <Label>主要</Label>
           <Select style={{ width: 100 }} value={aspd.weaponId} onChange={updateAspdWeaponId}>
-            {usableWeapons.map(({ id, baseAspd }) => (
-              <Option key={id} value={id}>{find(weapons, { id }).name}</Option>)
-            )}
+            {usableWeapons.map(({ id }) => (
+              <Option key={id} value={id}>{find(allWeapons, { id }).name}</Option>
+            ))}
           </Select>
         </Col>
         <Col xs={12}>
@@ -55,12 +49,13 @@ const AspdSetting = ({
             style={{ width: 100 }}
             value={aspd.lefthandId}
             onChange={updateAspdLefthandId}
-            disabled={!find(weapons, ['id', aspd.weaponId]).lefthand}>
+            disabled={!find(allWeapons, ['id', aspd.weaponId]).lefthand}
+          >
             <Option key={100} value={100}>無</Option>
             <Option key={101} value={101}>盾</Option>
-            {usableLefthand.map(({ id, baseAspd }) => (
-              <Option key={id} value={id}>{find(weapons, { id }).name}</Option>)
-            )}
+            {usableLefthand.map(({ id }) => (
+              <Option key={id} value={id}>{find(allWeapons, { id }).name}</Option>
+            ))}
           </Select>
         </Col>
       </Row>
@@ -73,7 +68,8 @@ const AspdSetting = ({
         min={-100}
         max={200}
         value={aspd.equipMod}
-        onChange={updateAspdEquipMod} /> %
+        onChange={updateAspdEquipMod}
+      /> %
     </InputField>
     <InputField>
       <Popover title="技能提升攻速 (攻擊後延遲)" content={SkillMod}>
@@ -83,7 +79,8 @@ const AspdSetting = ({
         min={0}
         max={200}
         value={aspd.skillMod}
-        onChange={updateAspdSkillMod}/> %
+        onChange={updateAspdSkillMod}
+      /> %
     </InputField>
     <InputField>
       <Popover title="裝備提升 ASPD" content={EquipFixed}>
@@ -93,19 +90,45 @@ const AspdSetting = ({
         min={0}
         max={20}
         value={aspd.equipFixed}
-        onChange={updateAspdEquipFixed}/>
+        onChange={updateAspdEquipFixed}
+      />
     </InputField>
     <InputField>
       <RadioGroup
         options={aspdPotionModOptions}
         value={aspd.potionMod}
-        onChange={({ target }) => updateAspdPotionMod(target.value)}/>
+        onChange={({ target }) => updateAspdPotionMod(target.value)}
+      />
     </InputField>
   </Card>
 );
 
+const weaponShape = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  baseAspd: PropTypes.number.isRequired,
+});
+
+AspdSetting.propTypes = {
+  aspd: PropTypes.shape({
+    weaponId: PropTypes.number.isRequired,
+    lefthandId: PropTypes.number.isRequired,
+    equipFixed: PropTypes.number.isRequired,
+    equipMod: PropTypes.number.isRequired,
+    skillMod: PropTypes.number.isRequired,
+    potionMod: PropTypes.number.isRequired,
+  }).isRequired,
+  usableWeapons: PropTypes.arrayOf(weaponShape).isRequired,
+  usableLefthand: PropTypes.arrayOf(weaponShape).isRequired,
+  updateAspdWeaponId: PropTypes.func.isRequired,
+  updateAspdLefthandId: PropTypes.func.isRequired,
+  updateAspdEquipMod: PropTypes.func.isRequired,
+  updateAspdEquipFixed: PropTypes.func.isRequired,
+  updateAspdSkillMod: PropTypes.func.isRequired,
+  updateAspdPotionMod: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = ({ job, stats, aspd }) => {
-  const { weapons, lefthand } = find(aspdTable, ['job', job[1]]);
+  const { weapons, lefthand = [] } = find(aspdTable, ['job', job[1]]);
   return {
     stats,
     aspd,
@@ -114,13 +137,6 @@ const mapStateToProps = ({ job, stats, aspd }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  updateAspdWeaponId,
-  updateAspdLefthandId,
-  updateAspdEquipMod,
-  updateAspdEquipFixed,
-  updateAspdSkillMod,
-  updateAspdPotionMod,
-}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(aspdActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AspdSetting);

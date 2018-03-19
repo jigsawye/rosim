@@ -50,7 +50,7 @@ const withPathHandler = compose(
       if (key !== path) {
         push(key);
       }
-    }
+    },
   }),
 );
 

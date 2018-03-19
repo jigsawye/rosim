@@ -1,5 +1,15 @@
-import { SECOND, TRANSCENDENT_SECOND, THIRD } from './classNames';
-import { MERCHANT, BLACKSMITH, ALCHEMIST, WHITESMITH, CREATOR, MECHANIC, GENETIC } from './classNames';
+import {
+  SECOND,
+  TRANSCENDENT_SECOND,
+  THIRD,
+  MERCHANT,
+  BLACKSMITH,
+  ALCHEMIST,
+  WHITESMITH,
+  CREATOR,
+  MECHANIC,
+  GENETIC,
+} from './classNames';
 
 export default {
   value: MERCHANT,

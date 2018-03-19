@@ -1,5 +1,15 @@
-import { SECOND, TRANSCENDENT_SECOND, THIRD } from './classNames';
-import { ACOLYTE, PRIEST, MONK, HIGH_PRIEST, CHAMPION, ARCH_BISHOP, SURA } from './classNames';
+import {
+  SECOND,
+  TRANSCENDENT_SECOND,
+  THIRD,
+  ACOLYTE,
+  PRIEST,
+  MONK,
+  HIGH_PRIEST,
+  CHAMPION,
+  ARCH_BISHOP,
+  SURA,
+} from './classNames';
 
 export default {
   value: ACOLYTE,

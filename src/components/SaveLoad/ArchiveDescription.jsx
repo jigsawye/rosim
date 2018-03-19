@@ -18,11 +18,12 @@ const ArchiveDescription = ({ item }) => (
       Job: <BoldSpan>{getJobName(item.job)}</BoldSpan>
     </div>
     <div>
-    {Object.keys(item.stats).map(key =>
-      <span key={key}>
-        <span>{key.toUpperCase()} </span>
-        <BoldSpan>{item.stats[key]}</BoldSpan>
-      </span>)}
+      {Object.keys(item.stats).map(key => (
+        <span key={key}>
+          <span>{key.toUpperCase()} </span>
+          <BoldSpan>{item.stats[key]}</BoldSpan>
+        </span>
+      ))}
     </div>
   </div>
 );
@@ -33,7 +34,7 @@ ArchiveDescription.propTypes = {
     jobLevel: PropTypes.number.isRequired,
     job: PropTypes.array.isRequired,
     stats: PropTypes.object.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default ArchiveDescription;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Card, Select, Cascader, Popover } from 'antd';
@@ -7,7 +8,7 @@ import styled from 'styled-components';
 import { BaseLevelTips, JobLevelTips } from '../components/Tips/BaseInfo';
 import classes from '../constants/classes';
 import { getBaseLevelRange, getJobLevelRange } from '../constants/ranges';
-import { setBaseLevel, setJobLevel, setJob } from '../actions';
+import * as baseInfoActions from '../actions/baseInfo';
 
 const { Option } = Select;
 
@@ -51,6 +52,17 @@ const BaseInfo = ({
   </Card>
 );
 
+BaseInfo.propTypes = {
+  baseLevelRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  jobLevelRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  baseLevel: PropTypes.number.isRequired,
+  jobLevel: PropTypes.number.isRequired,
+  job: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  setBaseLevel: PropTypes.func.isRequired,
+  setJobLevel: PropTypes.func.isRequired,
+  setJob: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = ({ baseLevel, jobLevel, job }) => ({
   baseLevel,
   jobLevel,
@@ -59,11 +71,6 @@ const mapStateToProps = ({ baseLevel, jobLevel, job }) => ({
   jobLevelRange: getJobLevelRange(job),
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setBaseLevel, setJobLevel, setJob,
-}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(baseInfoActions, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BaseInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(BaseInfo);

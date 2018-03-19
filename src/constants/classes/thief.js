@@ -1,5 +1,15 @@
-import { SECOND, TRANSCENDENT_SECOND, THIRD } from './classNames';
-import { THIEF, ASSASSIN, ROGUE, ASSASSIN_CROSS, STALKER, GUILLOTINE_CROSS, SHADOW_CHASER } from './classNames';
+import {
+  SECOND,
+  TRANSCENDENT_SECOND,
+  THIRD,
+  THIEF,
+  ASSASSIN,
+  ROGUE,
+  ASSASSIN_CROSS,
+  STALKER,
+  GUILLOTINE_CROSS,
+  SHADOW_CHASER,
+} from './classNames';
 
 export default {
   value: THIEF,

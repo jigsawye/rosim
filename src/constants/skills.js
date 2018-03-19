@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { range } from 'lodash';
 
 const maxLevel10 = range(10, 0, -1);
