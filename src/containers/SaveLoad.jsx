@@ -127,11 +127,11 @@ class SaveLoad extends Component {
 
     return [
       <Tooltip title={this.copiedText()} onVisibleChange={this.resetCopied}>
-        <button onClick={() => this.handleCopyClick(item)}>Url</button>
+        <Button size="small" onClick={() => this.handleCopyClick(item)}>Url</Button>
       </Tooltip>,
       ...actions.map(({ title, text, onConfirm }) => (
         <Popconfirm placement="bottom" title={`你確定要${title}存檔嗎?`} onConfirm={onConfirm}>
-          <button>{text}</button>
+          <Button size="small">{text}</Button>
         </Popconfirm>
       )),
     ];
