@@ -12,7 +12,7 @@ import App from './components/App';
 import { unregister } from './registerServiceWorker';
 import loadDataFromUrl from './utils/loadDataFromUrl';
 
-Raven.config(process.env.SENTRY_DSN).install();
+Raven.config(process.env.REACT_APP_SENTRY_DSN).install();
 
 const store = createStore(
   reducer,

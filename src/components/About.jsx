@@ -26,7 +26,7 @@ const aboutWebsite = `
 若有能力也歡迎發 Pull Request 或是 Issue 討論。
 
 ### 改版訊息
-當前版本: **${process.env.version}**
+當前版本: **${process.env.REACT_APP_VERSION}**
 
 
 完整改版訊息請參閱 [Github Releases](https://github.com/jigsawye/rosim/releases)。
