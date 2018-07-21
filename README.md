@@ -3,13 +3,12 @@
 ![demo](images/demo.png)
 
 [![CircleCI](https://circleci.com/gh/jigsawye/rosim/tree/master.svg?style=svg)](https://circleci.com/gh/jigsawye/rosim/tree/master)
-[![Dependency Status](https://beta.gemnasium.com/badges/github.com/jigsawye/rosim.svg)](https://beta.gemnasium.com/projects/github.com/jigsawye/rosim)
 
 Build with React, Redux, antd, styled-components.
 
 ## Setup
 
-``` bash
+```bash
 # create your .env file
 cp .env.example .env
 
@@ -19,7 +18,7 @@ vim .env
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 yarn
 
@@ -29,4 +28,3 @@ yarn start
 # build for production with minification
 yarn build
 ```
-
