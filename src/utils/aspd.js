@@ -1,5 +1,6 @@
 import { find, floor } from 'lodash';
 import aspdTable from '../constants/aspdTable';
+import { additionalEquipModTable } from '../constants/aspdAdditional';
 
 export const getAspdFrequency = aspd => floor(50 / (200 - Number(aspd)), 2);
 
@@ -38,6 +39,7 @@ export default (job, agi, dex, aspd) => {
     equipFixed,
     skillMod,
     potionMod,
+    additionalMod,
   } = aspd;
   const { weapons, shieldAspd, lefthand = [] } = find(aspdTable, [
     'job',
@@ -58,11 +60,16 @@ export default (job, agi, dex, aspd) => {
   const agiModifier = getAgiModifier(hasLefthandWeapon, weaponId);
   const aspdPenalty = getAspdPenalty(hasLefthandWeapon, baseAspd);
 
+  const additionalEquipMod = additionalMod.reduce((acc, curr) => acc + additionalEquipModTable[curr], 0);
+
   const aspdA =
     baseAspd +
     lefthandPenalty +
     Math.sqrt(agi * agiModifier + ((dex * 11) / 60) * aspdPenalty);
   const aspdB = 200 - (200 - aspdA) * (1 - aspdModifier / 100);
-  const finalAspd = 195 - (195 - aspdB) * (1 - equipMod / 100) + equipFixed;
+  const finalAspd =
+    195 -
+    (195 - aspdB) * (1 - (equipMod + additionalEquipMod) / 100) +
+    equipFixed;
   return floor(finalAspd, 2);
 };

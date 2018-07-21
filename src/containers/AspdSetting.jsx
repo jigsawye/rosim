@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Select, InputNumber, Radio, Popover } from 'antd';
+import { Row, Col, Select, InputNumber, Radio, Popover, Checkbox } from 'antd';
 import { find } from 'lodash';
 
+import {
+  ENRICH_CELERMINE_JUICE,
+  SPARKLING_CANDY,
+} from '../constants/aspdAdditional';
 import { Card, Label, InputField } from '../components/Layouts/CardLayout';
 import { EquipMod, EquipFixed, SkillMod } from '../components/Tips/ASPD';
 import * as aspdActions from '../actions/aspd';
@@ -21,6 +25,11 @@ const aspdPotionModOptions = [
   { label: '菠色克藥水', value: 20 },
 ];
 
+const additiionalModOptions = [
+  { label: '攻速增加濃縮汁', value: ENRICH_CELERMINE_JUICE },
+  { label: '跳跳糖', value: SPARKLING_CANDY },
+];
+
 const AspdSetting = ({
   aspd,
   usableWeapons,
@@ -31,6 +40,7 @@ const AspdSetting = ({
   updateAspdEquipFixed,
   updateAspdSkillMod,
   updateAspdPotionMod,
+  updateAspdAdditialalMod,
 }) => (
   <Card title="ASPD Setting">
     <InputField>
@@ -114,6 +124,12 @@ const AspdSetting = ({
         onChange={({ target }) => updateAspdPotionMod(target.value)}
       />
     </InputField>
+    <InputField>
+      <Checkbox.Group
+        options={additiionalModOptions}
+        onChange={updateAspdAdditialalMod}
+      />
+    </InputField>
   </Card>
 );
 
@@ -139,6 +155,7 @@ AspdSetting.propTypes = {
   updateAspdEquipFixed: PropTypes.func.isRequired,
   updateAspdSkillMod: PropTypes.func.isRequired,
   updateAspdPotionMod: PropTypes.func.isRequired,
+  updateAspdAdditialalMod: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ job, stats, aspd }) => {

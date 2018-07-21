@@ -44,6 +44,7 @@ const initialState = {
     equipMod: 0,
     skillMod: 0,
     potionMod: 0,
+    additionalMod: [],
   },
   skills: [],
 };
@@ -112,6 +113,9 @@ export default handleActions(
     },
     [types.UPDATE_ASPD_POTION_MOD]: (state, { payload }) => {
       state.aspd.potionMod = payload;
+    },
+    [types.UPDATE_ASPD_ADDITIONAL_MOD]: (state, { payload }) => {
+      state.aspd.additionalMod = payload;
     },
 
     [types.UPDATE_HP_ADD_MOD]: (state, { payload }) => {
