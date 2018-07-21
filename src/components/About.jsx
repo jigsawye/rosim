@@ -6,7 +6,11 @@ import { Row, Col } from 'antd';
 
 import { Card } from './Layouts/CardLayout';
 
-const link = ({ href, children }) => <a href={href} target="_blank">{children}</a>;
+const link = ({ href, children }) => (
+  <a href={href} target="_blank">
+    {children}
+  </a>
+);
 link.propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
@@ -75,9 +79,18 @@ const About = () => (
       </Card>
       <Card title="關於作者">
         <ReactMarkdown source={aboutCreator} renderers={renderers} />
-        <p>如果你有餘力的話，歡迎資助我以讓我繼續開發此模擬器，有任何疑問歡迎寄信至：jigsaw.ye@gmail.com</p>
-        <a href="https://p.ecpay.com.tw/MeDs6" target="_blank" rel="noopener noreferrer">
-          <img alt="ecpay" src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" />
+        <p>
+          如果你有餘力的話，歡迎資助我以讓我繼續開發此模擬器，有任何疑問歡迎寄信至：jigsaw.ye@gmail.com
+        </p>
+        <a
+          href="https://p.ecpay.com.tw/MeDs6"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            alt="ecpay"
+            src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"
+          />
         </a>
       </Card>
     </Col>

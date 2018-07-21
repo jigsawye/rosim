@@ -43,9 +43,13 @@
     "deploy": "gh-pages -m 'auto commit [ci skip]' -d build"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.6",
     "babel-plugin-import": "^1.6.7",
     "babel-plugin-lodash": "^3.3.2",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "prettier": "^1.13.7",
     "react-app-rewire-eslint": "^0.2.3",
     "react-app-rewired": "^1.5.0"
   }

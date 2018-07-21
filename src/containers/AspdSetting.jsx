@@ -37,9 +37,15 @@ const AspdSetting = ({
       <Row>
         <Col xs={12}>
           <Label>主要</Label>
-          <Select style={{ width: 100 }} value={aspd.weaponId} onChange={updateAspdWeaponId}>
+          <Select
+            style={{ width: 100 }}
+            value={aspd.weaponId}
+            onChange={updateAspdWeaponId}
+          >
             {usableWeapons.map(({ id }) => (
-              <Option key={id} value={id}>{find(allWeapons, { id }).name}</Option>
+              <Option key={id} value={id}>
+                {find(allWeapons, { id }).name}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -51,10 +57,16 @@ const AspdSetting = ({
             onChange={updateAspdLefthandId}
             disabled={!find(allWeapons, ['id', aspd.weaponId]).lefthand}
           >
-            <Option key={100} value={100}>無</Option>
-            <Option key={101} value={101}>盾</Option>
+            <Option key={100} value={100}>
+              無
+            </Option>
+            <Option key={101} value={101}>
+              盾
+            </Option>
             {usableLefthand.map(({ id }) => (
-              <Option key={id} value={id}>{find(allWeapons, { id }).name}</Option>
+              <Option key={id} value={id}>
+                {find(allWeapons, { id }).name}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -69,7 +81,8 @@ const AspdSetting = ({
         max={200}
         value={aspd.equipMod}
         onChange={updateAspdEquipMod}
-      /> %
+      />{' '}
+      %
     </InputField>
     <InputField>
       <Popover title="技能提升攻速 (攻擊後延遲)" content={SkillMod}>
@@ -80,7 +93,8 @@ const AspdSetting = ({
         max={200}
         value={aspd.skillMod}
         onChange={updateAspdSkillMod}
-      /> %
+      />{' '}
+      %
     </InputField>
     <InputField>
       <Popover title="裝備提升 ASPD" content={EquipFixed}>
@@ -137,6 +151,10 @@ const mapStateToProps = ({ job, stats, aspd }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators(aspdActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(aspdActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AspdSetting);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AspdSetting);

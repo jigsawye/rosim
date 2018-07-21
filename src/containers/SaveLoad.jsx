@@ -24,7 +24,10 @@ const SaveLoadContainer = styled.div`
   }
 `;
 
-const generateId = () => `_${Math.random().toString(36).substr(2, 9)}`;
+const generateId = () =>
+  `_${Math.random()
+    .toString(36)
+    .substr(2, 9)}`;
 
 class SaveLoad extends Component {
   static propTypes = {
@@ -39,7 +42,7 @@ class SaveLoad extends Component {
       skills: PropTypes.arrayOf(PropTypes.object).isRequired,
     }).isRequired,
     loadSaveData: PropTypes.func.isRequired,
-  }
+  };
 
   constructor(prop) {
     super(prop);
@@ -59,13 +62,14 @@ class SaveLoad extends Component {
     localStorage.setItem('archives', JSON.stringify(this.state.archives));
   }
 
-  copiedText = () => (this.state.copied ? '複製成功！' : '複製分享網址至剪貼板')
+  copiedText = () =>
+    this.state.copied ? '複製成功！' : '複製分享網址至剪貼板';
 
-  showModal = () => this.setState({ visible: true, saveName: '' })
+  showModal = () => this.setState({ visible: true, saveName: '' });
 
-  closeModal = () => this.setState({ visible: false })
+  closeModal = () => this.setState({ visible: false });
 
-  updateSaveName = ({ target }) => this.setState({ saveName: target.value })
+  updateSaveName = ({ target }) => this.setState({ saveName: target.value });
 
   saveData = () => {
     if (this.state.saveName === '') {
@@ -82,7 +86,7 @@ class SaveLoad extends Component {
       archives: [...this.state.archives, data],
       saveName: '',
     });
-  }
+  };
 
   saveExistsData = ({ _id, name }) => {
     const { archives } = this.state;
@@ -90,16 +94,16 @@ class SaveLoad extends Component {
     archives[index] = { ...this.props.currentData, _id, name };
 
     this.setState({ archives });
-  }
+  };
 
-  loadData = data => this.props.loadSaveData(data)
+  loadData = data => this.props.loadSaveData(data);
 
   deleteData = ({ _id }) => {
     const archives = reject(this.state.archives, { _id });
     this.setState({ archives });
-  }
+  };
 
-  resetCopied = () => this.setState({ copied: false })
+  resetCopied = () => this.setState({ copied: false });
 
   handleCopyClick = ({ _id, name, ...data }) => {
     const jsonData = JSON.stringify(data);
@@ -108,39 +112,58 @@ class SaveLoad extends Component {
 
     copy(url);
     this.setState({ copied: true });
-  }
+  };
 
-  generateCurrentUrl = () => this.handleCopyClick(this.props.currentData)
+  generateCurrentUrl = () => this.handleCopyClick(this.props.currentData);
 
   renderListItem = item => (
     <List.Item actions={this.renderListActions(item)}>
-      <List.Item.Meta title={item.name} description={<ArchiveDescription item={item} />} />
+      <List.Item.Meta
+        title={item.name}
+        description={<ArchiveDescription item={item} />}
+      />
     </List.Item>
-  )
+  );
 
-  renderListActions = (item) => {
+  renderListActions = item => {
     const actions = [
-      { title: '覆蓋原', text: 'Save', onConfirm: () => this.saveExistsData(item) },
+      {
+        title: '覆蓋原',
+        text: 'Save',
+        onConfirm: () => this.saveExistsData(item),
+      },
       { title: '載入此', text: 'Load', onConfirm: () => this.loadData(item) },
-      { title: '刪除此', text: 'Delete', onConfirm: () => this.deleteData(item) },
+      {
+        title: '刪除此',
+        text: 'Delete',
+        onConfirm: () => this.deleteData(item),
+      },
     ];
 
     return [
       <Tooltip title={this.copiedText()} onVisibleChange={this.resetCopied}>
-        <Button size="small" onClick={() => this.handleCopyClick(item)}>Url</Button>
+        <Button size="small" onClick={() => this.handleCopyClick(item)}>
+          Url
+        </Button>
       </Tooltip>,
       ...actions.map(({ title, text, onConfirm }) => (
-        <Popconfirm placement="bottom" title={`你確定要${title}存檔嗎?`} onConfirm={onConfirm}>
+        <Popconfirm
+          placement="bottom"
+          title={`你確定要${title}存檔嗎?`}
+          onConfirm={onConfirm}
+        >
           <Button size="small">{text}</Button>
         </Popconfirm>
       )),
     ];
-  }
+  };
 
   render() {
     return (
       <SaveLoadContainer>
-        <Button icon="save" type="sm" onClick={this.showModal}>Save / Load</Button>
+        <Button icon="save" type="sm" onClick={this.showModal}>
+          Save / Load
+        </Button>
         <Modal
           title="Save / Load"
           width={600}
@@ -171,8 +194,15 @@ class SaveLoad extends Component {
 
 const mapStateToProps = state => ({ currentData: state });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  loadSaveData: loadSaveDataAction,
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      loadSaveData: loadSaveDataAction,
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SaveLoad);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SaveLoad);

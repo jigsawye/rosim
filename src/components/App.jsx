@@ -11,7 +11,7 @@ import About from './About';
 const { Content } = Layout;
 
 const AppContent = styled(Content)`
-  @media (min-width:992px) {
+  @media (min-width: 992px) {
     padding: 30px 50px;
   }
   min-height: calc(100vh - 182px);

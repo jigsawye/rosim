@@ -10,7 +10,7 @@ const StatusPointLabel = styled.span`
 
 const StatusPoint = styled.span`
   background: ${props => (props.point < 0 ? '#F5222D' : '#232323')};
-  color: #FFF;
+  color: #fff;
   padding: 4px 8px;
   border-radius: 7px;
 `;

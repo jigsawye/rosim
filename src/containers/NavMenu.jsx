@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers, withProps, setPropTypes, pure } from 'recompose';
+import {
+  compose,
+  withHandlers,
+  withProps,
+  setPropTypes,
+  pure,
+} from 'recompose';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { Menu } from 'antd';
@@ -38,7 +44,9 @@ const withPathHandler = compose(
   pure,
   withRouter,
   withProps(({ location, history, mode = 'vertical' }) => ({
-    path: location.pathname, push: history.push, mode,
+    path: location.pathname,
+    push: history.push,
+    mode,
   })),
   setPropTypes({
     path: PropTypes.string.isRequired,
@@ -51,7 +59,7 @@ const withPathHandler = compose(
         push(key);
       }
     },
-  }),
+  })
 );
 
 const NavMenu = withPathHandler(({ mode, path, pushPath }) => (
