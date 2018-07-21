@@ -42,15 +42,6 @@ const aboutWebsite = `
 - 感謝 [琉璃廣](https://home.gamer.com.tw/homeindex.php?owner=rorigo) 的公式分享
 - 感謝 [白龍](https://home.gamer.com.tw/homeindex.php?owner=k99999532) 的說明文字授權
 
-### 開發技術
-
-- 採用 [React](https://reactjs.org/) + [Redux](https://redux.js.org/) 開發
-- UI Framework 使用 [antd](https://ant.design)
-- 部署空間使用 [Github pages](https://pages.github.com/)
-- Error Tracking 使用 [Sentry](https://sentry.io/)
-- 使用 [CircleCI](https://circleci.com/gh/jigsawye/rosim/tree/master) 進行 auto deploy
-- 使用 [Gemnasium](https://beta.gemnasium.com/projects/github.com/jigsawye/rosim) 做 Depanedencies track
-
 ### 資料來源
 - [iRO Wiki](https://irowiki.org/wiki/Main_Page)
 
@@ -58,7 +49,7 @@ const aboutWebsite = `
 `;
 
 const aboutCreator = `
-RO 起源玩家，遊戲ID: \`Sociopath\`
+RO 起源玩家，~~遊戲ID: \`Sociopath\`~~ 已退坑
 
 其餘請直接參考我的 [個人網站](https://jigsawye.com/about/)
 `;
