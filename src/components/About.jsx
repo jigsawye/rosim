@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Row, Col } from 'antd';
 
+import { version } from '../../package.json';
 import { Card } from './Layouts/CardLayout';
 
 const link = ({ href, children }) => (
@@ -30,8 +31,7 @@ const aboutWebsite = `
 若有能力也歡迎發 Pull Request 或是 Issue 討論。
 
 ### 改版訊息
-當前版本: **${process.env.REACT_APP_VERSION}**
-
+當前版本: **${version}**
 
 完整改版訊息請參閱 [Github Releases](https://github.com/jigsawye/rosim/releases)。
 
