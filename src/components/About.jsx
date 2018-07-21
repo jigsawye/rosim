@@ -1,9 +1,9 @@
-/* eslint react/no-unknown-property: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Row, Col } from 'antd';
 
+import { version } from '../../package.json';
 import { Card } from './Layouts/CardLayout';
 
 const link = ({ href, children }) => (
@@ -21,7 +21,9 @@ const renderers = { link };
 const aboutWebsite = `
 為何會有此模擬器請參考[巴哈原文](https://forum.gamer.com.tw/C.php?bsn=4212&snA=416122&tnum=7)，總之這是一個在過年沒 RO 玩之下的產物。
 
-只要我還沒離開 RO 這款遊戲，就會慢慢更新此模擬器，讓功能趨近於完整。
+~~只要我還沒離開 RO 這款遊戲，就會慢慢更新此模擬器，讓功能趨近於完整。~~
+
+雖然已經退坑了，不過還是會慢慢更新。
 
 如果有任何建議歡迎加入 Discord 討論，或是透過巴哈私訊我。
 
@@ -30,8 +32,7 @@ const aboutWebsite = `
 若有能力也歡迎發 Pull Request 或是 Issue 討論。
 
 ### 改版訊息
-當前版本: **${process.env.REACT_APP_VERSION}**
-
+當前版本: **${version}**
 
 完整改版訊息請參閱 [Github Releases](https://github.com/jigsawye/rosim/releases)。
 
@@ -41,6 +42,7 @@ const aboutWebsite = `
 - 感謝 [川_@](https://home.gamer.com.tw/homeindex.php?owner=hsin0604) 的建議及錯誤回報
 - 感謝 [琉璃廣](https://home.gamer.com.tw/homeindex.php?owner=rorigo) 的公式分享
 - 感謝 [白龍](https://home.gamer.com.tw/homeindex.php?owner=k99999532) 的說明文字授權
+- 感謝 [琥雨心](https://home.gamer.com.tw/homeindex.php?owner=d790012) 的建議及錯誤回報
 
 ### 資料來源
 - [iRO Wiki](https://irowiki.org/wiki/Main_Page)
@@ -64,6 +66,7 @@ const About = () => (
           src="https://discordapp.com/widget?id=416465528442454026&theme=dark"
           width="100%"
           height="500"
+          // eslint-disable-next-line react/no-unknown-property
           allowtransparency="true"
           frameBorder="0"
         />

@@ -30,6 +30,7 @@ export default (state, { payload }) => {
     equipMod: defaultTo(aspd.equltmentsAddition, aspd.equipMod),
     skillMod: defaultTo(aspd.skillsAddition, aspd.skillMod),
     potionMod: defaultTo(aspd.potionAddition, aspd.potionMod),
+    additionalMod: defaultTo(aspd.additionalMod, []),
   };
   state.skills = skills;
 };
