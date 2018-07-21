@@ -1,4 +1,3 @@
-/* eslint react/no-unknown-property: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
@@ -64,6 +63,7 @@ const About = () => (
           src="https://discordapp.com/widget?id=416465528442454026&theme=dark"
           width="100%"
           height="500"
+          // eslint-disable-next-line react/no-unknown-property
           allowtransparency="true"
           frameBorder="0"
         />
