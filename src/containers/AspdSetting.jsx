@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Select, InputNumber, Radio, Popover } from 'antd';
+import { Row, Col, Select, InputNumber, Radio, Popover, Checkbox } from 'antd';
 import { find } from 'lodash';
 
+import {
+  ENRICH_CELERMINE_JUICE,
+  SPARKLING_CANDY,
+} from '../constants/aspdAdditional';
 import { Card, Label, InputField } from '../components/Layouts/CardLayout';
 import { EquipMod, EquipFixed, SkillMod } from '../components/Tips/ASPD';
 import * as aspdActions from '../actions/aspd';
@@ -21,6 +25,11 @@ const aspdPotionModOptions = [
   { label: '菠色克藥水', value: 20 },
 ];
 
+const additiionalModOptions = [
+  { label: '攻速增加濃縮汁', value: ENRICH_CELERMINE_JUICE },
+  { label: '跳跳糖', value: SPARKLING_CANDY },
+];
+
 const AspdSetting = ({
   aspd,
   usableWeapons,
@@ -31,15 +40,22 @@ const AspdSetting = ({
   updateAspdEquipFixed,
   updateAspdSkillMod,
   updateAspdPotionMod,
+  updateAspdAdditialalMod,
 }) => (
   <Card title="ASPD Setting">
     <InputField>
       <Row>
         <Col xs={12}>
           <Label>主要</Label>
-          <Select style={{ width: 100 }} value={aspd.weaponId} onChange={updateAspdWeaponId}>
+          <Select
+            style={{ width: 100 }}
+            value={aspd.weaponId}
+            onChange={updateAspdWeaponId}
+          >
             {usableWeapons.map(({ id }) => (
-              <Option key={id} value={id}>{find(allWeapons, { id }).name}</Option>
+              <Option key={id} value={id}>
+                {find(allWeapons, { id }).name}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -51,10 +67,16 @@ const AspdSetting = ({
             onChange={updateAspdLefthandId}
             disabled={!find(allWeapons, ['id', aspd.weaponId]).lefthand}
           >
-            <Option key={100} value={100}>無</Option>
-            <Option key={101} value={101}>盾</Option>
+            <Option key={100} value={100}>
+              無
+            </Option>
+            <Option key={101} value={101}>
+              盾
+            </Option>
             {usableLefthand.map(({ id }) => (
-              <Option key={id} value={id}>{find(allWeapons, { id }).name}</Option>
+              <Option key={id} value={id}>
+                {find(allWeapons, { id }).name}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -69,7 +91,8 @@ const AspdSetting = ({
         max={200}
         value={aspd.equipMod}
         onChange={updateAspdEquipMod}
-      /> %
+      />{' '}
+      %
     </InputField>
     <InputField>
       <Popover title="技能提升攻速 (攻擊後延遲)" content={SkillMod}>
@@ -80,7 +103,8 @@ const AspdSetting = ({
         max={200}
         value={aspd.skillMod}
         onChange={updateAspdSkillMod}
-      /> %
+      />{' '}
+      %
     </InputField>
     <InputField>
       <Popover title="裝備提升 ASPD" content={EquipFixed}>
@@ -98,6 +122,12 @@ const AspdSetting = ({
         options={aspdPotionModOptions}
         value={aspd.potionMod}
         onChange={({ target }) => updateAspdPotionMod(target.value)}
+      />
+    </InputField>
+    <InputField>
+      <Checkbox.Group
+        options={additiionalModOptions}
+        onChange={updateAspdAdditialalMod}
       />
     </InputField>
   </Card>
@@ -125,6 +155,7 @@ AspdSetting.propTypes = {
   updateAspdEquipFixed: PropTypes.func.isRequired,
   updateAspdSkillMod: PropTypes.func.isRequired,
   updateAspdPotionMod: PropTypes.func.isRequired,
+  updateAspdAdditialalMod: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ job, stats, aspd }) => {
@@ -137,6 +168,10 @@ const mapStateToProps = ({ job, stats, aspd }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators(aspdActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(aspdActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AspdSetting);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AspdSetting);

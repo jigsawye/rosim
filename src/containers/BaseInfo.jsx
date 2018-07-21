@@ -29,7 +29,11 @@ const BaseInfo = ({
   <Card title="Base Info" style={{ marginTop: 15 }}>
     <Row gutter={16}>
       <Col span={7}>
-        <Popover title="Base Level (基本等級)" content={BaseLevelTips} placement="bottomLeft">
+        <Popover
+          title="Base Level (基本等級)"
+          content={BaseLevelTips}
+          placement="bottomLeft"
+        >
           <Label>Lv.</Label>
         </Popover>
         <Select style={{ width: 70 }} value={baseLevel} onChange={setBaseLevel}>
@@ -37,7 +41,11 @@ const BaseInfo = ({
         </Select>
       </Col>
       <Col span={7}>
-        <Popover title="Job Level (職業等級)" content={JobLevelTips} placement="bottom">
+        <Popover
+          title="Job Level (職業等級)"
+          content={JobLevelTips}
+          placement="bottom"
+        >
           <Label>Job Lv.</Label>
         </Popover>
         <Select style={{ width: 70 }} value={jobLevel} onChange={setJobLevel}>
@@ -46,7 +54,12 @@ const BaseInfo = ({
       </Col>
       <Col span={10}>
         <Label>Job</Label>
-        <Cascader options={classes} value={job} onChange={setJob} allowClear={false} />
+        <Cascader
+          options={classes}
+          value={job}
+          onChange={setJob}
+          allowClear={false}
+        />
       </Col>
     </Row>
   </Card>
@@ -71,6 +84,10 @@ const mapStateToProps = ({ baseLevel, jobLevel, job }) => ({
   jobLevelRange: getJobLevelRange(job),
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(baseInfoActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(baseInfoActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(BaseInfo);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BaseInfo);

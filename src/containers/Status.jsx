@@ -8,7 +8,11 @@ import { Card } from '../components/Layouts/CardLayout';
 import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
 import * as statsActions from '../actions/stats';
-import { getRemainingStatsPoint, getJobBonusStats, getSkillBuffStats } from '../utils/stats';
+import {
+  getRemainingStatsPoint,
+  getJobBonusStats,
+  getSkillBuffStats,
+} from '../utils/stats';
 import { getStatsRange } from '../constants/ranges';
 
 const Status = ({
@@ -61,7 +65,12 @@ Status.propTypes = {
 };
 
 const mapStateToProps = ({
-  stats, otherStats, baseLevel, jobLevel, job, skills,
+  stats,
+  otherStats,
+  baseLevel,
+  jobLevel,
+  job,
+  skills,
 }) => ({
   stats,
   otherStats,
@@ -71,9 +80,10 @@ const mapStateToProps = ({
   remainingPoint: getRemainingStatsPoint(baseLevel, stats, job),
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(statsActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(statsActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Status);

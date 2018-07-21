@@ -8,7 +8,7 @@ import { getAspdFrequency } from '../../utils/aspd';
 
 const AspdTip = ({ aspd }) => (
   <div>
-    <p>每秒攻擊次數：{ getAspdFrequency(aspd) }</p>
+    <p>每秒攻擊次數：{getAspdFrequency(aspd)}</p>
   </div>
 );
 
@@ -23,16 +23,12 @@ export const ASPD = {
 
 export const MaxHP = {
   title: 'Max HP (最大生命值)',
-  content: () => (
-    <div>角色之最大生命值</div>
-  ),
+  content: () => <div>角色之最大生命值</div>,
 };
 
 export const MaxSP = {
   title: 'Max SP (最大魔力值)',
-  content: () => (
-    <div>角色之最大魔力值</div>
-  ),
+  content: () => <div>角色之最大魔力值</div>,
 };
 
 export const ATK = {
@@ -110,37 +106,57 @@ const MarginDiv = styled.div`
 const withCastTime = compose(
   withState('skillCastTime', 'setSkillCastTime', 0),
   withState('equipCastTime', 'setEquipCastTime', 0),
-  withState('isSource', 'setIsSource', true),
+  withState('isSource', 'setIsSource', true)
 );
 
-const CastTimePopover = withCastTime(({
-  castTime,
-  skillCastTime,
-  equipCastTime,
-  isSource,
-  setSkillCastTime,
-  setEquipCastTime,
-  setIsSource,
-}) => (
-  <div>
-    <p>以此百分比進行變詠減免</p>
-    <MarginDiv>
-      起源 <Switch size="small" checked={isSource} onChange={setIsSource} />
-    </MarginDiv>
-    <MarginDiv>
-      <span>原始變詠 : </span>
-      <InputNumber size="small" min={0} max={30} value={skillCastTime} onChange={setSkillCastTime} />
-    </MarginDiv>
-    <MarginDiv>
-      <span>卡裝減免 : </span>
-      <InputNumber size="small" min={0} max={100} value={equipCastTime} onChange={setEquipCastTime} />%
-    </MarginDiv>
-    <p>
-      最終變詠 : {round(skillCastTime * (1 - (equipCastTime / 100)) *
-      (isSource ? 0.6 : 1) * castTime, 2)}
-    </p>
-  </div>
-));
+const CastTimePopover = withCastTime(
+  ({
+    castTime,
+    skillCastTime,
+    equipCastTime,
+    isSource,
+    setSkillCastTime,
+    setEquipCastTime,
+    setIsSource,
+  }) => (
+    <div>
+      <p>以此百分比進行變詠減免</p>
+      <MarginDiv>
+        起源 <Switch size="small" checked={isSource} onChange={setIsSource} />
+      </MarginDiv>
+      <MarginDiv>
+        <span>原始變詠 : </span>
+        <InputNumber
+          size="small"
+          min={0}
+          max={30}
+          value={skillCastTime}
+          onChange={setSkillCastTime}
+        />
+      </MarginDiv>
+      <MarginDiv>
+        <span>卡裝減免 : </span>
+        <InputNumber
+          size="small"
+          min={0}
+          max={100}
+          value={equipCastTime}
+          onChange={setEquipCastTime}
+        />%
+      </MarginDiv>
+      <p>
+        最終變詠 :{' '}
+        {round(
+          skillCastTime *
+            (1 - equipCastTime / 100) *
+            (isSource ? 0.6 : 1) *
+            castTime,
+          2
+        )}
+      </p>
+    </div>
+  )
+);
 
 export const CastTime = {
   title: 'Case Time (詠唱時間)',

@@ -45,7 +45,12 @@ const MenuBar = styled(Icon)`
 
 const AppHeader = () => (
   <RoSimHeader>
-    <Popover overlayClassName="popover-menu" placement="bottomRight" content={<NavMenu />} trigger="click">
+    <Popover
+      overlayClassName="popover-menu"
+      placement="bottomRight"
+      content={<NavMenu />}
+      trigger="click"
+    >
       <MenuBar type="bars" />
     </Popover>
     <Row gutter={16}>

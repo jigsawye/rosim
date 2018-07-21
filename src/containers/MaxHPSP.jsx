@@ -5,11 +5,20 @@ import { bindActionCreators } from 'redux';
 import { InputNumber, Popover } from 'antd';
 
 import { Card, Label, InputField } from '../components/Layouts/CardLayout';
-import { HpAddMod, HpMultiMod, SpAddMod, SpMultiMod } from '../components/Tips/MaxHPSP';
+import {
+  HpAddMod,
+  HpMultiMod,
+  SpAddMod,
+  SpMultiMod,
+} from '../components/Tips/MaxHPSP';
 import * as hpspActions from '../actions/hpsp';
 
 const MaxHPSP = ({
-  hpsp, updateHpAddMod, updateHpMultiMod, updateSpAddMod, updateSpMultiMod,
+  hpsp,
+  updateHpAddMod,
+  updateHpMultiMod,
+  updateSpAddMod,
+  updateSpMultiMod,
 }) => (
   <Card title="Max HP & Max SP">
     <InputField>
@@ -24,7 +33,11 @@ const MaxHPSP = ({
       />
     </InputField>
     <InputField>
-      <Popover title="提升 Max Hp 的百分比" content={HpMultiMod} placement="bottom">
+      <Popover
+        title="提升 Max Hp 的百分比"
+        content={HpMultiMod}
+        placement="bottom"
+      >
         <Label>Max HP 提升</Label>
       </Popover>
       <InputNumber
@@ -32,7 +45,8 @@ const MaxHPSP = ({
         max={400}
         value={hpsp.hpMultiMod}
         onChange={updateHpMultiMod}
-      /> %
+      />{' '}
+      %
     </InputField>
     <InputField>
       <Popover title="提升 Max Sp 的數值" content={SpAddMod} placement="bottom">
@@ -46,7 +60,11 @@ const MaxHPSP = ({
       />
     </InputField>
     <InputField>
-      <Popover title="提升 Max Sp 的百分比" content={SpMultiMod} placement="bottom">
+      <Popover
+        title="提升 Max Sp 的百分比"
+        content={SpMultiMod}
+        placement="bottom"
+      >
         <Label>Max SP 提升</Label>
       </Popover>
       <InputNumber
@@ -54,7 +72,8 @@ const MaxHPSP = ({
         max={400}
         value={hpsp.spMultiMod}
         onChange={updateSpMultiMod}
-      /> %
+      />{' '}
+      %
     </InputField>
   </Card>
 );
@@ -74,6 +93,10 @@ MaxHPSP.propTypes = {
 
 const mapStateToProps = ({ hpsp }) => ({ hpsp });
 
-const mapDispatchToProps = dispatch => bindActionCreators(hpspActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(hpspActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MaxHPSP);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MaxHPSP);

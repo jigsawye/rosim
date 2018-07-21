@@ -14,28 +14,33 @@ const { Option } = Select;
 const SkillBuff = ({ getBuffVelue, updateBuffSkill }) => (
   <Card title="Skill Buffs">
     <Row>
-      {acolyteSkills.map(({
-        key, name, maxLevel, isToggle = false,
-      }) => {
+      {acolyteSkills.map(({ key, name, maxLevel, isToggle = false }) => {
         const buffValue = getBuffVelue(key);
         return (
           <Col key={key} xs={12}>
             <InputField>
               <Label>{name}</Label>
-              {isToggle ?
+              {isToggle ? (
                 <Switch
                   checked={buffValue}
                   onChange={checked => updateBuffSkill({ key, value: checked })}
-                /> :
+                />
+              ) : (
                 <Select
                   style={{ width: 70 }}
                   value={buffValue || 0}
                   onChange={level => updateBuffSkill({ key, value: level })}
                 >
-                  <Option key={0} value={0}>off</Option>
-                  {maxLevel.map(level => <Option key={level} value={level}>{level}</Option>)}
+                  <Option key={0} value={0}>
+                    off
+                  </Option>
+                  {maxLevel.map(level => (
+                    <Option key={level} value={level}>
+                      {level}
+                    </Option>
+                  ))}
                 </Select>
-              }
+              )}
             </InputField>
           </Col>
         );
@@ -50,14 +55,21 @@ SkillBuff.propTypes = {
 };
 
 const mapStateToProps = ({ skills }) => ({
-  getBuffVelue: (key) => {
+  getBuffVelue: key => {
     const skill = find(skills, { key });
     return skill ? skill.value : false;
   },
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  updateBuffSkill: skillActions,
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      updateBuffSkill: skillActions,
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SkillBuff);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SkillBuff);

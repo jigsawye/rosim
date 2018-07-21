@@ -9,14 +9,13 @@ import createRavenMiddleware from 'raven-for-redux';
 
 import reducer from './reducers';
 import App from './components/App';
-import { unregister } from './registerServiceWorker';
 import loadDataFromUrl from './utils/loadDataFromUrl';
 
 Raven.config(process.env.REACT_APP_SENTRY_DSN).install();
 
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(createRavenMiddleware(Raven))),
+  composeWithDevTools(applyMiddleware(createRavenMiddleware(Raven)))
 );
 
 loadDataFromUrl(store);
@@ -25,7 +24,5 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
-
-unregister();
