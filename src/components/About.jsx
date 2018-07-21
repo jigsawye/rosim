@@ -21,7 +21,9 @@ const renderers = { link };
 const aboutWebsite = `
 為何會有此模擬器請參考[巴哈原文](https://forum.gamer.com.tw/C.php?bsn=4212&snA=416122&tnum=7)，總之這是一個在過年沒 RO 玩之下的產物。
 
-只要我還沒離開 RO 這款遊戲，就會慢慢更新此模擬器，讓功能趨近於完整。
+~~只要我還沒離開 RO 這款遊戲，就會慢慢更新此模擬器，讓功能趨近於完整。~~
+
+雖然已經退坑了，不過還是會慢慢更新。
 
 如果有任何建議歡迎加入 Discord 討論，或是透過巴哈私訊我。
 
@@ -40,6 +42,7 @@ const aboutWebsite = `
 - 感謝 [川_@](https://home.gamer.com.tw/homeindex.php?owner=hsin0604) 的建議及錯誤回報
 - 感謝 [琉璃廣](https://home.gamer.com.tw/homeindex.php?owner=rorigo) 的公式分享
 - 感謝 [白龍](https://home.gamer.com.tw/homeindex.php?owner=k99999532) 的說明文字授權
+- 感謝 [琥雨心](https://home.gamer.com.tw/homeindex.php?owner=d790012) 的建議及錯誤回報
 
 ### 資料來源
 - [iRO Wiki](https://irowiki.org/wiki/Main_Page)
