@@ -1,9 +1,10 @@
-import { range, mapValues, find, floor } from 'lodash';
+import { find, floor, mapValues, range } from 'lodash';
 import { reduce } from 'lodash/fp';
+
 import jobStatBonus, { statsMap } from '../constants/bonus';
-import { getJobType } from '../constants/classes';
 import { SECOND } from '../constants/classes/classNames';
 import { acolyteSkills } from '../constants/skills';
+import { getJobType } from '../constants/classes';
 
 const initialStats = () => ({
   str: 0,
@@ -19,7 +20,8 @@ export const getAvailableStatsPoint = (level, isTranscendent) =>
     .map(lv => {
       if (lv < 100) {
         return floor(lv / 5 + 3);
-      } else if (lv < 151) {
+      }
+      if (lv < 151) {
         return floor(lv / 10 + 13);
       }
 
@@ -48,11 +50,13 @@ export const getRemainingStatsPoint = (level, stats, job) => {
 
 export const getJobBonusStats = (jobLevel, job) => {
   const jobBonus = find(jobStatBonus, ['key', job[1]]);
-  return jobBonus.bonus.filter(r => r[0] <= jobLevel).reduce((prev, next) => {
-    const nextBouns = { ...prev };
-    nextBouns[statsMap[next[1]]] += 1;
-    return nextBouns;
-  }, initialStats());
+  return jobBonus.bonus
+    .filter(r => r[0] <= jobLevel)
+    .reduce((prev, next) => {
+      const nextBouns = { ...prev };
+      nextBouns[statsMap[next[1]]] += 1;
+      return nextBouns;
+    }, initialStats());
 };
 
 export const getSkillBuffStats = reduce((status, { key, value }) => {

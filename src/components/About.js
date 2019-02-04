@@ -1,19 +1,20 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Row, Col } from 'antd';
+import { Col, Row } from 'antd';
 
 import { version } from '../../package.json';
+
 import { Card } from './Layouts/CardLayout';
 
 const link = ({ href, children }) => (
-  <a href={href} target="_blank">
+  <a href={href} target="_blank" rel="noopener noreferrer">
     {children}
   </a>
 );
 link.propTypes = {
-  href: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 const renderers = { link };
@@ -61,15 +62,6 @@ const About = () => (
     <Col xs={24} lg={{ span: 18, offset: 3 }} xxl={{ span: 14, offset: 5 }}>
       <Card title="關於本站">
         <ReactMarkdown source={aboutWebsite} renderers={renderers} />
-        <iframe
-          title="discord"
-          src="https://discordapp.com/widget?id=416465528442454026&theme=dark"
-          width="100%"
-          height="500"
-          // eslint-disable-next-line react/no-unknown-property
-          allowtransparency="true"
-          frameBorder="0"
-        />
       </Card>
       <Card title="關於作者">
         <ReactMarkdown source={aboutCreator} renderers={renderers} />

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Layout, Row, Col, Popover, Icon } from 'antd';
+import { Col, Icon, Layout, Popover, Row } from 'antd';
 
-import NavMenu from '../../containers/NavMenu';
 import AppLogo from '../../assets/logo.png';
+import NavMenu from '../../containers/NavMenu';
 
 import './AppHeader.css';
 

@@ -1,19 +1,19 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Checkbox, Col, InputNumber, Popover, Radio, Row, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Select, InputNumber, Radio, Popover, Checkbox } from 'antd';
 import { find } from 'lodash';
 
+import allWeapons from '../constants/weapons';
+import aspdTable from '../constants/aspdTable';
+import { Card, InputField, Label } from '../components/Layouts/CardLayout';
 import {
   ENRICH_CELERMINE_JUICE,
   SPARKLING_CANDY,
 } from '../constants/aspdAdditional';
-import { Card, Label, InputField } from '../components/Layouts/CardLayout';
-import { EquipMod, EquipFixed, SkillMod } from '../components/Tips/ASPD';
+import { EquipFixed, EquipMod, SkillMod } from '../components/Tips/ASPD';
 import * as aspdActions from '../actions/aspd';
-import allWeapons from '../constants/weapons';
-import aspdTable from '../constants/aspdTable';
 
 const RadioGroup = Radio.Group;
 const { Option } = Select;
@@ -147,15 +147,15 @@ AspdSetting.propTypes = {
     skillMod: PropTypes.number.isRequired,
     potionMod: PropTypes.number.isRequired,
   }).isRequired,
-  usableWeapons: PropTypes.arrayOf(weaponShape).isRequired,
-  usableLefthand: PropTypes.arrayOf(weaponShape).isRequired,
-  updateAspdWeaponId: PropTypes.func.isRequired,
-  updateAspdLefthandId: PropTypes.func.isRequired,
-  updateAspdEquipMod: PropTypes.func.isRequired,
-  updateAspdEquipFixed: PropTypes.func.isRequired,
-  updateAspdSkillMod: PropTypes.func.isRequired,
-  updateAspdPotionMod: PropTypes.func.isRequired,
   updateAspdAdditialalMod: PropTypes.func.isRequired,
+  updateAspdEquipFixed: PropTypes.func.isRequired,
+  updateAspdEquipMod: PropTypes.func.isRequired,
+  updateAspdLefthandId: PropTypes.func.isRequired,
+  updateAspdPotionMod: PropTypes.func.isRequired,
+  updateAspdSkillMod: PropTypes.func.isRequired,
+  updateAspdWeaponId: PropTypes.func.isRequired,
+  usableLefthand: PropTypes.arrayOf(weaponShape).isRequired,
+  usableWeapons: PropTypes.arrayOf(weaponShape).isRequired,
 };
 
 const mapStateToProps = ({ job, stats, aspd }) => {

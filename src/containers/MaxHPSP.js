@@ -1,10 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import { InputNumber, Popover } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { Card, Label, InputField } from '../components/Layouts/CardLayout';
+import { Card, InputField, Label } from '../components/Layouts/CardLayout';
 import {
   HpAddMod,
   HpMultiMod,

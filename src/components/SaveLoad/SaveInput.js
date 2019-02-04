@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
-import { Row, Col, Input, Button, Tooltip } from 'antd';
+import { Button, Col, Input, Row, Tooltip } from 'antd';
 
 const MarginButton = styled(Button)`
   margin-right: 10px;
@@ -31,12 +31,12 @@ const SaveInput = ({
 );
 
 SaveInput.propTypes = {
-  value: PropTypes.string.isRequired,
-  updateSaveName: PropTypes.func.isRequired,
-  saveData: PropTypes.func.isRequired,
-  generateCurrentUrl: PropTypes.func.isRequired,
   copiedText: PropTypes.string.isRequired,
+  generateCurrentUrl: PropTypes.func.isRequired,
   resetCopied: PropTypes.func.isRequired,
+  saveData: PropTypes.func.isRequired,
+  updateSaveName: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default SaveInput;

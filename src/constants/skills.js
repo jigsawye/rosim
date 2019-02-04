@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { range } from 'lodash';
 
 const maxLevel10 = range(10, 0, -1);
@@ -9,7 +8,10 @@ export const acolyteSkills = [
     name: '天使之賜福',
     maxLevel: maxLevel10,
     isToggle: false,
-    buffs: maxLevel10.map(level => ({ level, status: { str: level, int: level, dex: level } })),
+    buffs: maxLevel10.map(level => ({
+      level,
+      status: { str: level, int: level, dex: level },
+    })),
   },
   {
     key: 'INCREASE_AGI',

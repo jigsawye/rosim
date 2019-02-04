@@ -1,7 +1,8 @@
-import { round, floor, find, range } from 'lodash';
-import { compose, prop, includes } from 'lodash/fp';
-import { getJobType } from '../constants/classes';
+import { compose, includes, prop } from 'lodash/fp';
+import { find, floor, range, round } from 'lodash';
+
 import { SECOND, THIRD } from '../constants/classes/classNames';
+import { getJobType } from '../constants/classes';
 import {
   secondHpTable,
   secondSpTable,

@@ -1,15 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  compose,
-  withHandlers,
-  withProps,
-  setPropTypes,
-  pure,
-} from 'recompose';
-import { withRouter } from 'react-router';
+import React from 'react';
 import styled from 'styled-components';
 import { Menu } from 'antd';
+import {
+  compose,
+  pure,
+  setPropTypes,
+  withHandlers,
+  withProps,
+} from 'recompose';
+import { withRouter } from 'react-router';
 
 import SaveLoad from './SaveLoad';
 

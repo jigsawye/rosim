@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import copy from 'copy-to-clipboard';
+import styled from 'styled-components';
+import { Button, Divider, List, Modal, Popconfirm, Tooltip } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Button, Modal, List, Divider, Popconfirm, Tooltip } from 'antd';
 import { findIndex, reject } from 'lodash';
-import copy from 'copy-to-clipboard';
 
 import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
 import SaveInput from '../components/SaveLoad/SaveInput';
@@ -72,18 +72,21 @@ class SaveLoad extends Component {
   updateSaveName = ({ target }) => this.setState({ saveName: target.value });
 
   saveData = () => {
-    if (this.state.saveName === '') {
+    const { archives, saveName } = this.state;
+    const { currentData } = this.props;
+
+    if (saveName === '') {
       return;
     }
 
     const data = {
-      ...this.props.currentData,
+      ...currentData,
       _id: generateId(),
-      name: this.state.saveName,
+      name: saveName,
     };
 
     this.setState({
-      archives: [...this.state.archives, data],
+      archives: [...archives, data],
       saveName: '',
     });
   };
@@ -99,8 +102,9 @@ class SaveLoad extends Component {
   loadData = data => this.props.loadSaveData(data);
 
   deleteData = ({ _id }) => {
-    const archives = reject(this.state.archives, { _id });
-    this.setState({ archives });
+    this.setState(({ archives }) => ({
+      archives: reject(archives, { _id }),
+    }));
   };
 
   resetCopied = () => this.setState({ copied: false });

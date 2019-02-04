@@ -1,15 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Popover } from 'antd';
+import { connect } from 'react-redux';
 import { floor, round } from 'lodash';
 
-import { Card, CardText, CardGrid } from '../components/Layouts/CardLayout';
-import * as AbilityTips from '../components/Tips/Ability';
-import { getJobBonusStats, getSkillBuffStats } from '../utils/stats';
 import getAspd from '../utils/aspd';
+import { Card, CardGrid, CardText } from '../components/Layouts/CardLayout';
+import { getJobBonusStats, getSkillBuffStats } from '../utils/stats';
 import { getMaxHp, getMaxSp } from '../utils/hpsp';
 import { statsMap } from '../constants/bonus';
+import * as AbilityTips from '../components/Tips/Ability';
 
 const AbilityGrid = ({ label, children, ...props }) => {
   const ContentComponent = AbilityTips[label].content;
@@ -27,12 +27,12 @@ const AbilityGrid = ({ label, children, ...props }) => {
 };
 
 AbilityGrid.propTypes = {
-  label: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.array,
   ]).isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 const Ability = ({
@@ -71,18 +71,18 @@ const Ability = ({
 );
 
 Ability.propTypes = {
+  aspd: PropTypes.number.isRequired,
+  atk: PropTypes.number.isRequired,
+  castTime: PropTypes.number.isRequired,
+  cri: PropTypes.number.isRequired,
+  def: PropTypes.number.isRequired,
+  dodge: PropTypes.number.isRequired,
+  flee: PropTypes.number.isRequired,
+  hit: PropTypes.number.isRequired,
+  matk: PropTypes.number.isRequired,
   maxHp: PropTypes.number.isRequired,
   maxSp: PropTypes.number.isRequired,
-  atk: PropTypes.number.isRequired,
-  matk: PropTypes.number.isRequired,
-  def: PropTypes.number.isRequired,
   mdef: PropTypes.number.isRequired,
-  hit: PropTypes.number.isRequired,
-  flee: PropTypes.number.isRequired,
-  dodge: PropTypes.number.isRequired,
-  cri: PropTypes.number.isRequired,
-  aspd: PropTypes.number.isRequired,
-  castTime: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({
