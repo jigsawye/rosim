@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HashRouter as Router, Route } from 'react-router-dom';
 import { Layout } from 'antd';
+import { Route, HashRouter as Router } from 'react-router-dom';
 
-import AppHeader from './Layouts/AppHeader';
-import AppFooter from './Layouts/AppFooter';
-import Simulator from './Simulator';
 import About from './About';
+import AppFooter from './Layouts/AppFooter';
+import AppHeader from './Layouts/AppHeader';
+import Simulator from './Simulator';
 
 const { Content } = Layout;
 

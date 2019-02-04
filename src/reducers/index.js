@@ -1,15 +1,16 @@
 import { find, findIndex, remove } from 'lodash';
+
+import formatOldData from '../utils/formatOldData';
 import handleActions from '../utils/handleActions';
-import * as types from '../constants/types';
-import { getJobType } from '../constants/classes';
+import weapons from '../constants/weapons';
 import { THIRD } from '../constants/classes/classNames';
+import { getJobType } from '../constants/classes';
 import {
   getMaxBaseLevel,
   getMaxJobLevel,
   getMaxStats,
 } from '../constants/ranges';
-import weapons from '../constants/weapons';
-import formatOldData from '../utils/formatOldData';
+import * as types from '../constants/types';
 
 const initialState = {
   baseLevel: 1,

@@ -1,10 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { Select, Popover } from 'antd';
+import React from 'react';
 import styled from 'styled-components';
+import { Popover, Select } from 'antd';
 import { range, upperCase } from 'lodash';
 
 import { getStatNeedPoint } from '../utils/stats';
+
 import * as StatTips from './Tips/Stat';
 
 const { Option } = Select;
@@ -57,7 +58,9 @@ const Stats = ({
       <Label>{upperCase(label)}</Label>
     </Popover>
     <Select style={{ width: 70 }} value={value} onChange={onChange}>
-      {statsRange.map(stat => <Option key={stat}>{stat}</Option>)}
+      {statsRange.map(stat => (
+        <Option key={stat}>{stat}</Option>
+      ))}
     </Select>
     <Plus>+</Plus>
     <Bonuse>{bonuse + buff}</Bonuse>
@@ -67,21 +70,23 @@ const Stats = ({
       value={otherStat}
       onChange={onChangeOtherStat}
     >
-      {range(0, 201).map(stat => <Option key={stat}>{stat}</Option>)}
+      {range(0, 201).map(stat => (
+        <Option key={stat}>{stat}</Option>
+      ))}
     </Select>
     <NeedPoint>{getStatNeedPoint(value)}</NeedPoint>
   </StatsContainer>
 );
 
 Stats.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
   bonuse: PropTypes.number.isRequired,
   buff: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
   otherStat: PropTypes.number.isRequired,
-  onChangeOtherStat: PropTypes.func.isRequired,
   statsRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onChangeOtherStat: PropTypes.func.isRequired,
 };
 
 export default Stats;

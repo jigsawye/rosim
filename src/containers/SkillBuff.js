@@ -1,12 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, Row, Select, Switch } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Select, Switch } from 'antd';
 import { find } from 'lodash';
 
-import { Card, Label, InputField } from '../components/Layouts/CardLayout';
 import skillActions from '../actions/skill';
+import { Card, InputField, Label } from '../components/Layouts/CardLayout';
 import { acolyteSkills } from '../constants/skills';
 
 const { Option } = Select;

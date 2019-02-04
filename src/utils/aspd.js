@@ -1,4 +1,5 @@
 import { find, floor } from 'lodash';
+
 import aspdTable from '../constants/aspdTable';
 import { additionalEquipModTable } from '../constants/aspdAdditional';
 
@@ -7,7 +8,8 @@ export const getAspdFrequency = aspd => floor(50 / (200 - Number(aspd)), 2);
 const getLefthandBaseAspd = (lefthandId, lefthand, shieldAspd) => {
   if (lefthandId === 100) {
     return 0;
-  } else if (lefthandId === 101) {
+  }
+  if (lefthandId === 101) {
     return shieldAspd;
   }
   return find(lefthand, ['id', lefthandId]).baseAspd;
@@ -16,7 +18,8 @@ const getLefthandBaseAspd = (lefthandId, lefthand, shieldAspd) => {
 const getAgiModifier = (hasLefthandWeapon, weaponId) => {
   if (hasLefthandWeapon) {
     return 10.01;
-  } else if (weaponId === 10) {
+  }
+  if (weaponId === 10) {
     return 10;
   }
   return 1120 / 111;
@@ -25,7 +28,8 @@ const getAgiModifier = (hasLefthandWeapon, weaponId) => {
 const getAspdPenalty = (hasLefthandWeapon, baseAspd) => {
   if (hasLefthandWeapon) {
     return 1.04518;
-  } else if (baseAspd >= 145) {
+  }
+  if (baseAspd >= 145) {
     return 1 - (baseAspd - 144) / 50;
   }
   return 1;

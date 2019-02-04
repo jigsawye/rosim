@@ -1,16 +1,16 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["yoctol"],
   "env": {
     "browser": true
   },
   "rules": {
+    "react/destructuring-assignment": "off",
     "no-param-reassign": [
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": ["state"]
+        "ignorePropertyModificationsFor": ["state", "config"]
       }
     ]
   }

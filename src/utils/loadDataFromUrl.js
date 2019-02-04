@@ -1,4 +1,5 @@
 import { parse } from 'query-string';
+
 import loadSaveData from '../actions';
 
 export default ({ dispatch }) => {

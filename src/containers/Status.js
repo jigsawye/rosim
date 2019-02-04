@@ -1,19 +1,19 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Divider } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Divider } from 'antd';
 
-import { Card } from '../components/Layouts/CardLayout';
 import Stat from '../components/Stat';
 import StatusPointBox from '../components/StatusPointBox';
-import * as statsActions from '../actions/stats';
+import { Card } from '../components/Layouts/CardLayout';
 import {
-  getRemainingStatsPoint,
   getJobBonusStats,
+  getRemainingStatsPoint,
   getSkillBuffStats,
 } from '../utils/stats';
 import { getStatsRange } from '../constants/ranges';
+import * as statsActions from '../actions/stats';
 
 const Status = ({
   stats,
@@ -54,14 +54,14 @@ const statusShape = {
 };
 
 Status.propTypes = {
-  stats: PropTypes.shape(statusShape).isRequired,
-  otherStats: PropTypes.shape(statusShape).isRequired,
   jobBonusStats: PropTypes.shape(statusShape).isRequired,
-  skillBuffStats: PropTypes.shape(statusShape).isRequired,
-  statsRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  setStat: PropTypes.func.isRequired,
-  setOtherStat: PropTypes.func.isRequired,
+  otherStats: PropTypes.shape(statusShape).isRequired,
   remainingPoint: PropTypes.number.isRequired,
+  setOtherStat: PropTypes.func.isRequired,
+  setStat: PropTypes.func.isRequired,
+  skillBuffStats: PropTypes.shape(statusShape).isRequired,
+  stats: PropTypes.shape(statusShape).isRequired,
+  statsRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 const mapStateToProps = ({

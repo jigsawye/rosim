@@ -1,4 +1,4 @@
-import { isNumber, defaultTo } from 'lodash';
+import { defaultTo, isNumber } from 'lodash';
 
 export default (state, { payload }) => {
   const {

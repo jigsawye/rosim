@@ -1,12 +1,12 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Col, Row } from 'antd';
 
-import BaseInfo from '../containers/BaseInfo';
-import Status from '../containers/Status';
 import Ability from '../containers/Ability';
 import AspdSetting from '../containers/AspdSetting';
+import BaseInfo from '../containers/BaseInfo';
 import MaxHPSP from '../containers/MaxHPSP';
 import SkillBuff from '../containers/SkillBuff';
+import Status from '../containers/Status';
 
 const Simulator = () => (
   <Row gutter={16}>

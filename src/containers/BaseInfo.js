@@ -1,12 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+import { Card, Cascader, Col, Popover, Row, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Card, Select, Cascader, Popover } from 'antd';
-import styled from 'styled-components';
 
-import { BaseLevelTips, JobLevelTips } from '../components/Tips/BaseInfo';
 import classes from '../constants/classes';
+import { BaseLevelTips, JobLevelTips } from '../components/Tips/BaseInfo';
 import { getBaseLevelRange, getJobLevelRange } from '../constants/ranges';
 import * as baseInfoActions from '../actions/baseInfo';
 
@@ -37,7 +37,9 @@ const BaseInfo = ({
           <Label>Lv.</Label>
         </Popover>
         <Select style={{ width: 70 }} value={baseLevel} onChange={setBaseLevel}>
-          {baseLevelRange.map(level => <Option key={level}>{level}</Option>)}
+          {baseLevelRange.map(level => (
+            <Option key={level}>{level}</Option>
+          ))}
         </Select>
       </Col>
       <Col span={7}>
@@ -49,7 +51,9 @@ const BaseInfo = ({
           <Label>Job Lv.</Label>
         </Popover>
         <Select style={{ width: 70 }} value={jobLevel} onChange={setJobLevel}>
-          {jobLevelRange.map(level => <Option key={level}>{level}</Option>)}
+          {jobLevelRange.map(level => (
+            <Option key={level}>{level}</Option>
+          ))}
         </Select>
       </Col>
       <Col span={10}>
@@ -66,14 +70,14 @@ const BaseInfo = ({
 );
 
 BaseInfo.propTypes = {
-  baseLevelRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  jobLevelRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   baseLevel: PropTypes.number.isRequired,
-  jobLevel: PropTypes.number.isRequired,
+  baseLevelRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   job: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  jobLevel: PropTypes.number.isRequired,
+  jobLevelRange: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   setBaseLevel: PropTypes.func.isRequired,
-  setJobLevel: PropTypes.func.isRequired,
   setJob: PropTypes.func.isRequired,
+  setJobLevel: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ baseLevel, jobLevel, job }) => ({

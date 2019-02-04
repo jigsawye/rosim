@@ -1,9 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withState } from 'recompose';
+import React from 'react';
 import styled from 'styled-components';
 import { InputNumber, Switch } from 'antd';
+import { compose, withState } from 'recompose';
 import { round } from 'lodash';
+
 import { getAspdFrequency } from '../../utils/aspd';
 
 const AspdTip = ({ aspd }) => (
@@ -122,7 +123,12 @@ const CastTimePopover = withCastTime(
     <div>
       <p>以此百分比進行變詠減免</p>
       <MarginDiv>
-        起源 <Switch size="small" checked={isSource} onChange={setIsSource} />
+        起源{' '}
+        <Switch
+          size="small"
+          checked={isSource}
+          onChange={checked => setIsSource(checked)}
+        />
       </MarginDiv>
       <MarginDiv>
         <span>原始變詠 : </span>
@@ -142,7 +148,8 @@ const CastTimePopover = withCastTime(
           max={100}
           value={equipCastTime}
           onChange={setEquipCastTime}
-        />%
+        />
+        %
       </MarginDiv>
       <p>
         最終變詠 :{' '}

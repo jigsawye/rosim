@@ -1,16 +1,16 @@
-const { injectBabelPlugin } = require('react-app-rewired');
-const rewireEslint = require('react-app-rewire-eslint');
+const { addBabelPlugins, override, useEslintRc } = require('customize-cra');
 
-module.exports = function override(config, env) {
-  config = injectBabelPlugin(['import', {
-    libraryName: 'antd',
-    libraryDirectory: 'es',
-    style: 'css',
-  }], config);
-
-  config = injectBabelPlugin(['lodash', { id: ['lodash', 'recompose'] }], config);
-
-  config = rewireEslint(config, env);
-
-  return config;
-};
+module.exports = override(
+  ...addBabelPlugins(
+    [
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+    ],
+    ['lodash', { id: ['lodash', 'recompose'] }]
+  ),
+  useEslintRc()
+);
