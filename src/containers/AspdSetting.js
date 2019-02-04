@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Checkbox, Col, InputNumber, Popover, Radio, Row, Select } from 'antd';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { find } from 'lodash';
 
 import allWeapons from '../constants/weapons';
 import aspdTable from '../constants/aspdTable';
+import useStoreContext from '../hooks/useStoreContext';
 import { Card, InputField, Label } from '../components/Layouts/CardLayout';
 import {
   ENRICH_CELERMINE_JUICE,
@@ -30,148 +28,130 @@ const additiionalModOptions = [
   { label: '跳跳糖', value: SPARKLING_CANDY },
 ];
 
-const AspdSetting = ({
-  aspd,
-  usableWeapons,
-  usableLefthand,
-  updateAspdWeaponId,
-  updateAspdLefthandId,
-  updateAspdEquipMod,
-  updateAspdEquipFixed,
-  updateAspdSkillMod,
-  updateAspdPotionMod,
-  updateAspdAdditialalMod,
-}) => (
-  <Card title="ASPD Setting">
-    <InputField>
-      <Row>
-        <Col xs={12}>
-          <Label>主要</Label>
-          <Select
-            style={{ width: 100 }}
-            value={aspd.weaponId}
-            onChange={updateAspdWeaponId}
-          >
-            {usableWeapons.map(({ id }) => (
-              <Option key={id} value={id}>
-                {find(allWeapons, { id }).name}
-              </Option>
-            ))}
-          </Select>
-        </Col>
-        <Col xs={12}>
-          <Label>副手</Label>
-          <Select
-            style={{ width: 100 }}
-            value={aspd.lefthandId}
-            onChange={updateAspdLefthandId}
-            disabled={!find(allWeapons, ['id', aspd.weaponId]).lefthand}
-          >
-            <Option key={100} value={100}>
-              無
-            </Option>
-            <Option key={101} value={101}>
-              盾
-            </Option>
-            {usableLefthand.map(({ id }) => (
-              <Option key={id} value={id}>
-                {find(allWeapons, { id }).name}
-              </Option>
-            ))}
-          </Select>
-        </Col>
-      </Row>
-    </InputField>
-    <InputField>
-      <Popover title="裝備提升攻速 (攻擊後延遲)" content={EquipMod}>
-        <Label>裝備提升攻速</Label>
-      </Popover>
-      <InputNumber
-        min={-100}
-        max={200}
-        value={aspd.equipMod}
-        onChange={updateAspdEquipMod}
-      />{' '}
-      %
-    </InputField>
-    <InputField>
-      <Popover title="技能提升攻速 (攻擊後延遲)" content={SkillMod}>
-        <Label>技能提升攻速</Label>
-      </Popover>
-      <InputNumber
-        min={0}
-        max={200}
-        value={aspd.skillMod}
-        onChange={updateAspdSkillMod}
-      />{' '}
-      %
-    </InputField>
-    <InputField>
-      <Popover title="裝備提升 ASPD" content={EquipFixed}>
-        <Label>裝備提升 ASPD</Label>
-      </Popover>
-      <InputNumber
-        min={0}
-        max={20}
-        value={aspd.equipFixed}
-        onChange={updateAspdEquipFixed}
-      />
-    </InputField>
-    <InputField>
-      <RadioGroup
-        options={aspdPotionModOptions}
-        value={aspd.potionMod}
-        onChange={({ target }) => updateAspdPotionMod(target.value)}
-      />
-    </InputField>
-    <InputField>
-      <Checkbox.Group
-        options={additiionalModOptions}
-        onChange={updateAspdAdditialalMod}
-      />
-    </InputField>
-  </Card>
-);
+const useAspdSettingStore = () => {
+  const [{ job, aspd }] = useStoreContext();
 
-const weaponShape = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  baseAspd: PropTypes.number.isRequired,
-});
-
-AspdSetting.propTypes = {
-  aspd: PropTypes.shape({
-    weaponId: PropTypes.number.isRequired,
-    lefthandId: PropTypes.number.isRequired,
-    equipFixed: PropTypes.number.isRequired,
-    equipMod: PropTypes.number.isRequired,
-    skillMod: PropTypes.number.isRequired,
-    potionMod: PropTypes.number.isRequired,
-  }).isRequired,
-  updateAspdAdditialalMod: PropTypes.func.isRequired,
-  updateAspdEquipFixed: PropTypes.func.isRequired,
-  updateAspdEquipMod: PropTypes.func.isRequired,
-  updateAspdLefthandId: PropTypes.func.isRequired,
-  updateAspdPotionMod: PropTypes.func.isRequired,
-  updateAspdSkillMod: PropTypes.func.isRequired,
-  updateAspdWeaponId: PropTypes.func.isRequired,
-  usableLefthand: PropTypes.arrayOf(weaponShape).isRequired,
-  usableWeapons: PropTypes.arrayOf(weaponShape).isRequired,
-};
-
-const mapStateToProps = ({ job, stats, aspd }) => {
   const { weapons, lefthand = [] } = find(aspdTable, ['job', job[1]]);
+
   return {
-    stats,
     aspd,
     usableWeapons: weapons,
     usableLefthand: lefthand,
+    updateAspdWeaponId: aspdActions.useUpdateAspdWeaponId(),
+    updateAspdLefthandId: aspdActions.useUpdateAspdLefthandId(),
+    updateAspdEquipMod: aspdActions.useUpdateAspdEquipMod(),
+    updateAspdEquipFixed: aspdActions.useUpdateAspdEquipFixed(),
+    updateAspdSkillMod: aspdActions.useUpdateAspdSkillMod(),
+    updateAspdPotionMod: aspdActions.useUpdateAspdPotionMod(),
+    updateAspdAdditialalMod: aspdActions.useUpdateAspdAdditialalMod(),
   };
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(aspdActions, dispatch);
+function AspdSetting() {
+  const {
+    aspd,
+    usableWeapons,
+    usableLefthand,
+    updateAspdWeaponId,
+    updateAspdLefthandId,
+    updateAspdEquipMod,
+    updateAspdEquipFixed,
+    updateAspdSkillMod,
+    updateAspdPotionMod,
+    updateAspdAdditialalMod,
+  } = useAspdSettingStore();
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AspdSetting);
+  return (
+    <Card title="ASPD Setting">
+      <InputField>
+        <Row>
+          <Col xs={12}>
+            <Label>主要</Label>
+            <Select
+              style={{ width: 100 }}
+              value={aspd.weaponId}
+              onChange={updateAspdWeaponId}
+            >
+              {usableWeapons.map(({ id }) => (
+                <Option key={id} value={id}>
+                  {find(allWeapons, { id }).name}
+                </Option>
+              ))}
+            </Select>
+          </Col>
+          <Col xs={12}>
+            <Label>副手</Label>
+            <Select
+              style={{ width: 100 }}
+              value={aspd.lefthandId}
+              onChange={updateAspdLefthandId}
+              disabled={!find(allWeapons, ['id', aspd.weaponId]).lefthand}
+            >
+              <Option key={100} value={100}>
+                無
+              </Option>
+              <Option key={101} value={101}>
+                盾
+              </Option>
+              {usableLefthand.map(({ id }) => (
+                <Option key={id} value={id}>
+                  {find(allWeapons, { id }).name}
+                </Option>
+              ))}
+            </Select>
+          </Col>
+        </Row>
+      </InputField>
+      <InputField>
+        <Popover title="裝備提升攻速 (攻擊後延遲)" content={EquipMod}>
+          <Label>裝備提升攻速</Label>
+        </Popover>
+        <InputNumber
+          min={-100}
+          max={200}
+          value={aspd.equipMod}
+          onChange={updateAspdEquipMod}
+        />{' '}
+        %
+      </InputField>
+      <InputField>
+        <Popover title="技能提升攻速 (攻擊後延遲)" content={SkillMod}>
+          <Label>技能提升攻速</Label>
+        </Popover>
+        <InputNumber
+          min={0}
+          max={200}
+          value={aspd.skillMod}
+          onChange={updateAspdSkillMod}
+        />{' '}
+        %
+      </InputField>
+      <InputField>
+        <Popover title="裝備提升 ASPD" content={EquipFixed}>
+          <Label>裝備提升 ASPD</Label>
+        </Popover>
+        <InputNumber
+          min={0}
+          max={20}
+          value={aspd.equipFixed}
+          onChange={updateAspdEquipFixed}
+        />
+      </InputField>
+      <InputField>
+        <RadioGroup
+          options={aspdPotionModOptions}
+          value={aspd.potionMod}
+          onChange={({ target }) => updateAspdPotionMod(target.value)}
+        />
+      </InputField>
+      <InputField>
+        <Checkbox.Group
+          options={additiionalModOptions}
+          onChange={updateAspdAdditialalMod}
+        />
+      </InputField>
+    </Card>
+  );
+}
+
+export default AspdSetting;

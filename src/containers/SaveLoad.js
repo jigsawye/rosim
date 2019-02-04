@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import copy from 'copy-to-clipboard';
 import styled from 'styled-components';
 import { Button, Divider, List, Modal, Popconfirm, Tooltip } from 'antd';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { findIndex, reject } from 'lodash';
 
 import ArchiveDescription from '../components/SaveLoad/ArchiveDescription';
 import SaveInput from '../components/SaveLoad/SaveInput';
-import loadSaveDataAction from '../actions';
+import useLoadSaveDataAction from '../actions';
+import useStoreContext from '../hooks/useStoreContext';
 
 const SaveLoadContainer = styled.div`
   display: inline-block;
@@ -196,17 +195,11 @@ class SaveLoad extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentData: state });
+function SaveLoadWrapper() {
+  const [currentData] = useStoreContext();
+  const loadSaveData = useLoadSaveDataAction();
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      loadSaveData: loadSaveDataAction,
-    },
-    dispatch
-  );
+  return <SaveLoad currentData={currentData} loadSaveData={loadSaveData} />;
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SaveLoad);
+export default SaveLoadWrapper;

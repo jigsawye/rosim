@@ -1,6 +1,5 @@
-import { createAction } from 'redux-actions';
-
+import useAction from '../hooks/useAction';
 import { SET_OTHER_STAT, SET_STAT } from '../constants/types';
 
-export const setStat = createAction(SET_STAT);
-export const setOtherStat = createAction(SET_OTHER_STAT);
+export const useSetStat = () => useAction(SET_STAT);
+export const useSetOtherStat = () => useAction(SET_OTHER_STAT);

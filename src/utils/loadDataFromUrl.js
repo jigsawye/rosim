@@ -2,7 +2,7 @@ import { parse } from 'query-string';
 
 import loadSaveData from '../actions';
 
-export default ({ dispatch }) => {
+export default dispatch => {
   const { data } = parse(window.location.search);
   if (data) {
     try {

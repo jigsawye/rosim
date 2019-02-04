@@ -1,5 +1,4 @@
-import { createAction } from 'redux-actions';
-
+import useAction from '../hooks/useAction';
 import { UPDATE_BUFF_SKILL } from '../constants/types';
 
-export default createAction(UPDATE_BUFF_SKILL);
+export default () => useAction(UPDATE_BUFF_SKILL);

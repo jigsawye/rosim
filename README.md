@@ -4,7 +4,7 @@
 
 [![CircleCI](https://circleci.com/gh/jigsawye/rosim/tree/master.svg?style=svg)](https://circleci.com/gh/jigsawye/rosim/tree/master)
 
-Build with React, Redux, antd, styled-components.
+Build with React, antd, styled-components.
 
 ## Setup
 
