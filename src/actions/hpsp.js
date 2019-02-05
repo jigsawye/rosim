@@ -1,5 +1,4 @@
-import { createAction } from 'redux-actions';
-
+import useAction from '../hooks/useAction';
 import {
   UPDATE_HP_ADD_MOD,
   UPDATE_HP_MULTI_MOD,
@@ -7,7 +6,7 @@ import {
   UPDATE_SP_MULTI_MOD,
 } from '../constants/types';
 
-export const updateHpAddMod = createAction(UPDATE_HP_ADD_MOD);
-export const updateHpMultiMod = createAction(UPDATE_HP_MULTI_MOD);
-export const updateSpAddMod = createAction(UPDATE_SP_ADD_MOD);
-export const updateSpMultiMod = createAction(UPDATE_SP_MULTI_MOD);
+export const useUpdateHpAddMod = () => useAction(UPDATE_HP_ADD_MOD);
+export const useUpdateHpMultiMod = () => useAction(UPDATE_HP_MULTI_MOD);
+export const useUpdateSpAddMod = () => useAction(UPDATE_SP_ADD_MOD);
+export const useUpdateSpMultiMod = () => useAction(UPDATE_SP_MULTI_MOD);
