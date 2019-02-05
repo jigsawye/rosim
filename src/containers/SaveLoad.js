@@ -11,14 +11,10 @@ import useLoadSaveDataAction from '../actions';
 import useStoreContext from '../hooks/useStoreContext';
 
 const SaveLoadContainer = styled.div`
-  display: inline-block;
   margin-left: 16px;
-  float: right;
 
   @media only screen and (max-width: 767.99px) {
     margin-left: 0;
-    float: none;
-    display: block;
     padding: 12px 16px;
   }
 `;

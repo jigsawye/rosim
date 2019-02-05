@@ -8,10 +8,8 @@ import SaveLoad from './SaveLoad';
 
 const RoSimMenu = styled(Menu)`
   border: 0;
-  float: right;
 
   @media only screen and (max-width: 767.99px) {
-    float: none;
     width: 100%;
     font-size: 14px;
   }
@@ -34,10 +32,18 @@ const RoSimMenuItem = styled(Menu.Item)`
   }
 `;
 
+const NavMenuWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  @media only screen and (max-width: 767.99px) {
+    flex-direction: column;
+  }
+`;
+
 function NavMenu({ location, history, mode }) {
   return (
-    <div>
-      <SaveLoad />
+    <NavMenuWrapper>
       <RoSimMenu
         mode={mode}
         selectedKeys={[location.pathname]}
@@ -50,7 +56,8 @@ function NavMenu({ location, history, mode }) {
         <RoSimMenuItem key="/">模擬器</RoSimMenuItem>
         <RoSimMenuItem key="/about">關於</RoSimMenuItem>
       </RoSimMenu>
-    </div>
+      <SaveLoad />
+    </NavMenuWrapper>
   );
 }
 
