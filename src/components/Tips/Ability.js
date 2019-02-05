@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { InputNumber, Switch } from 'antd';
-import { compose, withState } from 'recompose';
 import { round } from 'lodash';
 
 import { getAspdFrequency } from '../../utils/aspd';
@@ -104,22 +103,12 @@ const MarginDiv = styled.div`
   margin-bottom: 5px;
 `;
 
-const withCastTime = compose(
-  withState('skillCastTime', 'setSkillCastTime', 0),
-  withState('equipCastTime', 'setEquipCastTime', 0),
-  withState('isSource', 'setIsSource', true)
-);
+function CastTimePopover({ castTime }) {
+  const [skillCastTime, setSkillCastTime] = useState(0);
+  const [equipCastTime, setEquipCastTime] = useState(0);
+  const [isSource, setIsSource] = useState(true);
 
-const CastTimePopover = withCastTime(
-  ({
-    castTime,
-    skillCastTime,
-    equipCastTime,
-    isSource,
-    setSkillCastTime,
-    setEquipCastTime,
-    setIsSource,
-  }) => (
+  return (
     <div>
       <p>以此百分比進行變詠減免</p>
       <MarginDiv>
@@ -162,8 +151,12 @@ const CastTimePopover = withCastTime(
         )}
       </p>
     </div>
-  )
-);
+  );
+}
+
+CastTimePopover.propTypes = {
+  castTime: PropTypes.number.isRequired,
+};
 
 export const CastTime = {
   title: 'Case Time (詠唱時間)',

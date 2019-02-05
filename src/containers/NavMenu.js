@@ -2,13 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Menu } from 'antd';
-import {
-  compose,
-  pure,
-  setPropTypes,
-  withHandlers,
-  withProps,
-} from 'recompose';
 import { withRouter } from 'react-router';
 
 import SaveLoad from './SaveLoad';
@@ -16,6 +9,7 @@ import SaveLoad from './SaveLoad';
 const RoSimMenu = styled(Menu)`
   border: 0;
   float: right;
+
   @media only screen and (max-width: 767.99px) {
     float: none;
     width: 100%;
@@ -40,36 +34,38 @@ const RoSimMenuItem = styled(Menu.Item)`
   }
 `;
 
-const withPathHandler = compose(
-  pure,
-  withRouter,
-  withProps(({ location, history, mode = 'vertical' }) => ({
-    path: location.pathname,
-    push: history.push,
-    mode,
-  })),
-  setPropTypes({
-    path: PropTypes.string.isRequired,
+function NavMenu({ location, history, mode }) {
+  return (
+    <div>
+      <SaveLoad />
+      <RoSimMenu
+        mode={mode}
+        selectedKeys={[location.pathname]}
+        onClick={({ key }) => {
+          if (key !== location.pathname) {
+            history.push(key);
+          }
+        }}
+      >
+        <RoSimMenuItem key="/">模擬器</RoSimMenuItem>
+        <RoSimMenuItem key="/about">關於</RoSimMenuItem>
+      </RoSimMenu>
+    </div>
+  );
+}
+
+NavMenu.propTypes = {
+  history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-    mode: PropTypes.string.isRequired,
-  }),
-  withHandlers({
-    pushPath: ({ path, push }) => ({ key }) => {
-      if (key !== path) {
-        push(key);
-      }
-    },
-  })
-);
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+  mode: PropTypes.oneOf(['horizontal', 'vertical']),
+};
 
-const NavMenu = withPathHandler(({ mode, path, pushPath }) => (
-  <div>
-    <SaveLoad />
-    <RoSimMenu mode={mode} selectedKeys={[path]} onClick={pushPath}>
-      <RoSimMenuItem key="/">模擬器</RoSimMenuItem>
-      <RoSimMenuItem key="/about">關於</RoSimMenuItem>
-    </RoSimMenu>
-  </div>
-));
+NavMenu.defaultProps = {
+  mode: 'vertical',
+};
 
-export default NavMenu;
+export default withRouter(NavMenu);

@@ -10,7 +10,7 @@ module.exports = override(
         style: 'css',
       },
     ],
-    ['lodash', { id: ['lodash', 'recompose'] }]
+    ['lodash', { id: ['lodash'] }]
   ),
   useEslintRc()
 );
