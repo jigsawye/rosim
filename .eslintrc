@@ -2,7 +2,9 @@
   "parser": "babel-eslint",
   "extends": ["yoctol"],
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true,
+    "jest": true,
   },
   "rules": {
     "react/destructuring-assignment": "off",

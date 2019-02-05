@@ -1,22 +1,102 @@
 version: 2
+
+# Reference variables.
+references:
+  docker_default: &docker
+    working_directory: /tmp/app
+    docker:
+      - image: circleci/node:10.13
+        environment:
+          - REACT_APP_SENTRY_DSN=${SENTRY_DSN}
+          - SKIP_PREFLIGHT_CHECK=true
+
 jobs:
   build:
-    docker:
-      - image: circleci/node:9.5.0
-    working_directory: ~/repo
-    branches:
-      only:
-        - master
+    <<: *docker
     steps:
       - checkout
       - restore_cache:
           keys:
           - dependencies-{{ checksum "package.json" }}
           - dependencies-
-      - run: yarn install
+      - run:
+          name: Install Dependencies
+          command: yarn --frozen-lockfile
+          working_directory: ./
       - save_cache:
           paths:
             - node_modules
           key: dependencies-{{ checksum "package.json" }}
-      - run: echo "REACT_APP_SENTRY_DSN=${SENTRY_DSN}" >> .env
-      - run: yarn deploy
+      - run:
+          name: Build
+          command: yarn run build
+          working_directory: ./
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+
+  lint:
+    <<: *docker
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint
+          command: yarn lint
+          working_directory: ./
+
+  test:
+    <<: *docker
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Test
+          command: yarn test
+          working_directory: ./
+
+  deploy:
+    docker:
+      - image: circleci/node:10.13
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploy
+          command: yarn deploy
+          working_directory: ./
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - lint:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - lint
+            - test
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*(-.*)?/
+            branches:
+              ignore: /.*/
