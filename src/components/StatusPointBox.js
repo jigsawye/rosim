@@ -15,12 +15,14 @@ const StatusPoint = styled.span`
   border-radius: 7px;
 `;
 
-const StatusPointBox = ({ point }) => (
-  <div>
-    <StatusPointLabel>Status Point</StatusPointLabel>
-    <StatusPoint point={point}>{point}</StatusPoint>
-  </div>
-);
+function StatusPointBox({ point }) {
+  return (
+    <div>
+      <StatusPointLabel>Status Point</StatusPointLabel>
+      <StatusPoint point={point}>{point}</StatusPoint>
+    </div>
+  );
+}
 
 StatusPointBox.propTypes = {
   point: PropTypes.number.isRequired,

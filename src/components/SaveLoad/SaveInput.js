@@ -7,28 +7,34 @@ const MarginButton = styled(Button)`
   margin-right: 10px;
 `;
 
-const SaveInput = ({
+function SaveInput({
   value,
   updateSaveName,
   saveData,
   generateCurrentUrl,
   copiedText,
   resetCopied,
-}) => (
-  <Row gutter={16}>
-    <Col xs={14} lg={17}>
-      <Input placeholder="Save Name" value={value} onChange={updateSaveName} />
-    </Col>
-    <Col xs={10} lg={7}>
-      <MarginButton type="primary" onClick={saveData}>
-        Save
-      </MarginButton>
-      <Tooltip title={copiedText} onVisibleChange={resetCopied}>
-        <Button onClick={generateCurrentUrl}>Url</Button>
-      </Tooltip>
-    </Col>
-  </Row>
-);
+}) {
+  return (
+    <Row gutter={16}>
+      <Col xs={14} lg={17}>
+        <Input
+          placeholder="Save Name"
+          value={value}
+          onChange={updateSaveName}
+        />
+      </Col>
+      <Col xs={10} lg={7}>
+        <MarginButton type="primary" onClick={saveData}>
+          Save
+        </MarginButton>
+        <Tooltip title={copiedText} onVisibleChange={resetCopied}>
+          <Button onClick={generateCurrentUrl}>Url</Button>
+        </Tooltip>
+      </Col>
+    </Row>
+  );
+}
 
 SaveInput.propTypes = {
   copiedText: PropTypes.string.isRequired,

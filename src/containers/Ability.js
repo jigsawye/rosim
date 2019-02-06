@@ -43,11 +43,11 @@ const useAbilityStore = () => {
 };
 
 const AbilityGrid = ({ label, children, ...props }) => {
-  const ContentComponent = AbilityTips[label].content;
+  const ContentComponent = AbilityTips[label];
   return (
     <CardGrid>
       <Popover
-        title={AbilityTips[label].title}
+        title={ContentComponent.title}
         content={<ContentComponent {...props} />}
       >
         <div>{label}</div>
