@@ -128,13 +128,13 @@ class SaveLoad extends Component {
     const actions = [
       {
         title: '覆蓋原',
-        text: 'Save',
+        text: '儲存',
         onConfirm: () => this.saveExistsData(item),
       },
-      { title: '載入此', text: 'Load', onConfirm: () => this.loadData(item) },
+      { title: '載入此', text: '載入', onConfirm: () => this.loadData(item) },
       {
         title: '刪除此',
-        text: 'Delete',
+        text: '刪除',
         onConfirm: () => this.deleteData(item),
       },
     ];
@@ -142,7 +142,7 @@ class SaveLoad extends Component {
     return [
       <Tooltip title={this.copiedText()} onVisibleChange={this.resetCopied}>
         <Button size="small" onClick={() => this.handleCopyClick(item)}>
-          Url
+          產生網址
         </Button>
       </Tooltip>,
       ...actions.map(({ title, text, onConfirm }) => (
@@ -158,20 +158,22 @@ class SaveLoad extends Component {
   };
 
   render() {
+    const { visible, archives, saveName } = this.state;
+
     return (
       <SaveLoadContainer>
-        <Button icon="save" type="sm" onClick={this.showModal}>
-          Save / Load
+        <Button icon="save" onClick={this.showModal}>
+          儲存 / 載入
         </Button>
         <Modal
-          title="Save / Load"
+          title="儲存 / 載入"
           width={600}
-          visible={this.state.visible}
+          visible={visible}
           onCancel={this.closeModal}
-          footer={<Button onClick={this.closeModal}>Close</Button>}
+          footer={<Button onClick={this.closeModal}>關閉</Button>}
         >
           <SaveInput
-            value={this.state.saveName}
+            value={saveName}
             copiedText={this.copiedText()}
             updateSaveName={this.updateSaveName}
             saveData={this.saveData}
@@ -182,7 +184,7 @@ class SaveLoad extends Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
-            dataSource={this.state.archives}
+            dataSource={archives}
             renderItem={this.renderListItem}
           />
         </Modal>
