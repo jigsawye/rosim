@@ -33,7 +33,7 @@ function MaxHPSP() {
   } = useMaxHPSPStore();
 
   return (
-    <Card title="Max HP & Max SP">
+    <Card title="HP/SP 加成">
       <InputField>
         <Popover
           title="提升 Max Hp 的數值"

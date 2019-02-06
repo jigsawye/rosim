@@ -1,15 +1,13 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { Popover } from 'antd';
 import { floor, round } from 'lodash';
 
 import getAspd from '../utils/aspd';
 import useStoreContext from '../hooks/useStoreContext';
-import { Card, CardGrid, CardText } from '../components/Layouts/CardLayout';
+import { AbilityTip } from '../components/Tips/Ability';
+import { Card } from '../components/Layouts/CardLayout';
 import { getJobBonusStats, getSkillBuffStats } from '../utils/stats';
 import { getMaxHp, getMaxSp } from '../utils/hpsp';
 import { statsMap } from '../constants/bonus';
-import * as AbilityTips from '../components/Tips/Ability';
 
 const useAbilityStore = () => {
   const [
@@ -42,30 +40,6 @@ const useAbilityStore = () => {
   };
 };
 
-const AbilityGrid = ({ label, children, ...props }) => {
-  const ContentComponent = AbilityTips[label];
-  return (
-    <CardGrid>
-      <Popover
-        title={ContentComponent.title}
-        content={<ContentComponent {...props} />}
-      >
-        <div>{label}</div>
-      </Popover>
-      <CardText>{children}</CardText>
-    </CardGrid>
-  );
-};
-
-AbilityGrid.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.array,
-  ]).isRequired,
-  label: PropTypes.string.isRequired,
-};
-
 function Ability() {
   const {
     maxHp,
@@ -83,24 +57,32 @@ function Ability() {
   } = useAbilityStore();
 
   return (
-    <Card title="Ability" className="ant-card-contain-grid">
-      <AbilityGrid label="MaxHP">{maxHp}</AbilityGrid>
-      <AbilityGrid label="MaxSP">{maxSp}</AbilityGrid>
-      <AbilityGrid label="ASPD" aspd={aspd}>
+    <Card className="ant-card-contain-grid">
+      <AbilityTip label="MaxHP">{maxHp}</AbilityTip>
+      <AbilityTip label="MaxSP">{maxSp}</AbilityTip>
+      <AbilityTip label="ASPD" aspd={aspd}>
         {aspd}
-      </AbilityGrid>
-      <AbilityGrid label="ATK">{atk} + ___</AbilityGrid>
-      <AbilityGrid label="MATK">{matk} + ___</AbilityGrid>
-      <AbilityGrid label="CRI">{cri}</AbilityGrid>
-      <AbilityGrid label="DEF">{def} + ___</AbilityGrid>
-      <AbilityGrid label="MDEF">{mdef} + ___</AbilityGrid>
-      <AbilityGrid label="HIT">{hit}</AbilityGrid>
-      <AbilityGrid label="FLEE">
-        {flee} + {dodge}
-      </AbilityGrid>
-      <AbilityGrid label="CastTime" castTime={castTime}>
-        {round(castTime * 100, 3)} %
-      </AbilityGrid>
+      </AbilityTip>
+      <AbilityTip label="ATK" suffix="+ ___">
+        {atk}
+      </AbilityTip>
+      <AbilityTip label="MATK" suffix="+ ___">
+        {matk}
+      </AbilityTip>
+      <AbilityTip label="CRI">{cri}</AbilityTip>
+      <AbilityTip label="DEF" suffix="+ ___">
+        {def}
+      </AbilityTip>
+      <AbilityTip label="MDEF" suffix="+ ___">
+        {mdef}
+      </AbilityTip>
+      <AbilityTip label="HIT">{hit}</AbilityTip>
+      <AbilityTip label="FLEE" suffix={`+ ${dodge}`}>
+        {flee}
+      </AbilityTip>
+      <AbilityTip label="CastTime" castTime={castTime} suffix="%">
+        {round(castTime * 100, 3)}
+      </AbilityTip>
     </Card>
   );
 }

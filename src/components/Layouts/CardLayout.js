@@ -9,12 +9,6 @@ export const CardGrid = styled(AntdCard.Grid)`
   text-align: center;
 `;
 
-export const CardText = styled.div`
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: bold;
-`;
-
 export const Label = styled.div`
   display: inline-block;
   margin-right: 10px;

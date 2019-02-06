@@ -42,7 +42,7 @@ function BaseInfo() {
   } = useBaseInfoStore();
 
   return (
-    <Card title="Base Info" style={{ marginTop: 15 }}>
+    <Card style={{ marginTop: 15 }}>
       <Row gutter={16}>
         <Col span={7}>
           <Popover
