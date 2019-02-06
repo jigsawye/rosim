@@ -7,17 +7,20 @@ import { version } from '../../package.json';
 
 import { Card } from './Layouts/CardLayout';
 
-const link = ({ href, children }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer">
-    {children}
-  </a>
-);
-link.propTypes = {
+function Link({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  );
+}
+
+Link.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   href: PropTypes.string.isRequired,
 };
 
-const renderers = { link };
+const renderers = { link: Link };
 
 const aboutWebsite = `
 為何會有此模擬器請參考[巴哈原文](https://forum.gamer.com.tw/C.php?bsn=4212&snA=416122&tnum=7)，總之這是一個在過年沒 RO 玩之下的產物。
@@ -57,30 +60,32 @@ RO 起源玩家，~~遊戲ID: \`Sociopath\`~~ 已退坑
 其餘請直接參考我的 [個人網站](https://jigsawye.com/about/)
 `;
 
-const About = () => (
-  <Row>
-    <Col xs={24} lg={{ span: 18, offset: 3 }} xxl={{ span: 14, offset: 5 }}>
-      <Card title="關於本站">
-        <ReactMarkdown source={aboutWebsite} renderers={renderers} />
-      </Card>
-      <Card title="關於作者">
-        <ReactMarkdown source={aboutCreator} renderers={renderers} />
-        <p>
-          如果你有餘力的話，歡迎資助我以讓我繼續開發此模擬器，有任何疑問歡迎寄信至：jigsaw.ye@gmail.com
-        </p>
-        <a
-          href="https://p.ecpay.com.tw/MeDs6"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            alt="ecpay"
-            src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"
-          />
-        </a>
-      </Card>
-    </Col>
-  </Row>
-);
+function About() {
+  return (
+    <Row>
+      <Col xs={24} lg={{ span: 18, offset: 3 }} xxl={{ span: 14, offset: 5 }}>
+        <Card title="關於本站">
+          <ReactMarkdown source={aboutWebsite} renderers={renderers} />
+        </Card>
+        <Card title="關於作者">
+          <ReactMarkdown source={aboutCreator} renderers={renderers} />
+          <p>
+            如果你有餘力的話，歡迎資助我以讓我繼續開發此模擬器，有任何疑問歡迎寄信至：jigsaw.ye@gmail.com
+          </p>
+          <a
+            href="https://p.ecpay.com.tw/MeDs6"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              alt="ecpay"
+              src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png"
+            />
+          </a>
+        </Card>
+      </Col>
+    </Row>
+  );
+}
 
 export default About;

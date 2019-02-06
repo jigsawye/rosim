@@ -39,7 +39,7 @@ const NeedPoint = styled.span`
   border-radius: 7px;
 `;
 
-const Stats = ({
+function Stats({
   label,
   value,
   onChange,
@@ -48,35 +48,37 @@ const Stats = ({
   otherStat,
   onChangeOtherStat,
   statsRange,
-}) => (
-  <StatsContainer>
-    <Popover
-      title={StatTips[label].title}
-      content={StatTips[label].content}
-      placement="right"
-    >
-      <Label>{upperCase(label)}</Label>
-    </Popover>
-    <Select style={{ width: 70 }} value={value} onChange={onChange}>
-      {statsRange.map(stat => (
-        <Option key={stat}>{stat}</Option>
-      ))}
-    </Select>
-    <Plus>+</Plus>
-    <Bonuse>{bonuse + buff}</Bonuse>
-    <Plus>+</Plus>
-    <Select
-      style={{ width: 70 }}
-      value={otherStat}
-      onChange={onChangeOtherStat}
-    >
-      {range(0, 201).map(stat => (
-        <Option key={stat}>{stat}</Option>
-      ))}
-    </Select>
-    <NeedPoint>{getStatNeedPoint(value)}</NeedPoint>
-  </StatsContainer>
-);
+}) {
+  return (
+    <StatsContainer>
+      <Popover
+        title={StatTips[label].title}
+        content={StatTips[label].content}
+        placement="right"
+      >
+        <Label>{upperCase(label)}</Label>
+      </Popover>
+      <Select style={{ width: 70 }} value={value} onChange={onChange}>
+        {statsRange.map(stat => (
+          <Option key={stat}>{stat}</Option>
+        ))}
+      </Select>
+      <Plus>+</Plus>
+      <Bonuse>{bonuse + buff}</Bonuse>
+      <Plus>+</Plus>
+      <Select
+        style={{ width: 70 }}
+        value={otherStat}
+        onChange={onChangeOtherStat}
+      >
+        {range(0, 201).map(stat => (
+          <Option key={stat}>{stat}</Option>
+        ))}
+      </Select>
+      <NeedPoint>{getStatNeedPoint(value)}</NeedPoint>
+    </StatsContainer>
+  );
+}
 
 Stats.propTypes = {
   bonuse: PropTypes.number.isRequired,

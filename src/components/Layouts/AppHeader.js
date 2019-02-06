@@ -25,32 +25,34 @@ const MenuBar = styled.div`
   }
 `;
 
-const AppHeader = () => (
-  <RoSimHeader>
-    <Row gutter={16}>
-      <Col xs={20} md={6} lg={5} xxl={4}>
-        <a href="/">
-          <img src={AppLogo} alt="RoSim Logo" />
-        </a>
-      </Col>
-      <Col xs={0} md={18} lg={19} xxl={20}>
-        <NavMenu mode="horizontal" />
-      </Col>
-      <Col xs={4} md={0}>
-        <MenuBar>
-          <Popover
-            overlayClassName="popover-menu"
-            arrowPointAtCenter="center"
-            placement="bottomRight"
-            content={<NavMenu />}
-            trigger="click"
-          >
-            <Icon type="bars" style={{ fontSize: 24 }} />
-          </Popover>
-        </MenuBar>
-      </Col>
-    </Row>
-  </RoSimHeader>
-);
+function AppHeader() {
+  return (
+    <RoSimHeader>
+      <Row gutter={16}>
+        <Col xs={20} md={6} lg={5} xxl={4}>
+          <a href="/">
+            <img src={AppLogo} alt="RoSim Logo" />
+          </a>
+        </Col>
+        <Col xs={0} md={18} lg={19} xxl={20}>
+          <NavMenu mode="horizontal" />
+        </Col>
+        <Col xs={4} md={0}>
+          <MenuBar>
+            <Popover
+              overlayClassName="popover-menu"
+              arrowPointAtCenter="center"
+              placement="bottomRight"
+              content={<NavMenu />}
+              trigger="click"
+            >
+              <Icon type="bars" style={{ fontSize: 24 }} />
+            </Popover>
+          </MenuBar>
+        </Col>
+      </Row>
+    </RoSimHeader>
+  );
+}
 
 export default AppHeader;

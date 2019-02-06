@@ -10,23 +10,25 @@ const BoldSpan = styled.span`
   margin-right: 8px;
 `;
 
-const ArchiveDescription = ({ item }) => (
-  <div>
+function ArchiveDescription({ item }) {
+  return (
     <div>
-      Level: <BoldSpan>{item.baseLevel}</BoldSpan>
-      Job Level: <BoldSpan>{item.jobLevel}</BoldSpan>
-      Job: <BoldSpan>{getJobName(item.job)}</BoldSpan>
+      <div>
+        Level: <BoldSpan>{item.baseLevel}</BoldSpan>
+        Job Level: <BoldSpan>{item.jobLevel}</BoldSpan>
+        Job: <BoldSpan>{getJobName(item.job)}</BoldSpan>
+      </div>
+      <div>
+        {Object.keys(item.stats).map(key => (
+          <span key={key}>
+            <span>{key.toUpperCase()} </span>
+            <BoldSpan>{item.stats[key]}</BoldSpan>
+          </span>
+        ))}
+      </div>
     </div>
-    <div>
-      {Object.keys(item.stats).map(key => (
-        <span key={key}>
-          <span>{key.toUpperCase()} </span>
-          <BoldSpan>{item.stats[key]}</BoldSpan>
-        </span>
-      ))}
-    </div>
-  </div>
-);
+  );
+}
 
 ArchiveDescription.propTypes = {
   item: PropTypes.shape({

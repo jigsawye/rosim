@@ -15,10 +15,11 @@ import Simulator from './Simulator';
 const { Content } = Layout;
 
 const AppContent = styled(Content)`
+  min-height: calc(100vh - 182px);
+
   @media (min-width: 992px) {
     padding: 30px 50px;
   }
-  min-height: calc(100vh - 182px);
 `;
 
 function App() {
