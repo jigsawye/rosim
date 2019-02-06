@@ -62,7 +62,7 @@ function AspdSetting() {
   } = useAspdSettingStore();
 
   return (
-    <Card title="ASPD Setting">
+    <Card title="攻擊速度">
       <InputField>
         <Row>
           <Col xs={12}>

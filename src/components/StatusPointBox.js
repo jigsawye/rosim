@@ -18,7 +18,7 @@ const StatusPoint = styled.span`
 function StatusPointBox({ point }) {
   return (
     <div>
-      <StatusPointLabel>Status Point</StatusPointLabel>
+      <StatusPointLabel>剩餘點數</StatusPointLabel>
       <StatusPoint point={point}>{point}</StatusPoint>
     </div>
   );

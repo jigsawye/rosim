@@ -42,7 +42,7 @@ function Status() {
     skillBuffStats,
   } = useStatusStore();
   return (
-    <Card title="Stats" style={{ marginTop: 15 }}>
+    <Card style={{ marginTop: 15 }}>
       {Object.keys(stats).map(key => (
         <Stat
           key={key}

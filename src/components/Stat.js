@@ -58,7 +58,7 @@ function Stats({
       >
         <Label>{upperCase(label)}</Label>
       </Popover>
-      <Select style={{ width: 70 }} value={value} onChange={onChange}>
+      <Select style={{ width: 75 }} value={value} onChange={onChange}>
         {statsRange.map(stat => (
           <Option key={stat}>{stat}</Option>
         ))}
@@ -67,7 +67,7 @@ function Stats({
       <Bonuse>{bonuse + buff}</Bonuse>
       <Plus>+</Plus>
       <Select
-        style={{ width: 70 }}
+        style={{ width: 75 }}
         value={otherStat}
         onChange={onChangeOtherStat}
       >
