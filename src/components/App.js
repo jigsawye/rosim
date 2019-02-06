@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Layout } from 'antd';
+import zhTW from 'antd/lib/locale-provider/zh_TW';
+import { Layout, LocaleProvider } from 'antd';
 import { Route, HashRouter as Router } from 'react-router-dom';
 
 import StoreContext from '../context/StoreContext';
@@ -32,14 +33,16 @@ function App() {
   return (
     <StoreContext.Provider value={[state, dispatch]}>
       <Router>
-        <Layout>
-          <AppHeader />
-          <AppContent>
-            <Route exact path="/" component={Simulator} />
-            <Route exact path="/about" component={About} />
-          </AppContent>
-          <AppFooter />
-        </Layout>
+        <LocaleProvider locale={zhTW}>
+          <Layout>
+            <AppHeader />
+            <AppContent>
+              <Route exact path="/" component={Simulator} />
+              <Route exact path="/about" component={About} />
+            </AppContent>
+            <AppFooter />
+          </Layout>
+        </LocaleProvider>
       </Router>
     </StoreContext.Provider>
   );
