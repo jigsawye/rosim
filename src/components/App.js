@@ -28,6 +28,7 @@ function App() {
 
   useEffect(() => {
     loadDataFromUrl(dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
