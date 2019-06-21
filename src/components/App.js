@@ -7,6 +7,7 @@ import { Route, HashRouter as Router } from 'react-router-dom';
 import StoreContext from '../context/StoreContext';
 import loadDataFromUrl from '../utils/loadDataFromUrl';
 import useStoreReducer from '../hooks/useStoreReducer';
+import { LOAD_SAVE_DATA } from '../constants/types';
 
 import About from './About';
 import AppFooter from './Layouts/AppFooter';
@@ -27,7 +28,14 @@ function App() {
   const [state, dispatch] = useStoreReducer();
 
   useEffect(() => {
-    loadDataFromUrl(dispatch);
+    const data = loadDataFromUrl();
+
+    if (data) {
+      dispatch({
+        type: LOAD_SAVE_DATA,
+        payload: data,
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
