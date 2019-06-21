@@ -1,16 +1,16 @@
 import { parse } from 'query-string';
 
-import loadSaveData from '../actions';
-
-export default dispatch => {
+export default () => {
   const { data } = parse(window.location.search);
+
   if (data) {
     try {
       const jsonData = atob(data);
       const { _id, name, ...loadData } = JSON.parse(jsonData);
-      dispatch(loadSaveData(loadData));
+      return loadData;
     } catch (error) {
       window.location.href = window.location.origin;
+      return null;
     }
   }
 };

@@ -53,7 +53,7 @@ function BaseInfo() {
             <Label>Lv.</Label>
           </Popover>
           <Select
-            style={{ width: 70 }}
+            style={{ width: 80 }}
             value={baseLevel}
             onChange={setBaseLevel}
           >
