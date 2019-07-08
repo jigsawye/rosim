@@ -28,7 +28,7 @@ const Plus = styled.span`
 
 const Bonuse = styled.div`
   display: inline-block;
-  width: 10px;
+  width: 16px;
 `;
 
 const NeedPoint = styled.span`
@@ -58,21 +58,31 @@ function Stats({
       >
         <Label>{upperCase(label)}</Label>
       </Popover>
-      <Select style={{ width: 75 }} value={value} onChange={onChange}>
+      <Select
+        defaultActiveFirstOption={false}
+        style={{ width: 75 }}
+        value={value}
+        onChange={onChange}
+      >
         {statsRange.map(stat => (
-          <Option key={stat}>{stat}</Option>
+          <Option key={stat} value={stat}>
+            {stat}
+          </Option>
         ))}
       </Select>
       <Plus>+</Plus>
       <Bonuse>{bonuse + buff}</Bonuse>
       <Plus>+</Plus>
       <Select
+        defaultActiveFirstOption={false}
         style={{ width: 75 }}
         value={otherStat}
         onChange={onChangeOtherStat}
       >
         {range(0, 201).map(stat => (
-          <Option key={stat}>{stat}</Option>
+          <Option key={stat} value={stat}>
+            {stat}
+          </Option>
         ))}
       </Select>
       <NeedPoint>{getStatNeedPoint(value)}</NeedPoint>
