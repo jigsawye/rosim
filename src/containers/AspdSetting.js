@@ -68,6 +68,7 @@ function AspdSetting() {
           <Col xs={12}>
             <Label>主要</Label>
             <Select
+              defaultActiveFirstOption={false}
               style={{ width: 100 }}
               value={aspd.weaponId}
               onChange={updateAspdWeaponId}
@@ -82,6 +83,7 @@ function AspdSetting() {
           <Col xs={12}>
             <Label>副手</Label>
             <Select
+              defaultActiveFirstOption={false}
               style={{ width: 100 }}
               value={aspd.lefthandId}
               onChange={updateAspdLefthandId}

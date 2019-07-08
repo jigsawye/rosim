@@ -41,6 +41,7 @@ function SkillBuff() {
                   />
                 ) : (
                   <Select
+                    defaultActiveFirstOption={false}
                     style={{ width: 70 }}
                     value={buffValue || 0}
                     onChange={level => updateBuffSkill({ key, value: level })}

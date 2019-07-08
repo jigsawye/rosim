@@ -53,12 +53,15 @@ function BaseInfo() {
             <Label>Lv.</Label>
           </Popover>
           <Select
+            defaultActiveFirstOption={false}
             style={{ width: 80 }}
             value={baseLevel}
             onChange={setBaseLevel}
           >
             {baseLevelRange.map(level => (
-              <Option key={level}>{level}</Option>
+              <Option key={level} value={level}>
+                {level}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -70,9 +73,16 @@ function BaseInfo() {
           >
             <Label>Job Lv.</Label>
           </Popover>
-          <Select style={{ width: 70 }} value={jobLevel} onChange={setJobLevel}>
+          <Select
+            defaultActiveFirstOption={false}
+            style={{ width: 70 }}
+            value={jobLevel}
+            onChange={setJobLevel}
+          >
             {jobLevelRange.map(level => (
-              <Option key={level}>{level}</Option>
+              <Option key={level} value={level}>
+                {level}
+              </Option>
             ))}
           </Select>
         </Col>
