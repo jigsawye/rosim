@@ -1287,7 +1287,14 @@ export default [
   },
   {
     key: classes.HIGH_NOVICE,
-    bonus: [[2, 5], [2, 4], [5, 1], [6, 2], [8, 0], [9, 3]],
+    bonus: [
+      [2, 5],
+      [2, 4],
+      [5, 1],
+      [6, 2],
+      [8, 0],
+      [9, 3],
+    ],
   },
   {
     key: classes.HIGH_SWORDMAN,

@@ -11,13 +11,7 @@ import {
 } from '../constants/hpspTable';
 
 const findTable = (table, job) =>
-  find(
-    table,
-    compose(
-      includes(job[1]),
-      prop('job')
-    )
-  );
+  find(table, compose(includes(job[1]), prop('job')));
 
 const getTransMod = type => (type === SECOND ? 1 : 1.25);
 

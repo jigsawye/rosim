@@ -15,14 +15,8 @@ export const getJob = ([firstClass, secondClass]) => {
   return find(children, ['value', secondClass]);
 };
 
-export const getJobName = compose(
-  prop('label'),
-  getJob
-);
+export const getJobName = compose(prop('label'), getJob);
 
-export const getJobType = compose(
-  prop('type'),
-  getJob
-);
+export const getJobType = compose(prop('type'), getJob);
 
 export default classes;
